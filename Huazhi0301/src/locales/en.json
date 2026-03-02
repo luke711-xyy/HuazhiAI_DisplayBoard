@@ -1,0 +1,287 @@
+{
+  "app": {
+    "title": "Co-Creation · Co-Expansion · Co-Operation",
+    "subtitle": "HUAZHI AI Industrial Intelligence Platform"
+  },
+  "kpi": {
+    "reserve": "In Reserve",
+    "implementation": "In Progress",
+    "promotion": "In Promotion"
+  },
+  "category": {
+    "assembly": "Flexible Assembly",
+    "inspection": "Flexible Inspection",
+    "palletizing": "Flexible Palletizing"
+  },
+  "skill": {
+    "shangxiawuliao": {
+      "name": "Material Loading",
+      "desc": "Intelligent material loading & unloading system, enabling automated material handling with multi-station coordination."
+    },
+    "dingweiduiqi": {
+      "name": "Positioning",
+      "desc": "High-precision positioning & alignment system with vision-guided sub-millimeter accuracy for precision assembly."
+    },
+    "lianjieguding": {
+      "name": "Fastening",
+      "desc": "Automated connection & fastening system supporting bolting, riveting, and snap-fit processes."
+    },
+    "quexianjiance": {
+      "name": "Defect Detection",
+      "desc": "AI vision-based defect detection system identifying scratches, cracks, and discoloration with 99.5% accuracy."
+    },
+    "rouxingshineng": {
+      "name": "Flexible Enablement",
+      "desc": "Flexible enablement platform using force control and compliant motion for adaptive surface processing."
+    },
+    "wusunjiance": {
+      "name": "NDT Testing",
+      "desc": "Non-destructive testing using ultrasonic and X-ray methods to detect internal defects and ensure reliability."
+    },
+    "xingneng": {
+      "name": "Performance Testing",
+      "desc": "Comprehensive product testing covering electrical performance, mechanical strength, and sealing integrity."
+    },
+    "zhinengmaduo": {
+      "name": "Smart Palletizing",
+      "desc": "Intelligent palletizing planning system that auto-calculates optimal stacking patterns for warehouse efficiency."
+    },
+    "cankuduijie": {
+      "name": "Warehouse Interface",
+      "desc": "Automated warehouse docking system enabling seamless integration with AGV dispatch and WMS."
+    },
+    "chengpingbaoz": {
+      "name": "Weighing & Packing",
+      "desc": "Smart weighing and packaging system for automated sealing, labeling, and bundling processes."
+    },
+    "lujinguihua": {
+      "name": "Path Planning",
+      "desc": "Robot motion path planning with environment sensing for obstacle avoidance and multi-robot coordination."
+    }
+  },
+  "company": {
+    "tiancheng": { "name": "Shanghai Tiancheng Precision Co.", "industry": "Precision Machining", "type": "MNC" },
+    "huarui": { "name": "Huarui Smart Technology Co.", "industry": "Smart Manufacturing", "type": "SOE" },
+    "zhongke": { "name": "Zhongke Automation Equipment", "industry": "Automation Equipment", "type": "Private" },
+    "dongfang": { "name": "Dongfang Heavy Machinery Group", "industry": "Heavy Machinery", "type": "SOE" },
+    "minghe": { "name": "Minghe Electronics Technology", "industry": "Electronics", "type": "Private" },
+    "baoshan": { "name": "Baoshan Iron & Steel Co.", "industry": "Steel & Metallurgy", "type": "SOE" },
+    "hengda": { "name": "Hengda Precision Machinery Co.", "industry": "Precision Machinery", "type": "MNC" },
+    "xinda": { "name": "Xinda New Materials Technology", "industry": "New Materials", "type": "Private" },
+    "ruiguang": { "name": "Ruiguang Optoelectronics Co.", "industry": "Optoelectronics", "type": "MNC" },
+    "changjiang": { "name": "Changjiang Power Systems Co.", "industry": "Power Systems", "type": "SOE" },
+    "feiyu": { "name": "Feiyu Aero Parts Co.", "industry": "Aerospace Parts", "type": "Private" },
+    "yongxin": { "name": "Yongxin Industrial Automation", "industry": "Industrial Automation", "type": "SOE" },
+    "guohua": { "name": "Guohua Energy Equipment Co.", "industry": "Energy Equipment", "type": "MNC" },
+    "jingwei": { "name": "Jingwei Semiconductor Technology", "industry": "Semiconductor", "type": "Private" },
+    "senbo": { "name": "Senbo Robotics Technology", "industry": "Robotics", "type": "Private" },
+    "weichuang": { "name": "Weichuang Medical Devices Co.", "industry": "Medical Devices", "type": "MNC" },
+    "jiali": { "name": "Jiali Auto Parts Co.", "industry": "Auto Parts", "type": "SOE" },
+    "rongsheng": { "name": "Rongsheng New Energy Tech", "industry": "New Energy", "type": "Private" },
+    "zhiyuan": { "name": "Zhiyuan Sensor Technology Co.", "industry": "Sensor Technology", "type": "MNC" },
+    "dexin": { "name": "Dexin Heavy Equipment Co.", "industry": "Heavy Equipment", "type": "SOE" },
+    "longyu": { "name": "Longyu Precision Manufacturing", "industry": "Precision Manufacturing", "type": "MNC" },
+    "tianhe": { "name": "Tianhe Smart Systems Co.", "industry": "Smart Systems", "type": "Private" },
+    "boyu": { "name": "Boyu Aerospace Technology Co.", "industry": "Aerospace", "type": "SOE" },
+    "haiwei": { "name": "Haiwei Electrical Equipment Co.", "industry": "Electrical Equipment", "type": "MNC" },
+    "shengshi": { "name": "Shengshi Packaging Materials", "industry": "Packaging", "type": "Private" },
+    "qiangxin": { "name": "Qiangxin Telecom Equipment Co.", "industry": "Telecom Equipment", "type": "SOE" },
+    "zhongheng": { "name": "Zhongheng Solar Technology", "industry": "Solar Technology", "type": "MNC" },
+    "yifei": { "name": "Yifei Laser Technology Co.", "industry": "Laser Technology", "type": "Private" },
+    "xincheng": { "name": "Xincheng Rail Transit Co.", "industry": "Rail Transit", "type": "SOE" },
+    "dacheng": { "name": "Dacheng Bioengineering Co.", "industry": "Bioengineering", "type": "MNC" }
+  },
+  "scenario": {
+    "loading": "Loading",
+    "positioning": "Positioning",
+    "assembly": "Assembly",
+    "inspection": "Inspection",
+    "packaging": "Packaging",
+    "connecting": "Connecting",
+    "flexibility": "Flex Processing",
+    "palletizing": "Palletizing",
+    "warehousing": "Warehousing",
+    "ndt": "NDT Testing",
+    "performance": "Performance",
+    "pathplan": "Path Planning",
+    "weighpack": "Weighing & Packing"
+  },
+  "modal": {
+    "companyInfo": "Company Info",
+    "coreScenario": "Core Business Scenario",
+    "coreSkills": "Core Skills",
+    "close": "Close",
+    "industry": "Industry",
+    "type": "Type"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "sound": "Sound Volume",
+    "theme": "Night/Day Mode",
+    "chinese": "中文",
+    "english": "English"
+  },
+  "bottomPanel": {
+    "title": "Company List",
+    "noData": "No data available"
+  },
+  "subSkill": {
+    "wuxulailiao": {
+      "name": "Unordered Picking",
+      "desc": "Uses 3D vision and robotic arm planning to pick randomly stacked parts and place them into a sorting buffer for orderly feeding."
+    },
+    "youxugongliao": {
+      "name": "Ordered Feeding",
+      "desc": "Organizes scattered parts via vibratory feeders and conveyors into uniform orientation, with vision-guided precision placement to workstations."
+    },
+    "duowuliaoxietong": {
+      "name": "Multi-Material Sync",
+      "desc": "Manages multiple material types simultaneously, coordinating feeders and conveyor lines for accurate mixed-model production."
+    },
+    "xialiaofendao": {
+      "name": "Sortation & Diversion",
+      "desc": "Diverts finished or semi-finished products to different channels based on model, quality grade, or target process."
+    },
+    "wuliaoshaicha": {
+      "name": "Material Screening",
+      "desc": "Pre-inspects incoming materials for appearance, size, and weight, automatically rejecting non-conforming items to ensure line quality."
+    },
+    "shijuedingwei": {
+      "name": "Vision Positioning",
+      "desc": "High-speed 2D/3D industrial cameras with deep learning algorithms identify part pose and guide robots to precise pick/place positions."
+    },
+    "jiguangduizhun": {
+      "name": "Laser Alignment",
+      "desc": "Laser rangefinding and structured light projection for sub-millimeter real-time measurement and alignment of assembly surfaces or weld seams."
+    },
+    "jixiedingwei": {
+      "name": "Mechanical Locating",
+      "desc": "Pin-based fixtures and guide mechanisms achieve high-repeatability positioning, with quick-change systems for multi-variant production."
+    },
+    "liuweibuchang": {
+      "name": "6-DOF Compensation",
+      "desc": "Six-axis force sensors detect contact forces in real-time, automatically compensating pose deviations for peg-in-hole and surface fitting tasks."
+    },
+    "luoshuaningsuo": {
+      "name": "Bolt Tightening",
+      "desc": "Smart tightening systems with torque and angle monitoring execute bolting strategies (torque, angle, yield-point) automatically."
+    },
+    "maojieliangjie": {
+      "name": "Riveting",
+      "desc": "Self-piercing riveting or press riveting for high-strength joining of dissimilar materials (e.g., aluminum-steel) without pre-drilling."
+    },
+    "jiaozhanyajie": {
+      "name": "Adhesive Bonding",
+      "desc": "Precision dispensing systems combined with press mechanisms for structural and thermal adhesives, ensuring consistent bead width and thickness."
+    },
+    "kakouguding": {
+      "name": "Snap-Fit Assembly",
+      "desc": "Force-controlled robots identify snap-fit positions, apply controlled pressure, and verify seat confirmation through force feedback."
+    },
+    "biaomianhuahen": {
+      "name": "Scratch Detection",
+      "desc": "High-resolution line-scan cameras with multi-angle lighting detect micro-scratches on metal or plastic surfaces down to 0.02mm width."
+    },
+    "liewen": {
+      "name": "Crack Detection",
+      "desc": "Combines fluorescent penetrant, magnetic particle inspection and AI image analysis to detect surface and subsurface cracks in castings and forgings."
+    },
+    "bianse": {
+      "name": "Discoloration Check",
+      "desc": "Colorimeters and multispectral cameras analyze surface color consistency, detecting oxidation, burn marks, and coating defects with ΔE<0.5."
+    },
+    "chicunpiancha": {
+      "name": "Dimensional Check",
+      "desc": "Blue-light scanning or laser profilers perform 100% inline measurement of critical dimensions, auto-comparing against CAD models."
+    },
+    "likongshiying": {
+      "name": "Force-Adaptive Control",
+      "desc": "Integrated 6-axis force sensor compliant control system that adjusts end-effector force and pose in real-time to adapt to workpiece variations."
+    },
+    "qumiandamoqi": {
+      "name": "Surface Polishing",
+      "desc": "Flexible polishing tools with force feedback automatically adjust contact pressure and angle along complex curved surfaces for uniform finishing."
+    },
+    "rousunkongzhi": {
+      "name": "Compliant Control",
+      "desc": "Combined impedance and admittance control enables robots to respond compliantly to unknown environments, ideal for human-robot collaboration."
+    },
+    "chaoshengbojiance": {
+      "name": "Ultrasonic Testing",
+      "desc": "Detects internal voids, inclusions, and lack-of-fusion defects in welds and castings using ultrasonic wave propagation and reflection."
+    },
+    "xshexianjiance": {
+      "name": "X-Ray Inspection",
+      "desc": "Industrial CT/DR digital radiography provides 3D internal structure imaging of metals and composites with micrometer-level resolution."
+    },
+    "waiguansuomiao": {
+      "name": "Surface Scanning",
+      "desc": "360° multi-angle 3D scanning captures complete surface point clouds for reconstruction and comparison against reference models."
+    },
+    "dianqiceshi": {
+      "name": "Electrical Testing",
+      "desc": "Automated electrical test systems covering withstand voltage, insulation resistance, contact resistance, and continuity with high-speed parallel channels."
+    },
+    "jixieqiangdu": {
+      "name": "Mechanical Strength",
+      "desc": "Universal testing machines with auto-clamping for tensile, compression, bending, and impact tests with automatic force-displacement recording."
+    },
+    "mifengxing": {
+      "name": "Leak Testing",
+      "desc": "Differential pressure or flow-based leak detection for housings and sealed assemblies, with sensitivity down to 0.01 cc/min."
+    },
+    "naijiuxing": {
+      "name": "Durability Testing",
+      "desc": "Accelerated life testing under coupled temperature, humidity, and vibration stresses to rapidly evaluate expected product lifespan."
+    },
+    "hunhemaduo": {
+      "name": "Mixed Palletizing",
+      "desc": "Real-time algorithms compute optimal stacking combinations for multi-SKU boxes, achieving 95%+ pallet space utilization."
+    },
+    "gaosumaduo": {
+      "name": "High-Speed Palletizing",
+      "desc": "Delta robots with vision tracking achieve 30+ picks per minute, meeting FMCG production line throughput requirements."
+    },
+    "chaizhuomaduo": {
+      "name": "Depalletizing",
+      "desc": "3D vision identifies layer-by-layer positions and orientations on incoming pallets, sequentially picking and placing onto conveyors."
+    },
+    "agvdiaodu": {
+      "name": "AGV Dispatching",
+      "desc": "Multi-vehicle coordination system managing path planning, task allocation, and traffic control for dozens of AGV/AMR units in the facility."
+    },
+    "wmsjicheng": {
+      "name": "WMS Integration",
+      "desc": "Deep integration with warehouse management systems for fully automated inbound, outbound, and inventory operations with FIFO and batch tracing."
+    },
+    "liticangku": {
+      "name": "AS/RS Docking",
+      "desc": "Communication interface with automated storage/retrieval systems (stacker cranes, shuttles) for end-to-end unmanned material flow."
+    },
+    "jingquejizhong": {
+      "name": "Precision Weighing",
+      "desc": "High-precision dynamic weighing system measures in-line with ±0.5g accuracy, auto-rejecting over/under-weight products."
+    },
+    "zidongfengxiang": {
+      "name": "Auto Case Packing",
+      "desc": "Integrated case erecting, packing, and sealing line with auto box selection, hot-melt or tape sealing at 20 cases/minute."
+    },
+    "tiebiaodabao": {
+      "name": "Labeling & Banding",
+      "desc": "Print-and-apply labeling with barcode/QR generation, combined with PP strapping or stretch wrapping for secure packaging."
+    },
+    "bizhangguihua": {
+      "name": "Obstacle Avoidance",
+      "desc": "Real-time dynamic obstacle avoidance fusing LiDAR and depth camera data for safe robot navigation in complex workstation environments."
+    },
+    "zuijianlujing": {
+      "name": "Shortest Path",
+      "desc": "A*, RRT*, and other path search algorithms compute time-optimal or energy-optimal trajectories under given kinematic constraints."
+    },
+    "duojixietong": {
+      "name": "Multi-Robot Sync",
+      "desc": "Multiple robots coordinate in shared workspaces through real-time communication and collision prediction for interference-free scheduling."
+    }
+  }
+}

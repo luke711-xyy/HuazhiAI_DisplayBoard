@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 25% 8%;
+    --foreground: 210 40% 96%;
+    --card: 220 25% 10%;
+    --card-foreground: 210 40% 96%;
+    --popover: 220 25% 10%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 20% 16%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 220 20% 16%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 199 89% 48%;
+    --radius: 0.5rem;
+    
+    --tech-blue: 199 89% 48%;
+    --tech-cyan: 187 94% 43%;
+    --tech-purple: 262 83% 58%;
+    --tech-orange: 25 95% 53%;
+    --tech-green: 142 76% 36%;
+    --tech-glow: 199 89% 48%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Rajdhani', 'Microsoft YaHei', sans-serif;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-lg;
+    box-shadow: 
+      0 4px 24px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  
+  .tech-border {
+    @apply relative;
+  }
+  
+  .tech-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+      hsl(var(--tech-cyan) / 0.6), 
+      transparent 40%,
+      transparent 60%,
+      hsl(var(--tech-cyan) / 0.4)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  
+  .glow-text {
+    text-shadow: 
+      0 0 10px hsl(var(--tech-cyan) / 0.8),
+      0 0 20px hsl(var(--tech-cyan) / 0.5),
+      0 0 30px hsl(var(--tech-cyan) / 0.3);
+  }
+  
+  .digital-number {
+    font-family: 'Orbitron', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .breathing-light {
+    animation: breathing 2s ease-in-out infinite;
+  }
+  
+  @keyframes breathing {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .spotlight-dim {
+    @apply transition-all duration-500;
+    filter: brightness(0.3) saturate(0.5);
+  }
+  
+  .spotlight-active {
+    @apply transition-all duration-500;
+    filter: brightness(1.1) saturate(1.2);
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* 替代 Framer Motion 的 Vue 动画类 */
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-down {
+  animation: fadeInDown 0.6s ease-out both;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.zoom-in {
+  animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.draw-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: drawLine 0.8s ease-out forwards;
+}
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+.data-flow-anim {
+  animation: dataFlowAnim 1.5s linear infinite;
+}
+@keyframes dataFlowAnim {
+  0% { offset-distance: 0%; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* Detail Panel 过渡动画 */
+.slide-panel-left-enter-active,
+.slide-panel-left-leave-active,
+.slide-panel-right-enter-active,
+.slide-panel-right-leave-active {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.slide-panel-left-enter-from,
+.slide-panel-left-leave-to {
+  opacity: 0;
+  transform: translate(-100px, -50%);
+}
+.slide-panel-left-enter-to,
+.slide-panel-left-leave-from {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+.slide-panel-right-enter-from,
+.slide-panel-right-leave-to {
+  opacity: 0;
+  transform: translate(100px, -50%);
+}
+.slide-panel-right-enter-to,
+.slide-panel-right-leave-from {
+  opacity: 1;
+  transform: translate(0, -50%);
+}

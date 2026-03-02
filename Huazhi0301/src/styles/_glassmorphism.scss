@@ -1,0 +1,50 @@
+// ============================================================
+// 毛玻璃效果 Mixin 库 (Glassmorphism)
+// 用法: @include glass; 或 @include glass-dark;
+//
+// 参数说明:
+// - $blur: 模糊半径，值越大越模糊
+// - $bg-opacity: 背景透明度 (0-1)
+// - $border-opacity: 边框透明度 (0-1)
+// ============================================================
+
+// 浅色系毛玻璃（适用于悬浮信息框、tooltip 等）
+@mixin glass($blur: 12px, $bg-opacity: 0.08, $border-opacity: 0.12) {
+  background: rgba(255, 255, 255, $bg-opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, $border-opacity);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+// 深色系毛玻璃（适用于底部面板、侧边栏等大面积区域）
+@mixin glass-dark($blur: 16px, $bg-opacity: 0.7) {
+  background: rgba(10, 15, 30, $bg-opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(100, 150, 255, 0.1);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(100, 150, 255, 0.05);
+}
+
+// 带颜色主题的毛玻璃（适用于 KPI 徽标等有颜色标识的组件）
+@mixin glass-tinted($color, $blur: 12px) {
+  background: rgba($color, 0.1);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba($color, 0.2);
+  box-shadow:
+    0 4px 16px rgba($color, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+// 发光边框效果（可叠加在毛玻璃之上）
+@mixin glow-border($color, $intensity: 0.4) {
+  box-shadow:
+    0 0 8px rgba($color, $intensity),
+    0 0 24px rgba($color, $intensity * 0.5),
+    inset 0 0 8px rgba($color, $intensity * 0.3);
+}
