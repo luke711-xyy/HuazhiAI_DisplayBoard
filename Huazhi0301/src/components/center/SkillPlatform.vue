@@ -13,7 +13,7 @@
  */
 import type { SkillCategory, Skill } from '@/types'
 import SkillNode from './SkillNode.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()
@@ -34,16 +34,6 @@ const props = defineProps<{
   highlightedSkillIds: string[]
   hoveredSkillId: string | null
 }>()
-
-defineEmits<{
-  (e: 'hoverSkill', skillId: string | null): void
-}>()
-
-/** 平台图片映射 */
-const platformImages: Record<string, string> = {
-  block_layer_mid_dark: midDark,
-  block_layer_mid_light: midLight,
-}
 
 const upperImages: Record<string, string> = {
   block_layer_upper_l: upperL,
@@ -79,9 +69,9 @@ const categoryPositions: Record<string, { midTop: string; midLeft: string; upper
  * 父级分类标签的绝对位置（独立于平台图片，便于手动微调）
  */
 const categoryLabelPositions: Record<string, { top: string; left: string }> = {
-  assembly: { top: '440px', left: '220px' },
-  inspection: { top: '440px', left: '750px' },
-  palletizing: { top: '580px', left: '490px' },
+  assembly: { top: '300px', left: '276px' },
+  inspection: { top: '300px', left: '808px' },
+  palletizing: { top: '460px', left: '544px' },
 }
 
 /**
@@ -112,19 +102,19 @@ const skillPositions: Record<string, { top: string; left: string }> = {
  */
 const skillLabelOffsets: Record<string, { top: string; left: string }> = {
   // 柔性装配
-  shangxiawuliao: { top: '108px', left: '50%' },
-  dingweiduiqi:   { top: '108px', left: '50%' },
-  lianjieguding:  { top: '108px', left: '50%' },
+  shangxiawuliao: { top: '90px', left: '30%' },
+  dingweiduiqi:   { top: '60px', left: '80%' },
+  lianjieguding:  { top: '63px', left: '75%' },
   // 柔性质检
   quexianjiance:  { top: '108px', left: '50%' },
   rouxingshineng: { top: '108px', left: '50%' },
   wusunjiance:    { top: '108px', left: '50%' },
   xingneng:       { top: '108px', left: '50%' },
   // 柔性码垛
-  zhinengmaduo:   { top: '108px', left: '50%' },
-  cankuduijie:    { top: '108px', left: '50%' },
-  chengpingbaoz:  { top: '108px', left: '50%' },
-  lujinguihua:    { top: '108px', left: '50%' },
+  zhinengmaduo:   { top: '80px', left: '50%' },
+  cankuduijie:    { top: '80px', left: '50%' },
+  chengpingbaoz:  { top: '80px', left: '50%' },
+  lujinguihua:    { top: '75px', left: '50%' },
 }
 
 /**
@@ -143,10 +133,36 @@ function getCategorySkills(category: SkillCategory): Skill[] {
     .filter((s): s is Skill => s !== undefined)
 }
 
+/**
+ * 当前处于"激活"状态的分类 ID 集合
+ * 激活条件：该分类下有技能正被 hover 或被连线高亮
+ */
+const activeCategoryIds = computed(() => {
+  const active = new Set<string>()
+  const hovered = localHoveredSkillId.value
+  for (const category of props.categories) {
+    const hasActive = category.skills.some(
+      skillId => skillId === hovered || props.highlightedSkillIds.includes(skillId)
+    )
+    if (hasActive) active.add(category.id)
+  }
+  return active
+})
+
 /** 是否有子菜单正在展开（用于临时提升平台 z-index） */
 const isSubmenuOpen = ref(false)
 
+const emit = defineEmits<{
+  (e: 'hoverSkill', skillId: string | null): void
+}>()
+
+/** 本地记录当前 hover 的技能 ID，同时向父组件冒泡 */
+const localHoveredSkillId = ref<string | null>(null)
+
 function onSkillHover(skillId: string | null) {
+  localHoveredSkillId.value = skillId
+  emit('hoverSkill', skillId)
+
   // 判断当前 hover 的技能是否拥有子技能
   if (skillId) {
     const skill = props.skills.find(s => s.id === skillId)
@@ -172,7 +188,7 @@ defineExpose({ skillNodeRefs })
 
     <!-- 遍历三个分类，渲染中层底座 + 上层平台 + 技能节点 -->
     <template v-for="category in categories" :key="category.id">
-      <!-- 中层底座 (不含文字标签) -->
+      <!-- 中层底座 (不含文字标签，hover/高亮时切换 dark→light) -->
       <div
         class="skill-platform__mid"
         :style="{
@@ -180,7 +196,20 @@ defineExpose({ skillNodeRefs })
           left: categoryPositions[category.id]?.midLeft,
         }"
       >
-        <img :src="platformImages[category.platformImage]" alt="" class="skill-platform__mid-img" />
+        <!-- dark 底图（始终渲染，激活时淡出） -->
+        <img
+          :src="midDark"
+          alt=""
+          class="skill-platform__mid-img"
+          :class="{ 'skill-platform__mid-img--hidden': activeCategoryIds.has(category.id) }"
+        />
+        <!-- light 切图（叠在 dark 之上，激活时淡入） -->
+        <img
+          :src="midLight"
+          alt=""
+          class="skill-platform__mid-img skill-platform__mid-img--light"
+          :class="{ 'skill-platform__mid-img--visible': activeCategoryIds.has(category.id) }"
+        />
       </div>
 
       <!-- 上层技能承载平台 + 技能图标 -->
@@ -288,6 +317,24 @@ defineExpose({ skillNodeRefs })
       width: 100%;
       height: auto;
       pointer-events: none;
+      transition: opacity 0.4s ease;
+
+      // dark 底图默认可见
+      &--hidden {
+        opacity: 0;
+      }
+
+      // light 切图叠在 dark 之上，默认不可见
+      &--light {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
+
+      &--visible {
+        opacity: 1;
+      }
     }
   }
 
