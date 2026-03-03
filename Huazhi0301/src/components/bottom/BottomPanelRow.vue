@@ -11,6 +11,10 @@ const props = defineProps<{
   companies: Company[]
 }>()
 
+defineEmits<{
+  (e: 'clickCompany', companyId: string): void
+}>()
+
 /** 获取某状态下的所有企业 */
 function getCompaniesForStatus(statusFilter: string): Company[] {
   return props.companies.filter(c => c.status === statusFilter)
@@ -24,6 +28,7 @@ function getCompaniesForStatus(statusFilter: string): Company[] {
       :key="kpi.id"
       :kpi="kpi"
       :companies="getCompaniesForStatus(kpi.statusFilter)"
+      @click-company="$emit('clickCompany', $event)"
     />
   </div>
 </template>

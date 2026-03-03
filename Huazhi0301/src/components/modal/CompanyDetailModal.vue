@@ -6,9 +6,11 @@
  * 1. 顶部：公司简要信息 (名称、行业、类型)
  * 2. 中间：核心业务场景 (流程步骤 + 进度条)
  * 3. 底部：核心技能列表 (技能图标)
+ *
+ * 根据企业状态 (reserve/implementation/promotion) 使用对应的配色主题
  */
-import type { CompanyDetail, Skill } from '@/types'
-import { computed } from 'vue'
+import type { CompanyDetail, CompanyStatus, Skill } from '@/types'
+import { computed, ref, onMounted } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import btnCloseUrl from '@/assets/buttons/btn_close.png'
 
@@ -17,11 +19,37 @@ const { t } = useI18n()
 const props = defineProps<{
   detail: CompanyDetail
   skills: Skill[]
+  status: CompanyStatus
 }>()
 
 defineEmits<{
   (e: 'close'): void
 }>()
+
+/** 状态 → 配色映射 */
+const statusColorMap: Record<CompanyStatus, { from: string; to: string }> = {
+  reserve:        { from: '#3b82f6', to: '#60a5fa' },   // 蓝
+  implementation: { from: '#f59e0b', to: '#fbbf24' },   // 橙
+  promotion:      { from: '#ef4444', to: '#f87171' },   // 红
+}
+
+const accentColors = computed(() => statusColorMap[props.status])
+
+/** 进度条目标宽度百分比 */
+const progressPercent = computed(() => {
+  const flow = props.detail.scenarioFlow
+  const completed = flow.filter(s => s.progress && s.progress >= 100).length
+  return (completed / flow.length) * 100
+})
+
+/** 进度条填充动画：先 0，挂载后设置为目标值 */
+const animatedWidth = ref(0)
+onMounted(() => {
+  // 延迟一帧让初始 width:0 渲染，然后触发 CSS transition 填充
+  requestAnimationFrame(() => {
+    animatedWidth.value = progressPercent.value
+  })
+})
 
 /** 获取核心技能的完整数据 */
 const coreSkillsData = computed(() => {
@@ -45,7 +73,14 @@ function getSkillIconUrl(iconName: string): string {
   <!-- 遮罩层 -->
   <Transition name="modal">
     <div class="modal-overlay" @click="$emit('close')">
-      <div class="modal-content" @click.stop>
+      <div
+        class="modal-content"
+        :style="{
+          '--accent-from': accentColors.from,
+          '--accent-to': accentColors.to,
+        }"
+        @click.stop
+      >
         <!-- 关闭按钮 -->
         <button class="modal-content__close" @click="$emit('close')">
           <img :src="btnCloseUrl" alt="close" />
@@ -65,28 +100,26 @@ function getSkillIconUrl(iconName: string): string {
         <div class="modal-content__section">
           <h3 class="modal-content__section-title">{{ t('modal.coreScenario') }}</h3>
           <div class="modal-content__scenario-flow">
-            <div
-              v-for="(step, index) in detail.scenarioFlow"
-              :key="index"
-              class="scenario-step"
-            >
-              <div class="scenario-step__icon">
-                <img
-                  v-if="getSkillIconUrl(`ic_skill_${step.icon}`)"
-                  :src="getSkillIconUrl(`ic_skill_${step.icon}`)"
-                  alt=""
-                />
+            <template v-for="(step, index) in detail.scenarioFlow" :key="index">
+              <div class="scenario-step">
+                <div class="scenario-step__icon">
+                  <img
+                    v-if="getSkillIconUrl(`ic_skill_${step.icon}`)"
+                    :src="getSkillIconUrl(`ic_skill_${step.icon}`)"
+                    alt=""
+                  />
+                </div>
+                <span class="scenario-step__label">{{ t(step.labelKey) }}</span>
               </div>
-              <span class="scenario-step__label">{{ t(step.labelKey) }}</span>
-              <!-- 步骤间连接线 -->
-              <div v-if="index < detail.scenarioFlow.length - 1" class="scenario-step__connector" />
-            </div>
+              <!-- 步骤间箭头连接线（独立 flex 子元素，不重叠） -->
+              <div v-if="index < detail.scenarioFlow.length - 1" class="scenario-connector" />
+            </template>
           </div>
           <!-- 进度条 -->
           <div class="modal-content__progress">
             <div
               class="modal-content__progress-bar"
-              :style="{ width: `${(detail.scenarioFlow.filter(s => s.progress && s.progress >= 100).length / detail.scenarioFlow.length) * 100}%` }"
+              :style="{ width: `${animatedWidth}%` }"
             />
           </div>
         </div>
@@ -131,15 +164,26 @@ function getSkillIconUrl(iconName: string): string {
   padding: 32px;
   position: relative;
   overflow-y: auto;
+  isolation: isolate;
 
-  // 毛玻璃效果
-  background: rgba(10, 15, 30, 0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(100, 150, 255, 0.15);
+  // 边框使用主题色发光
+  border: 1px solid color-mix(in srgb, var(--accent-from) 25%, transparent);
   box-shadow:
     0 16px 64px rgba(0, 0, 0, 0.5),
-    0 0 24px rgba(59, 130, 246, 0.1);
+    0 0 24px color-mix(in srgb, var(--accent-from) 15%, transparent);
+
+  // 毛玻璃背景层（伪元素，位于内容之下，不影响文字渲染）
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: rgba(10, 15, 30, 0.55);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
 
   &__close {
     position: absolute;
@@ -197,6 +241,7 @@ function getSkillIconUrl(iconName: string): string {
     }
   }
 
+  // 小节标题左侧竖条使用主题色
   &__section-title {
     font-size: 14px;
     font-weight: 600;
@@ -212,16 +257,16 @@ function getSkillIconUrl(iconName: string): string {
       width: 3px;
       height: 14px;
       border-radius: 2px;
-      background: var(--color-accent-blue);
+      background: var(--accent-from);
     }
   }
 
   &__scenario-flow {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    gap: 0;
-    margin-bottom: 12px;
+    gap: 16px;
+    margin-bottom: 16px;
   }
 
   &__progress {
@@ -232,11 +277,31 @@ function getSkillIconUrl(iconName: string): string {
     overflow: hidden;
   }
 
+  // 进度条：填充动画 + 流光效果，使用主题色
   &__progress-bar {
     height: 100%;
     border-radius: 3px;
-    background: linear-gradient(90deg, var(--color-accent-blue), var(--color-accent-cyan));
-    transition: width var(--duration-slow) var(--ease-smooth);
+    background: linear-gradient(90deg, var(--accent-from), var(--accent-to));
+    // 从 0 宽度过渡到目标宽度，产生填充动画
+    transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+
+    // 流光效果（在填充过程中同时运行）
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.35) 45%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.35) 55%,
+        transparent 100%
+      );
+      animation: progress-flow 2.5s ease-in-out infinite;
+    }
   }
 
   &__skills {
@@ -250,8 +315,7 @@ function getSkillIconUrl(iconName: string): string {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-  position: relative;
+  gap: 6px;
 
   &__icon {
     width: 40px;
@@ -261,6 +325,7 @@ function getSkillIconUrl(iconName: string): string {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 
     img {
       width: 32px;
@@ -274,26 +339,40 @@ function getSkillIconUrl(iconName: string): string {
     color: var(--color-text-secondary);
     white-space: nowrap;
   }
+}
 
-  &__connector {
+// 步骤间箭头连接线 — 使用主题色
+.scenario-connector {
+  width: 32px;
+  height: 2px;
+  flex-shrink: 0;
+  margin-top: 19px; // 与图标垂直中心对齐 (40px / 2 - 1px)
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent-from) 30%, transparent),
+    color-mix(in srgb, var(--accent-from) 60%, transparent)
+  );
+  position: relative;
+
+  // 箭头尖端
+  &::after {
+    content: '';
     position: absolute;
-    top: 20px;
-    left: calc(100%);
-    width: 24px;
-    height: 2px;
-    background: rgba(59, 130, 246, 0.3);
-
-    &::after {
-      content: '';
-      position: absolute;
-      right: -3px;
-      top: -2px;
-      border: 3px solid transparent;
-      border-left-color: rgba(59, 130, 246, 0.3);
-    }
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 4px solid transparent;
+    border-left-color: color-mix(in srgb, var(--accent-from) 60%, transparent);
   }
 }
 
+// 进度条流光动画
+@keyframes progress-flow {
+  0% { transform: translateX(-200%); }
+  100% { transform: translateX(200%); }
+}
+
+// 技能徽章 — 边框使用主题色微光
 .skill-badge {
   display: flex;
   align-items: center;
@@ -301,7 +380,7 @@ function getSkillIconUrl(iconName: string): string {
   padding: 8px 14px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid color-mix(in srgb, var(--accent-from) 15%, rgba(255, 255, 255, 0.08));
 
   &__icon {
     width: 24px;

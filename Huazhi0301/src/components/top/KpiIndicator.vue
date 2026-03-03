@@ -60,6 +60,25 @@ function getIconUrl(icon: string): string {
   border-radius: 12px;
   transition: all var(--duration-normal) var(--ease-smooth);
   cursor: pointer;
+  position: relative;
+  isolation: isolate;
+
+  // 毛玻璃边框 + 阴影
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+
+  // 毛玻璃背景层（伪元素，不影响文字清晰度）
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: rgba(10, 15, 30, 0.4);
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  }
 
   &:hover {
     transform: scale(1.08);
@@ -67,19 +86,23 @@ function getIconUrl(icon: string): string {
   }
 
   &--active {
-    // 选中时底部加一条颜色标识线
-    position: relative;
+    // 选中时加强边框发光
+    border-color: color-mix(in srgb, var(--kpi-color) 35%, transparent);
+    box-shadow:
+      0 0 8px color-mix(in srgb, var(--kpi-color) 20%, transparent),
+      0 2px 12px rgba(0, 0, 0, 0.3);
+
+    // 底部标识线：宽度与背景底边融合
     &::after {
       content: '';
       position: absolute;
-      bottom: -2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 3px;
-      border-radius: 2px;
+      bottom: -1px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      border-radius: 0 0 2px 2px;
       background: var(--kpi-color);
-      box-shadow: 0 0 8px var(--kpi-color);
+      box-shadow: 0 0 10px var(--kpi-color), 0 0 20px color-mix(in srgb, var(--kpi-color) 40%, transparent);
     }
   }
 

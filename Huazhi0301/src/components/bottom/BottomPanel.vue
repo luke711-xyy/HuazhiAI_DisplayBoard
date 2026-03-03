@@ -2,7 +2,7 @@
 /**
  * BottomPanel.vue - 底部信息面板
  * 对应一种企业状态（储备中/实施中/推广中），展示该状态下的企业列表
- * 内部列表可滚动 (Scrollable)
+ * 内部列表可滚动 (Scrollable)，企业可点击打开详情弹窗
  */
 import type { Company, KpiIndicator } from '@/types'
 import GlassPanel from '@/components/common/GlassPanel.vue'
@@ -13,6 +13,10 @@ const { t } = useI18n()
 const props = defineProps<{
   kpi: KpiIndicator
   companies: Company[]
+}>()
+
+defineEmits<{
+  (e: 'clickCompany', companyId: string): void
 }>()
 </script>
 
@@ -31,6 +35,7 @@ const props = defineProps<{
         v-for="company in companies"
         :key="company.id"
         class="bottom-panel__item"
+        @click="$emit('clickCompany', company.id)"
       >
         <span class="bottom-panel__dot" :style="{ background: kpi.color }" />
         <span class="bottom-panel__company-name">{{ t(company.nameKey) }}</span>
@@ -95,6 +100,12 @@ const props = defineProps<{
     gap: 8px;
     padding: 6px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+    transition: background 0.15s var(--ease-smooth);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
 
     &:last-child {
       border-bottom: none;

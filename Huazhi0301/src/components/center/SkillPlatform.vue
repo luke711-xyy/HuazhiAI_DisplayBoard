@@ -143,8 +143,17 @@ function getCategorySkills(category: SkillCategory): Skill[] {
     .filter((s): s is Skill => s !== undefined)
 }
 
-function onSkillHover(_skillId: string | null) {
-  // hover state is now managed within SkillNode itself
+/** 是否有子菜单正在展开（用于临时提升平台 z-index） */
+const isSubmenuOpen = ref(false)
+
+function onSkillHover(skillId: string | null) {
+  // 判断当前 hover 的技能是否拥有子技能
+  if (skillId) {
+    const skill = props.skills.find(s => s.id === skillId)
+    isSubmenuOpen.value = !!(skill?.subSkills && skill.subSkills.length > 0)
+  } else {
+    isSubmenuOpen.value = false
+  }
 }
 
 /** 暴露技能节点引用供连线使用 */
@@ -153,7 +162,7 @@ defineExpose({ skillNodeRefs })
 </script>
 
 <template>
-  <div class="skill-platform">
+  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': isSubmenuOpen }">
     <!-- 底层网格大平台 -->
     <img :src="bottomLayer" alt="" class="skill-platform__bottom" />
 
@@ -230,6 +239,12 @@ defineExpose({ skillNodeRefs })
   width: 1200px;
   height: 700px;
   z-index: var(--z-platform-base);
+  transition: z-index 0s;
+
+  // 子菜单展开时，临时提升整个平台的层级，突破层叠上下文限制
+  &--submenu-active {
+    z-index: var(--z-skill-submenu);
+  }
 
   // 底层大平台
   &__bottom {

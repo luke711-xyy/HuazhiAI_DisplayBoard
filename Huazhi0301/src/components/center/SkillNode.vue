@@ -35,12 +35,19 @@ const isHovered = ref(false)
  */
 const skillIcons = import.meta.glob('@/assets/skills/*.png', { eager: true, import: 'default' }) as Record<string, string>
 
-const iconUrl = computed(() => {
-  const iconName = (isHovered.value || props.isHighlighted) ? props.skill.iconSelect : props.skill.icon
+function findIcon(name: string): string {
   for (const [path, url] of Object.entries(skillIcons)) {
-    if (path.includes(`/${iconName}.png`) && !path.includes('@2x')) return url
+    if (path.includes(`/${name}.png`) && !path.includes('@2x')) return url
   }
   return ''
+}
+
+const iconUrl = computed(() => {
+  if (isHovered.value || props.isHighlighted) {
+    // 优先使用 select 图标，缺失时回退到默认图标
+    return findIcon(props.skill.iconSelect) || findIcon(props.skill.icon)
+  }
+  return findIcon(props.skill.icon)
 })
 
 /** 是否展示二级子菜单 */
@@ -113,7 +120,7 @@ onMounted(() => {
   &:hover,
   &--highlighted {
     transform: scale(1.15);
-    filter: brightness(1.3) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
     z-index: calc(var(--z-skill-nodes) + 10);
   }
 

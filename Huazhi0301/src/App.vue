@@ -103,6 +103,13 @@ const selectedCompanyDetail = computed(() => {
   return getCompanyDetailById(selectedCompanyId.value) || null
 })
 
+/** 选中企业的状态 (用于弹窗配色) */
+const selectedCompanyStatus = computed(() => {
+  if (!selectedCompanyId.value) return 'reserve' as const
+  const company = config.companies.find(c => c.id === selectedCompanyId.value)
+  return company?.status ?? 'reserve'
+})
+
 /** 企业名称映射 (使用 i18n 翻译) */
 const companyNames = computed(() => {
   const map: Record<string, string> = {}
@@ -247,6 +254,7 @@ const { lines: connectionLines } = useConnectionLines(
     <BottomPanelRow
       :kpi-indicators="config.kpiIndicators"
       :companies="config.companies"
+      @click-company="onClickCompany"
     />
 
     <!-- SVG 发光连线覆盖层 -->
@@ -257,6 +265,7 @@ const { lines: connectionLines } = useConnectionLines(
       v-if="selectedCompanyDetail"
       :detail="selectedCompanyDetail"
       :skills="config.skills"
+      :status="selectedCompanyStatus"
       @close="onCloseModal"
     />
   </DashboardContainer>
