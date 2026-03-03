@@ -10,6 +10,7 @@ import KpiIndicator from './KpiIndicator.vue'
 defineProps<{
   indicators: KpiType[]
   activeKpiIds: Set<string>
+  hideCount: boolean
 }>()
 
 defineEmits<{
@@ -24,6 +25,7 @@ defineEmits<{
       :key="indicator.id"
       :indicator="indicator"
       :is-active="activeKpiIds.has(indicator.id)"
+      :hide-count="hideCount"
       @select="$emit('selectKpi', $event)"
     />
   </div>
@@ -32,7 +34,7 @@ defineEmits<{
 <style scoped lang="scss">
 .kpi-row {
   position: absolute;
-  top: 70px;
+  top: 90px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

@@ -33,7 +33,7 @@ import SettingsModal from '@/components/modal/SettingsModal.vue'
 // ==================== Composables ====================
 const { config, getCompanyDetailById } = useDashboardData()
 const { t } = useI18n()
-const { isSettingsOpen, toggleSettings, closeSettings } = useSettings()
+const { isSettingsOpen, toggleSettings, closeSettings, hideBottomPanels } = useSettings()
 
 // ==================== DOM 元素引用（用于连线坐标计算）====================
 
@@ -216,12 +216,12 @@ const { lines: connectionLines } = useConnectionLines(
     <KpiIndicatorRow
       :indicators="config.kpiIndicators"
       :active-kpi-ids="activeKpiIds"
+      :hide-count="hideBottomPanels"
       @select-kpi="onSelectKpi"
     />
 
     <!-- 左侧企业卡片 -->
     <CompanyCardGrid
-      v-if="leftCompanies.length > 0"
       :companies="leftCompanies"
       side="left"
       :hovered-company-id="hoveredCompanyId"
@@ -232,7 +232,6 @@ const { lines: connectionLines } = useConnectionLines(
 
     <!-- 右侧企业卡片 -->
     <CompanyCardGrid
-      v-if="rightCompanies.length > 0"
       :companies="rightCompanies"
       side="right"
       :hovered-company-id="hoveredCompanyId"
@@ -250,10 +249,12 @@ const { lines: connectionLines } = useConnectionLines(
       @hover-skill="onHoverSkill"
     />
 
-    <!-- 底部信息面板 -->
+    <!-- 底部信息面板（各面板由对应 KPI 独立控制，抽屉式滑入/滑出） -->
     <BottomPanelRow
+      v-if="!hideBottomPanels"
       :kpi-indicators="config.kpiIndicators"
       :companies="config.companies"
+      :active-kpi-ids="activeKpiIds"
       @click-company="onClickCompany"
     />
 

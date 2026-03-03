@@ -11,7 +11,7 @@ import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
 
 const { t, locale, setLocale } = useI18n()
-const { soundVolume, themeMode } = useSettings()
+const { soundVolume, themeMode, hideBottomPanels } = useSettings()
 
 defineEmits<{
   (e: 'close'): void
@@ -60,6 +60,18 @@ defineEmits<{
         class="settings-modal__toggle"
         :class="{ 'settings-modal__toggle--light': themeMode === 'light' }"
         @click="themeMode = themeMode === 'dark' ? 'light' : 'dark'"
+      >
+        <span class="settings-modal__toggle-knob" />
+      </button>
+    </div>
+
+    <!-- 常闭底部列表 -->
+    <div class="settings-modal__item">
+      <span class="settings-modal__label">{{ t('settings.hideBottomPanels') }}</span>
+      <button
+        class="settings-modal__toggle"
+        :class="{ 'settings-modal__toggle--light': hideBottomPanels }"
+        @click="hideBottomPanels = !hideBottomPanels"
       >
         <span class="settings-modal__toggle-knob" />
       </button>

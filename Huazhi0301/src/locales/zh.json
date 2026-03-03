@@ -120,7 +120,8 @@
     "sound": "声音大小",
     "theme": "夜间/日间模式",
     "chinese": "中文",
-    "english": "English"
+    "english": "English",
+    "hideBottomPanels": "常闭底部列表"
   },
   "bottomPanel": {
     "title": "企业列表",

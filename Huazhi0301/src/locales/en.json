@@ -120,7 +120,8 @@
     "sound": "Sound Volume",
     "theme": "Night/Day Mode",
     "chinese": "中文",
-    "english": "English"
+    "english": "English",
+    "hideBottomPanels": "Always Hide Panels"
   },
   "bottomPanel": {
     "title": "Company List",

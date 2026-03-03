@@ -59,33 +59,37 @@ defineProps<{
   }
 
   &__logo-img {
-    height: 36px;
+    height: 64px;
     width: auto;
+    margin-top: 30px;
   }
 
   &__title {
     position: absolute;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 700;
-    letter-spacing: 8px;
+    letter-spacing: 14px;
     color: var(--color-text-primary);
     white-space: nowrap;
   }
 
   &__settings {
-    width: 36px;
-    height: 36px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px;
+    padding: 2px;
+    margin-top: 20px;
+    margin-right: 15px;
 
     img {
-      width: 24px;
-      height: 24px;
+      width: 48px;
+      height: 48px;
     }
   }
 }

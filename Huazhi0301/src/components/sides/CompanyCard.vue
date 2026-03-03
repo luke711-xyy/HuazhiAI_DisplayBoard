@@ -85,27 +85,26 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   cursor: pointer;
-  width: 80px;
+  width: 100px;
   // 入场动画
   animation: fade-in-up var(--duration-normal) var(--ease-smooth) both;
 
   &__cube {
-    width: 60px;
-    height: 60px;
+    width: 76px;
+    height: 76px;
     object-fit: contain;
     transition: filter var(--duration-normal) var(--ease-smooth);
   }
 
   &__name {
-    font-size: 10px;
+    font-size: 13px;
     color: var(--color-text-secondary);
     text-align: center;
-    max-width: 80px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: 100px;
+    word-break: break-all;
+    white-space: normal;
     line-height: 1.3;
   }
 

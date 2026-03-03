@@ -35,21 +35,43 @@ const statusColorMap: Record<CompanyStatus, { from: string; to: string }> = {
 
 const accentColors = computed(() => statusColorMap[props.status])
 
-/** 进度条目标宽度百分比 */
+/** 进度条默认目标宽度百分比 */
 const progressPercent = computed(() => {
   const flow = props.detail.scenarioFlow
   const completed = flow.filter(s => s.progress && s.progress >= 100).length
   return (completed / flow.length) * 100
 })
 
-/** 进度条填充动画：先 0，挂载后设置为目标值 */
+/** 当前悬停的工序索引 (-1 表示未悬停) */
+const hoveredStepIndex = ref(-1)
+
+/** 进度条实际显示宽度：hover 时跟随到对应节点位置，否则用默认值 */
 const animatedWidth = ref(0)
+const isInitialFill = ref(true)
+
 onMounted(() => {
-  // 延迟一帧让初始 width:0 渲染，然后触发 CSS transition 填充
   requestAnimationFrame(() => {
     animatedWidth.value = progressPercent.value
+    // 初始填充动画结束后切换为快速过渡
+    setTimeout(() => { isInitialFill.value = false }, 1600)
   })
 })
+
+function onStepEnter(index: number) {
+  hoveredStepIndex.value = index
+  const total = props.detail.scenarioFlow.length
+  animatedWidth.value = ((index + 1) / total) * 100
+}
+
+function onStepLeave() {
+  hoveredStepIndex.value = -1
+  animatedWidth.value = progressPercent.value
+}
+
+/** 根据工序 icon 字段查找对应的 Skill 完整数据（用于 tooltip） */
+function getSkillByStepIcon(icon: string): Skill | undefined {
+  return props.skills.find(s => s.id === icon)
+}
 
 /** 获取核心技能的完整数据 */
 const coreSkillsData = computed(() => {
@@ -101,7 +123,12 @@ function getSkillIconUrl(iconName: string): string {
           <h3 class="modal-content__section-title">{{ t('modal.coreScenario') }}</h3>
           <div class="modal-content__scenario-flow">
             <template v-for="(step, index) in detail.scenarioFlow" :key="index">
-              <div class="scenario-step">
+              <div
+                class="scenario-step"
+                :class="{ 'scenario-step--hovered': hoveredStepIndex === index }"
+                @mouseenter="onStepEnter(index)"
+                @mouseleave="onStepLeave"
+              >
                 <div class="scenario-step__icon">
                   <img
                     v-if="getSkillIconUrl(`ic_skill_${step.icon}`)"
@@ -110,6 +137,21 @@ function getSkillIconUrl(iconName: string): string {
                   />
                 </div>
                 <span class="scenario-step__label">{{ t(step.labelKey) }}</span>
+
+                <!-- 悬浮技能详情 tooltip -->
+                <Transition name="step-tooltip">
+                  <div
+                    v-if="hoveredStepIndex === index && getSkillByStepIcon(step.icon)"
+                    class="scenario-step__tooltip"
+                  >
+                    <h4 class="scenario-step__tooltip-title">
+                      {{ t(getSkillByStepIcon(step.icon)!.nameKey) }}
+                    </h4>
+                    <p class="scenario-step__tooltip-desc">
+                      {{ t(getSkillByStepIcon(step.icon)!.descriptionKey) }}
+                    </p>
+                  </div>
+                </Transition>
               </div>
               <!-- 步骤间箭头连接线（独立 flex 子元素，不重叠） -->
               <div v-if="index < detail.scenarioFlow.length - 1" class="scenario-connector" />
@@ -119,6 +161,7 @@ function getSkillIconUrl(iconName: string): string {
           <div class="modal-content__progress">
             <div
               class="modal-content__progress-bar"
+              :class="{ 'modal-content__progress-bar--fast': !isInitialFill }"
               :style="{ width: `${animatedWidth}%` }"
             />
           </div>

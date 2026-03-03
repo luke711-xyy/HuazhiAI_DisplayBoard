@@ -12,6 +12,7 @@ const { t } = useI18n()
 const props = defineProps<{
   indicator: KpiIndicator
   isActive: boolean
+  hideCount: boolean
 }>()
 
 defineEmits<{
@@ -33,7 +34,10 @@ function getIconUrl(icon: string): string {
 <template>
   <button
     class="kpi-indicator"
-    :class="{ 'kpi-indicator--active': isActive }"
+    :class="{
+      'kpi-indicator--active': isActive,
+      'kpi-indicator--compact': hideCount,
+    }"
     :style="{ '--kpi-color': props.indicator.color }"
     @click="$emit('select', indicator.id)"
   >
@@ -45,7 +49,9 @@ function getIconUrl(icon: string): string {
     <!-- 右侧：文字标签 + 数字 -->
     <div class="kpi-indicator__info">
       <span class="kpi-indicator__label">{{ t(indicator.labelKey) }}</span>
-      <span class="kpi-indicator__count">{{ indicator.count }}</span>
+      <Transition name="count-fade">
+        <span v-if="!hideCount" class="kpi-indicator__count">{{ indicator.count }}</span>
+      </Transition>
     </div>
   </button>
 </template>
@@ -143,5 +149,29 @@ function getIconUrl(icon: string): string {
     font-variant-numeric: tabular-nums;
     color: var(--color-text-primary);
   }
+
+  // 常闭模式：隐藏数字，图标+文字横向居中
+  &--compact {
+    justify-content: center;
+
+    .kpi-indicator__info {
+      align-items: center;
+    }
+
+    .kpi-indicator__label {
+      font-size: 14px;
+    }
+  }
+}
+
+// 数字淡入淡出
+.count-fade-enter-active,
+.count-fade-leave-active {
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+.count-fade-enter-from,
+.count-fade-leave-to {
+  opacity: 0;
+  max-height: 0;
 }
 </style>

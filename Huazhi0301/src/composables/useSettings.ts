@@ -17,6 +17,9 @@ const soundVolume = ref(50)
 /** 主题模式 (架空 UI) */
 const themeMode = ref<'dark' | 'light'>('dark')
 
+/** 常闭底部列表：开启后底部三个滚动列表永远不显示，KPI 数字也隐藏 */
+const hideBottomPanels = ref(false)
+
 export function useSettings() {
   /** 切换设置面板显隐 */
   function toggleSettings() {
@@ -32,6 +35,7 @@ export function useSettings() {
     isSettingsOpen,
     soundVolume,
     themeMode,
+    hideBottomPanels,
     toggleSettings,
     closeSettings,
   }
