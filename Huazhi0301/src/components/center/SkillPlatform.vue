@@ -105,24 +105,26 @@ const skillPositions: Record<string, { top: string; left: string }> = {
 }
 
 /**
- * 子级技能标签的绝对位置（独立于图标，便于手动微调）
- * 初始值基于 upperLeft + skillPositions 换算并向下偏移
+ * 子级技能标签相对于各自 SkillNode 的偏移量
+ * top / left 是相对于节点左上角的 CSS 值
+ * 标签水平方向默认以 translateX(-50%) 居中，left 基于节点宽度百分比
+ * 可对每个技能单独微调
  */
-const skillLabelPositions: Record<string, { top: string; left: string }> = {
-  // 柔性装配 (upper基准: top=35, left=110, 平台宽高=450)
-  shangxiawuliao: { top: '195px', left: '220px' },
-  dingweiduiqi:   { top: '120px', left: '260px' },
-  lianjieguding:  { top: '175px', left: '385px' },
-  // 柔性质检 (upper基准: top=35, left=640)
-  quexianjiance:  { top: '130px', left: '695px' },
-  rouxingshineng: { top: '130px', left: '875px' },
-  wusunjiance:    { top: '300px', left: '740px' },
-  xingneng:       { top: '300px', left: '920px' },
-  // 柔性码垛 (upper基准: top=195, left=376)
-  zhinengmaduo:   { top: '365px', left: '530px' },
-  cankuduijie:    { top: '310px', left: '650px' },
-  chengpingbaoz:  { top: '310px', left: '415px' },
-  lujinguihua:    { top: '235px', left: '530px' },
+const skillLabelOffsets: Record<string, { top: string; left: string }> = {
+  // 柔性装配
+  shangxiawuliao: { top: '108px', left: '50%' },
+  dingweiduiqi:   { top: '108px', left: '50%' },
+  lianjieguding:  { top: '108px', left: '50%' },
+  // 柔性质检
+  quexianjiance:  { top: '108px', left: '50%' },
+  rouxingshineng: { top: '108px', left: '50%' },
+  wusunjiance:    { top: '108px', left: '50%' },
+  xingneng:       { top: '108px', left: '50%' },
+  // 柔性码垛
+  zhinengmaduo:   { top: '108px', left: '50%' },
+  cankuduijie:    { top: '108px', left: '50%' },
+  chengpingbaoz:  { top: '108px', left: '50%' },
+  lujinguihua:    { top: '108px', left: '50%' },
 }
 
 /**
@@ -189,6 +191,7 @@ defineExpose({ skillNodeRefs })
           :skill="skill"
           :is-highlighted="highlightedSkillIds.includes(skill.id)"
           :category-color="categoryColorMap[category.id] || '#3B82F6'"
+          :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
           :style="{
             position: 'absolute',
             top: skillPositions[skill.id]?.top || '50%',
@@ -215,19 +218,6 @@ defineExpose({ skillNodeRefs })
       {{ t(category.nameKey) }}
     </div>
 
-    <!-- 子级技能标签（小号胶囊 · 毛玻璃 + 光效） -->
-    <div
-      v-for="skill in skills"
-      :key="`label-${skill.id}`"
-      class="skill-label"
-      :style="{
-        top: skillLabelPositions[skill.id]?.top,
-        left: skillLabelPositions[skill.id]?.left,
-        '--label-color': categoryColorMap[skill.categoryId] || '#3B82F6',
-      }"
-    >
-      {{ t(skill.nameKey) }}
-    </div>
   </div>
 </template>
 
@@ -353,51 +343,4 @@ defineExpose({ skillNodeRefs })
   }
 }
 
-// 子级技能标签 — 小号胶囊 · 毛玻璃 + 光效
-.skill-label {
-  position: absolute;
-  z-index: var(--z-skill-nodes);
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #fff;
-  white-space: nowrap;
-  pointer-events: none;
-
-  // 毛玻璃底色
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    color-mix(in srgb, var(--label-color) 20%, transparent) 100%
-  );
-  backdrop-filter: blur(10px) saturate(1.3);
-  -webkit-backdrop-filter: blur(10px) saturate(1.3);
-
-  // 发光边框
-  border: 1px solid color-mix(in srgb, var(--label-color) 30%, transparent);
-
-  // 外发光
-  box-shadow:
-    0 0 6px color-mix(in srgb, var(--label-color) 25%, transparent),
-    0 0 14px color-mix(in srgb, var(--label-color) 10%, transparent),
-    0 1px 6px rgba(0, 0, 0, 0.35);
-
-  // 顶部高光线
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 15%;
-    right: 15%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      color-mix(in srgb, var(--label-color) 50%, white) 50%,
-      transparent
-    );
-    border-radius: 1px;
-  }
-}
 </style>

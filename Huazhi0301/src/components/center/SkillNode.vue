@@ -6,16 +6,21 @@
  * hover 时：
  *   1. 切换到选中态图标
  *   2. 展开二级子技能菜单 (SkillSubMenu)
- * 图标下方显示技能名称文字标签。
+ * 包含毛玻璃文字标签，位置可通过 labelOffset 单独调整。
  */
 import type { Skill } from '@/types'
 import { ref, computed, inject, onMounted } from 'vue'
+import { useI18n } from '@/composables/useI18n'
 import SkillSubMenu from './SkillSubMenu.vue'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   skill: Skill
   isHighlighted: boolean
   categoryColor: string
+  /** 标签相对于节点左上角的偏移 { top, left }，支持任意 CSS 值 */
+  labelOffset: { top: string; left: string }
 }>()
 
 defineEmits<{
@@ -68,6 +73,18 @@ onMounted(() => {
   >
     <img :src="iconUrl" :alt="skill.nameKey" class="skill-node__icon" />
 
+    <!-- 毛玻璃文字标签（位置通过 labelOffset 单独控制） -->
+    <span
+      class="skill-node__label"
+      :style="{
+        '--label-color': categoryColor,
+        top: labelOffset.top,
+        left: labelOffset.left,
+      }"
+    >
+      {{ t(skill.nameKey) }}
+    </span>
+
     <!-- 二级子技能菜单 -->
     <SkillSubMenu
       v-if="showSubMenu"
@@ -106,5 +123,52 @@ onMounted(() => {
     object-fit: contain;
   }
 
+  // 子级技能标签 — 小号胶囊 · 毛玻璃 + 光效
+  &__label {
+    position: absolute;
+    transform: translateX(-50%);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    pointer-events: none;
+
+    // 毛玻璃底色
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      color-mix(in srgb, var(--label-color) 20%, transparent) 100%
+    );
+    backdrop-filter: blur(10px) saturate(1.3);
+    -webkit-backdrop-filter: blur(10px) saturate(1.3);
+
+    // 发光边框
+    border: 1px solid color-mix(in srgb, var(--label-color) 30%, transparent);
+
+    // 外发光
+    box-shadow:
+      0 0 6px color-mix(in srgb, var(--label-color) 25%, transparent),
+      0 0 14px color-mix(in srgb, var(--label-color) 10%, transparent),
+      0 1px 6px rgba(0, 0, 0, 0.35);
+
+    // 顶部高光线
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        color-mix(in srgb, var(--label-color) 50%, white) 50%,
+        transparent
+      );
+      border-radius: 1px;
+    }
+  }
 }
 </style>
