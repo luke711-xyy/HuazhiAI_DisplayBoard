@@ -24,22 +24,42 @@ defineEmits<{
 const transitionName = computed(() =>
   props.side === 'left' ? 'slide-card-left' : 'slide-card-right'
 )
+
+/**
+ * 离场前捕获卡片在 grid 中的位置和尺寸，固定到 inline style
+ * 这样 position:absolute 后卡片仍停留在原位播放侧滑动画
+ */
+function onBeforeLeave(el: Element) {
+  const htmlEl = el as HTMLElement
+  const rect = htmlEl.getBoundingClientRect()
+  const parent = htmlEl.parentElement
+  if (!parent) return
+  const parentRect = parent.getBoundingClientRect()
+  htmlEl.style.left = `${rect.left - parentRect.left}px`
+  htmlEl.style.top = `${rect.top - parentRect.top}px`
+  htmlEl.style.width = `${rect.width}px`
+}
 </script>
 
 <template>
-  <div class="company-grid" :class="`company-grid--${side}`">
-    <TransitionGroup :name="transitionName">
-      <CompanyCard
-        v-for="company in companies"
-        :key="company.id"
-        :company="company"
-        :display-name="companyNames[company.id] || company.nameKey"
-        :is-hovered="hoveredCompanyId === company.id"
-        @hover="$emit('hoverCompany', $event)"
-        @click="$emit('clickCompany', $event)"
-      />
-    </TransitionGroup>
-  </div>
+  <!-- TransitionGroup 直接作为 grid 容器，避免 fragment 模式下 parentElement 不稳定 -->
+  <TransitionGroup
+    tag="div"
+    :name="transitionName"
+    class="company-grid"
+    :class="`company-grid--${side}`"
+    @before-leave="onBeforeLeave"
+  >
+    <CompanyCard
+      v-for="company in companies"
+      :key="company.id"
+      :company="company"
+      :display-name="companyNames[company.id] || company.nameKey"
+      :is-hovered="hoveredCompanyId === company.id"
+      @hover="$emit('hoverCompany', $event)"
+      @click="$emit('clickCompany', $event)"
+    />
+  </TransitionGroup>
 </template>
 
 <style scoped lang="scss">
@@ -91,7 +111,7 @@ const transitionName = computed(() =>
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-// 离场时脱离文档流，让 move 动画生效
+// 离场时脱离文档流（配合 onBeforeLeave 固定原始位置）
 .slide-card-left-leave-active,
 .slide-card-right-leave-active {
   position: absolute;

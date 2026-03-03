@@ -88,8 +88,6 @@ onUnmounted(() => {
   gap: 2px;
   cursor: pointer;
   width: 100px;
-  // 入场动画
-  animation: fade-in-up var(--duration-normal) var(--ease-smooth) both;
 
   &__cube {
     width: 76px;
