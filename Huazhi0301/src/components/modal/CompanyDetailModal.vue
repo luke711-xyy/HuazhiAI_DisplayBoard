@@ -14,9 +14,11 @@
 import type { CompanyDetail, CompanyStatus, Skill } from '@/types'
 import { computed, ref, reactive } from 'vue'
 import { useI18n } from '@/composables/useI18n'
+import { useSettings } from '@/composables/useSettings'
 import btnCloseUrl from '@/assets/buttons/btn_close.png'
 
 const { t } = useI18n()
+const { deviceMode } = useSettings()
 
 const props = defineProps<{
   detail: CompanyDetail
@@ -108,6 +110,21 @@ function onBadgeEnter(sub: ResolvedSubSkill, event: MouseEvent) {
   tooltipPos.left = rect.left + rect.width / 2
 }
 
+/** 移动端：触摸徽章切换浮层（使用 touchend 绕过合成 click 链路） */
+function onBadgeTouch(sub: ResolvedSubSkill, event: Event) {
+  const el = event.currentTarget as HTMLElement
+  if (hoveredBadgeId.value === sub.id) {
+    hoveredBadgeId.value = null
+  } else {
+    hoveredBadgeId.value = sub.id
+    if (el) {
+      const rect = el.getBoundingClientRect()
+      tooltipPos.top = rect.bottom + 10
+      tooltipPos.left = rect.left + rect.width / 2
+    }
+  }
+}
+
 /** 动态加载技能图标 */
 const skillIcons = import.meta.glob('@/assets/skills/*.png', { eager: true, import: 'default' }) as Record<string, string>
 
@@ -122,17 +139,18 @@ function getSkillIconUrl(iconName: string): string {
 <template>
   <!-- 遮罩层 -->
   <Transition name="modal">
-    <div class="modal-overlay" @click="$emit('close')">
+    <div class="modal-overlay" @click="$emit('close')" @touchend.prevent.self="$emit('close')">
       <div
         class="modal-content"
         :style="{
           '--accent-from': accentColors.from,
           '--accent-to': accentColors.to,
         }"
-        @click.stop
+        @click.stop="hoveredBadgeId = null"
+        @touchend="hoveredBadgeId = null"
       >
         <!-- 关闭按钮 -->
-        <button class="modal-content__close" @click="$emit('close')">
+        <button class="modal-content__close" @click="$emit('close')" @touchend.prevent.stop="$emit('close')">
           <img :src="btnCloseUrl" alt="close" />
         </button>
 
@@ -181,8 +199,10 @@ function getSkillIconUrl(iconName: string): string {
               :key="sub.id"
               class="skill-badge"
               :style="{ '--badge-color': getBadgeColor(sub) }"
-              @mouseenter="onBadgeEnter(sub, $event)"
-              @mouseleave="hoveredBadgeId = null"
+              @mouseenter="deviceMode === 'pc' ? onBadgeEnter(sub, $event) : undefined"
+              @mouseleave="deviceMode === 'pc' ? (hoveredBadgeId = null) : undefined"
+              @touchend.prevent.stop="onBadgeTouch(sub, $event)"
+              @click.stop
             >
               <img :src="getSkillIconUrl(sub.parentIcon)" alt="" class="skill-badge__icon" />
               <span class="skill-badge__name">{{ t(sub.nameKey) }}</span>
@@ -271,10 +291,10 @@ function getSkillIconUrl(iconName: string): string {
 
   &__close {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 28px;
-    height: 28px;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -282,8 +302,8 @@ function getSkillIconUrl(iconName: string): string {
     transition: all var(--duration-fast) var(--ease-smooth);
 
     img {
-      width: 20px;
-      height: 20px;
+      width: 28px;
+      height: 28px;
     }
 
     &:hover {

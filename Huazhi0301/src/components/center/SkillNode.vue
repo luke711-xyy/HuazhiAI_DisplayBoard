@@ -9,11 +9,13 @@
  * 包含毛玻璃文字标签，位置可通过 labelOffset 单独调整。
  */
 import type { Skill } from '@/types'
-import { ref, computed, inject, onMounted } from 'vue'
+import { ref, computed, inject, onMounted, watch } from 'vue'
 import { useI18n } from '@/composables/useI18n'
+import { useSettings } from '@/composables/useSettings'
 import SkillSubMenu from './SkillSubMenu.vue'
 
 const { t } = useI18n()
+const { deviceMode } = useSettings()
 
 const props = defineProps<{
   skill: Skill
@@ -27,13 +29,33 @@ const props = defineProps<{
   submenuDirection?: 'up' | 'down'
   /** 公司 hover 时，非关联节点降暗 */
   isDimmedByOverlay?: boolean
+  /** 父组件当前激活的 hover 技能 ID（用于移动端外部复位） */
+  activeHoveredId?: string | null
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'hover', skillId: string | null): void
 }>()
 
 const isHovered = ref(false)
+
+// 移动端：父组件清除 hover 时，级联复位本地 isHovered
+watch(() => props.activeHoveredId, (newId) => {
+  if (deviceMode.value === 'mobile') {
+    isHovered.value = (newId === props.skill.id)
+  }
+})
+
+/** 移动端点击切换 hover 状态 */
+function handleMobileClick() {
+  if (isHovered.value) {
+    isHovered.value = false
+    emit('hover', null)
+  } else {
+    isHovered.value = true
+    emit('hover', props.skill.id)
+  }
+}
 
 /**
  * 动态加载技能图标
@@ -93,8 +115,9 @@ onMounted(() => {
     class="skill-node"
     :class="{ 'skill-node--highlighted': isHighlighted, 'skill-node--hovered': isHovered, 'skill-node--overlay-dimmed': isDimmedByOverlay }"
     :data-skill-id="skill.id"
-    @mouseenter="isHovered = true; $emit('hover', skill.id)"
-    @mouseleave="isHovered = false; $emit('hover', null)"
+    @mouseenter="deviceMode === 'pc' ? (isHovered = true, $emit('hover', skill.id)) : undefined"
+    @mouseleave="deviceMode === 'pc' ? (isHovered = false, $emit('hover', null)) : undefined"
+    @click.stop="deviceMode === 'mobile' ? handleMobileClick() : undefined"
   >
     <img :src="iconUrl" :alt="skill.nameKey" class="skill-node__icon" />
 
@@ -139,7 +162,7 @@ onMounted(() => {
   z-index: var(--z-skill-nodes);
   transform: scale(var(--node-scale, 1));
 
-  &:hover,
+  &--hovered,
   &--highlighted {
     transform: scale(calc(var(--node-scale, 1) * 1.10));
     filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));

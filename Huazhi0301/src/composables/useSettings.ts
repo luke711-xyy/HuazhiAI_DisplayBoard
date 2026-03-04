@@ -15,7 +15,7 @@ const isSettingsOpen = ref(false)
 const soundVolume = ref(50)
 
 /** 设备模式：pc = 单击打开弹窗, mobile = 双击打开弹窗 */
-const deviceMode = ref<'pc' | 'mobile'>('pc')
+const deviceMode = ref<'pc' | 'mobile'>('mobile')
 
 /** 常闭底部列表：开启后底部三个滚动列表永远不显示，KPI 数字也隐藏 */
 const hideBottomPanels = ref(false)

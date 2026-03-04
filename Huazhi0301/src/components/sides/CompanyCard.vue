@@ -33,22 +33,15 @@ const emit = defineEmits<{
   (e: 'click', companyId: string): void
 }>()
 
-// ---- 移动端双击判定 ----
-let tapTimer: ReturnType<typeof setTimeout> | null = null
-const DOUBLE_TAP_DELAY = 300 // ms
-
-function handleMobileTap() {
-  if (tapTimer) {
-    // 第二次 tap 在 300ms 内到达 → 双击 → 打开弹窗
-    clearTimeout(tapTimer)
-    tapTimer = null
+// ---- 移动端状态感知单击 ----
+function handleMobileClick() {
+  if (props.isHovered) {
+    // 已点亮 → 再次单击同一公司 → 取消高光 + 打开详情弹窗
+    emit('hover', null)
     emit('click', props.company.id)
   } else {
-    // 首次 tap → 等 300ms 看是否有第二次
-    tapTimer = setTimeout(() => {
-      tapTimer = null
-      emit('hover', props.company.id)
-    }, DOUBLE_TAP_DELAY)
+    // 未点亮 → 首次单击 → 点亮 skill nodes
+    emit('hover', props.company.id)
   }
 }
 
@@ -78,7 +71,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  if (tapTimer) clearTimeout(tapTimer)
   if (unregisterCompanyElement) {
     unregisterCompanyElement(props.company.id)
   }
@@ -93,7 +85,7 @@ onUnmounted(() => {
     :data-company-id="company.id"
     @mouseenter="deviceMode === 'pc' ? $emit('hover', company.id) : undefined"
     @mouseleave="deviceMode === 'pc' ? $emit('hover', null) : undefined"
-    @click="deviceMode === 'pc' ? $emit('click', company.id) : handleMobileTap()"
+    @click="deviceMode === 'pc' ? $emit('click', company.id) : handleMobileClick()"
   >
     <!-- 方块立体图 -->
     <img :src="cubeUrl" alt="" class="company-card__cube" />

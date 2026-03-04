@@ -9,8 +9,10 @@
 import type { SubSkill } from '@/types'
 import { ref } from 'vue'
 import { useI18n } from '@/composables/useI18n'
+import { useSettings } from '@/composables/useSettings'
 
 const { t } = useI18n()
+const { deviceMode } = useSettings()
 
 const props = defineProps<{
   subSkills: SubSkill[]
@@ -46,7 +48,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
 </script>
 
 <template>
-  <div class="skill-submenu" :class="{ 'skill-submenu--down': direction === 'down' }" @mouseenter.stop @mouseleave.stop>
+  <div class="skill-submenu" :class="{ 'skill-submenu--down': direction === 'down' }" @mouseenter.stop @mouseleave.stop @click.stop>
     <!-- 垂直连接线 -->
     <div class="skill-submenu__stem" :style="{ '--stem-color': categoryColor }" />
 
@@ -63,8 +65,9 @@ function getHoveredSubSkill(): SubSkill | undefined {
         '--pill-color': categoryColor,
         'animation-delay': `${index * 60}ms`,
       }"
-      @mouseenter="hoveredSubSkillId = sub.id"
-      @mouseleave="hoveredSubSkillId = null"
+      @mouseenter="deviceMode === 'pc' ? (hoveredSubSkillId = sub.id) : undefined"
+      @mouseleave="deviceMode === 'pc' ? (hoveredSubSkillId = null) : undefined"
+      @click="deviceMode === 'mobile' ? (hoveredSubSkillId = hoveredSubSkillId === sub.id ? null : sub.id) : undefined"
     >
       <span class="skill-submenu__pill-dot" />
       <span class="skill-submenu__pill-text">{{ t(sub.nameKey) }}</span>

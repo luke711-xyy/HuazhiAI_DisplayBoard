@@ -13,10 +13,12 @@
  */
 import type { SkillCategory, Skill } from '@/types'
 import SkillNode from './SkillNode.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useI18n } from '@/composables/useI18n'
+import { useSettings } from '@/composables/useSettings'
 
 const { t, locale } = useI18n()
+const { deviceMode } = useSettings()
 
 // 图片资源导入
 import bottomLayer from '@/assets/platforms/block_layer_buttom.png'
@@ -206,10 +208,19 @@ const isOverlayActive = computed(() =>
 
 const emit = defineEmits<{
   (e: 'hoverSkill', skillId: string | null): void
+  (e: 'clearHover'): void
 }>()
 
 /** 本地记录当前 hover 的技能 ID，同时向父组件冒泡 */
 const localHoveredSkillId = ref<string | null>(null)
+
+// 父组件（App.vue）通过遮罩点击清除 hoveredSkillId 时，级联重置本地状态
+watch(() => props.hoveredSkillId, (newId) => {
+  if (newId === null) {
+    localHoveredSkillId.value = null
+    isSubmenuOpen.value = false
+  }
+})
 
 function onSkillHover(skillId: string | null) {
   localHoveredSkillId.value = skillId
@@ -224,13 +235,24 @@ function onSkillHover(skillId: string | null) {
   }
 }
 
+/** 移动端：点击平台空白区域关闭所有 hover */
+function onPlatformClick(e: MouseEvent) {
+  if (deviceMode.value !== 'mobile') return
+  const target = e.target as HTMLElement
+  if (target.closest('.skill-node')) return
+  localHoveredSkillId.value = null
+  isSubmenuOpen.value = false
+  emit('hoverSkill', null)
+  emit('clearHover')
+}
+
 /** 暴露技能节点引用供连线使用 */
 const skillNodeRefs = ref<Record<string, HTMLElement>>({})
 defineExpose({ skillNodeRefs })
 </script>
 
 <template>
-  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': effectiveSubmenuOpen }">
+  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': effectiveSubmenuOpen }" @click="onPlatformClick">
     <!-- 底层网格大平台 -->
     <img :src="bottomLayer" alt="" class="skill-platform__bottom" :class="{ 'skill-platform__bottom--dimmed': isOverlayActive }" />
 
@@ -287,6 +309,7 @@ defineExpose({ skillNodeRefs })
           :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
           :submenu-direction="skillSubmenuDirection[skill.id] || 'up'"
           :is-dimmed-by-overlay="isOverlayActive && !highlightedSkillIds.includes(skill.id)"
+          :active-hovered-id="localHoveredSkillId"
           :style="{
             position: 'absolute',
             top: skillPositions[skill.id]?.top || '50%',

@@ -9,13 +9,18 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const scale = ref(1)
+const containerTransform = ref('scale(1)')
 const containerRef = ref<HTMLElement>()
 
-/** 根据窗口大小计算缩放比例 */
+/**
+ * 根据窗口大小计算缩放比例
+ */
 function updateScale() {
-  const scaleX = window.innerWidth / 1920
-  const scaleY = window.innerHeight / 1080
-  scale.value = Math.min(scaleX, scaleY)
+  const w = window.innerWidth
+  const h = window.innerHeight
+  const s = Math.min(w / 1920, h / 1080)
+  scale.value = s
+  containerTransform.value = `scale(${s})`
 }
 
 onMounted(() => {
@@ -35,7 +40,7 @@ defineExpose({ containerRef, scale })
   <div
     ref="containerRef"
     class="dashboard-container"
-    :style="{ transform: `scale(${scale})` }"
+    :style="{ transform: containerTransform }"
   >
     <!-- 全屏地图背景 -->
     <div class="background-layer">

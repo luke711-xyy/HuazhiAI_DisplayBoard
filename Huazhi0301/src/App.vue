@@ -55,7 +55,7 @@ const containerScale = computed(() => dashboardRef.value?.scale ?? 1)
 // ==================== 响应式状态 ====================
 
 /** 当前选中的 KPI ID 集合（支持多选，同时展开多个分类） */
-const activeKpiIds = reactive(new Set<string>())
+const activeKpiIds = reactive(new Set<string>(['reserve', 'implementation', 'promotion']))
 
 /** 当前悬停的企业 ID (触发发光连线) */
 const hoveredCompanyId = ref<string | null>(null)
@@ -156,9 +156,11 @@ function onHoverCompany(companyId: string | null) {
   hoveredCompanyId.value = companyId
 }
 
-/** 企业点击：打开详情弹窗 */
+/** 企业点击：打开详情弹窗，同时清除所有 hover 高光 */
 function onClickCompany(companyId: string) {
   selectedCompanyId.value = companyId
+  hoveredCompanyId.value = null
+  hoveredSkillId.value = null
 }
 
 /** 关闭详情弹窗 */
@@ -177,6 +179,12 @@ function onOverlayClick() {
     hoveredCompanyId.value = null
     hoveredSkillId.value = null
   }
+}
+
+/** 移动端点击平台空白区域，清除所有 hover 状态 */
+function onClearHover() {
+  hoveredCompanyId.value = null
+  hoveredSkillId.value = null
 }
 
 // ==================== 连线系统 ====================
@@ -285,6 +293,7 @@ const { lines: connectionLines } = useConnectionLines(
       :highlighted-sub-skill-ids="highlightedSubSkillIds"
       :hovered-skill-id="hoveredSkillId"
       @hover-skill="onHoverSkill"
+      @clear-hover="onClearHover"
     />
 
     <!-- 底部信息面板（各面板由对应 KPI 独立控制，抽屉式滑入/滑出） -->
