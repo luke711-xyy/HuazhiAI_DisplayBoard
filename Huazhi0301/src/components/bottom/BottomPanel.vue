@@ -39,6 +39,9 @@ defineEmits<{
       >
         <span class="bottom-panel__dot" :style="{ background: kpi.color }" />
         <span class="bottom-panel__company-name">{{ t(company.nameKey) }}</span>
+        <span class="bottom-panel__progress" :style="{ '--progress': company.progress / 100 }">
+          <span class="bottom-panel__progress-fill" :style="{ '--bar-color': kpi.color }" />
+        </span>
         <span class="bottom-panel__company-type">{{ company.type }}</span>
       </div>
 
@@ -126,6 +129,24 @@ defineEmits<{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  &__progress {
+    width: 48px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    display: block;
+    width: calc(var(--progress) * 100%);
+    height: 100%;
+    border-radius: 2px;
+    background: var(--bar-color);
+    transition: width 0.6s var(--ease-smooth);
   }
 
   &__company-type {

@@ -25,6 +25,8 @@ export interface Company {
   side: 'left' | 'right'
   /** 在对应侧的排列位置索引 */
   slotIndex: number
+  /** 合作推进进度 (0-100) */
+  progress: number
 }
 
 /**
