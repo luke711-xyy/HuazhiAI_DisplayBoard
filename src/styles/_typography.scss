@@ -1,0 +1,44 @@
+// ============================================================
+// 字体与排版规范
+// ============================================================
+
+// 标题层级
+.text-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: var(--color-text-primary);
+}
+
+.text-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--color-text-secondary);
+}
+
+.text-kpi-number {
+  font-size: 36px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+
+.text-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.text-body {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.text-small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}

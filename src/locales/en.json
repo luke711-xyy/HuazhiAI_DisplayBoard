@@ -1,0 +1,420 @@
+{
+  "app": {
+    "title": "Co-Creation · Co-Expansion · Co-Operation",
+    "subtitle": "HUAZHI AI Industrial Intelligence Platform"
+  },
+  "kpi": {
+    "reserve": "In Reserve",
+    "implementation": "In Progress",
+    "promotion": "In Promotion"
+  },
+  "category": {
+    "assembly": "Flexible Assembly",
+    "inspection": "Flexible Inspection",
+    "palletizing": "Flexible Palletizing"
+  },
+  "skill": {
+    "shangxiawuliao": {
+      "name": "Material Loading",
+      "desc": "Intelligent material loading & unloading system, enabling automated material handling with multi-station coordination."
+    },
+    "dingweiduiqi": {
+      "name": "Positioning & Alignment",
+      "desc": "High-precision positioning & alignment system with vision-guided sub-millimeter accuracy for precision assembly."
+    },
+    "lianjieguding": {
+      "name": "Connection & Fastening",
+      "desc": "Automated connection & fastening system supporting bolting, riveting, and snap-fit processes."
+    },
+    "liuzhuanfuwei": {
+      "name": "Transfer & Reset",
+      "desc": "Post-assembly online verification, product sorting, and station reset to prevent defective products from flowing downstream."
+    },
+    "quexianjiance": {
+      "name": "Defect Detection",
+      "desc": "AI vision-based defect detection system identifying scratches, cracks, and discoloration with 99.5% accuracy."
+    },
+    "rouxingshineng": {
+      "name": "Flexible Enablement",
+      "desc": "Flexible enablement platform using force control and compliant motion for adaptive surface processing."
+    },
+    "wusunjiance": {
+      "name": "NDT Testing",
+      "desc": "Non-destructive testing using ultrasonic and X-ray methods to detect internal defects and ensure reliability."
+    },
+    "xingneng": {
+      "name": "Performance Testing",
+      "desc": "Comprehensive product functional and performance testing covering electrical, mechanical, sealing, and environmental dimensions."
+    },
+    "zhinengmaduo": {
+      "name": "Smart Palletizing",
+      "desc": "Intelligent palletizing planning system that auto-calculates optimal stacking patterns for warehouse efficiency."
+    },
+    "cankuduijie": {
+      "name": "Warehouse Interface",
+      "desc": "Automated warehouse docking system enabling seamless integration with AGV dispatch and WMS."
+    },
+    "chengpingbaoz": {
+      "name": "Product Packaging",
+      "desc": "Intelligent product packaging system integrating incoming recognition, pick planning, and method adjustment for multi-variety mixed production."
+    },
+    "lujinguihua": {
+      "name": "Path Planning",
+      "desc": "Robot motion path planning with environment sensing for obstacle avoidance and multi-robot coordination."
+    },
+    "fenjianpeisong": {
+      "name": "Sorting & Delivery",
+      "desc": "Intelligent sorting and delivery system using visual recognition and path optimization for automated classification and precise distribution."
+    }
+  },
+  "company": {
+    "tiancheng": { "name": "Shanghai Tiancheng Precision Co.", "industry": "Precision Machining", "type": "MNC" },
+    "huarui": { "name": "Huarui Smart Technology Co.", "industry": "Smart Manufacturing", "type": "SOE" },
+    "zhongke": { "name": "Zhongke Automation Equipment", "industry": "Automation Equipment", "type": "Private" },
+    "dongfang": { "name": "Dongfang Heavy Machinery Group", "industry": "Heavy Machinery", "type": "SOE" },
+    "minghe": { "name": "Minghe Electronics Technology", "industry": "Electronics", "type": "Private" },
+    "baoshan": { "name": "Baoshan Iron & Steel Co.", "industry": "Steel & Metallurgy", "type": "SOE" },
+    "hengda": { "name": "Hengda Precision Machinery Co.", "industry": "Precision Machinery", "type": "MNC" },
+    "xinda": { "name": "Xinda New Materials Technology", "industry": "New Materials", "type": "Private" },
+    "ruiguang": { "name": "Ruiguang Optoelectronics Co.", "industry": "Optoelectronics", "type": "MNC" },
+    "changjiang": { "name": "Changjiang Power Systems Co.", "industry": "Power Systems", "type": "SOE" },
+    "feiyu": { "name": "Feiyu Aero Parts Co.", "industry": "Aerospace Parts", "type": "Private" },
+    "yongxin": { "name": "Yongxin Industrial Automation", "industry": "Industrial Automation", "type": "SOE" },
+    "guohua": { "name": "Guohua Energy Equipment Co.", "industry": "Energy Equipment", "type": "MNC" },
+    "jingwei": { "name": "Jingwei Semiconductor Technology", "industry": "Semiconductor", "type": "Private" },
+    "senbo": { "name": "Senbo Robotics Technology", "industry": "Robotics", "type": "Private" },
+    "weichuang": { "name": "Weichuang Medical Devices Co.", "industry": "Medical Devices", "type": "MNC" },
+    "jiali": { "name": "Jiali Auto Parts Co.", "industry": "Auto Parts", "type": "SOE" },
+    "rongsheng": { "name": "Rongsheng New Energy Tech", "industry": "New Energy", "type": "Private" },
+    "zhiyuan": { "name": "Zhiyuan Sensor Technology Co.", "industry": "Sensor Technology", "type": "MNC" },
+    "dexin": { "name": "Dexin Heavy Equipment Co.", "industry": "Heavy Equipment", "type": "SOE" },
+    "longyu": { "name": "Longyu Precision Manufacturing", "industry": "Precision Manufacturing", "type": "MNC" },
+    "tianhe": { "name": "Tianhe Smart Systems Co.", "industry": "Smart Systems", "type": "Private" },
+    "boyu": { "name": "Boyu Aerospace Technology Co.", "industry": "Aerospace", "type": "SOE" },
+    "haiwei": { "name": "Haiwei Electrical Equipment Co.", "industry": "Electrical Equipment", "type": "MNC" },
+    "shengshi": { "name": "Shengshi Packaging Materials", "industry": "Packaging", "type": "Private" },
+    "qiangxin": { "name": "Qiangxin Telecom Equipment Co.", "industry": "Telecom Equipment", "type": "SOE" },
+    "zhongheng": { "name": "Zhongheng Solar Technology", "industry": "Solar Technology", "type": "MNC" },
+    "yifei": { "name": "Yifei Laser Technology Co.", "industry": "Laser Technology", "type": "Private" },
+    "xincheng": { "name": "Xincheng Rail Transit Co.", "industry": "Rail Transit", "type": "SOE" },
+    "dacheng": { "name": "Dacheng Bioengineering Co.", "industry": "Bioengineering", "type": "MNC" }
+  },
+  "scenario": {
+    "loading": "Loading",
+    "positioning": "Positioning",
+    "assembly": "Assembly",
+    "inspection": "Inspection",
+    "packaging": "Packaging",
+    "connecting": "Connecting",
+    "flexibility": "Flex Processing",
+    "palletizing": "Palletizing",
+    "warehousing": "Warehousing",
+    "ndt": "NDT Testing",
+    "performance": "Performance",
+    "pathplan": "Path Planning",
+    "weighpack": "Weighing & Packing"
+  },
+  "modal": {
+    "companyInfo": "Company Info",
+    "coreScenario": "Core Business Scenario",
+    "coreSkills": "Core Skills",
+    "close": "Close",
+    "industry": "Industry",
+    "type": "Type",
+    "briefDesc": "Company Profile",
+    "progressTitle": "Cooperation Progress"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "sound": "Sound Volume",
+    "theme": "Mobile Mode",
+    "chinese": "中文",
+    "english": "English",
+    "hideBottomPanels": "Always Hide Panels"
+  },
+  "bottomPanel": {
+    "title": "Company List",
+    "noData": "No data available"
+  },
+  "subSkill": {
+    "wuliaoshaicha": {
+      "name": "Material Screening",
+      "desc": "Uses vision, sensors, and other methods to identify and verify incoming material dimensions, surface quality, pose state, and identification information, ensuring materials meet assembly requirements and match production order data."
+    },
+    "wuxulailiao": {
+      "name": "Unordered Picking",
+      "desc": "For randomly stacked parts, uses 3D vision recognition and grasp planning to achieve occlusion-resistant picking, placing parts into temporary sorting buffers or feeders for subsequent orderly feeding."
+    },
+    "youxugongliao": {
+      "name": "Ordered Feeding",
+      "desc": "From sorted or oriented feeding devices (vibratory bowls, sorting trays, conveyors), uses high-precision vision guidance to control robotic arms for precise pose picking, accurately placing parts into assembly station fixtures or positioning mechanisms."
+    },
+    "duowuliaoxietong": {
+      "name": "Multi-Material Sync",
+      "desc": "When assembly requires multiple parts in specific sequence or simultaneously, coordinates multiple devices or robotic arms to complete synchronized feeding per assembly process sequence and cycle time requirements."
+    },
+    "xialiaofendao": {
+      "name": "Sortation & Diversion",
+      "desc": "Removes completed products or semi-finished goods from assembly stations, sorting them into different transfer containers, trays, or conveyor lines based on inline inspection results (pass/fail) or downstream process routes."
+    },
+    "shijuedingwei": {
+      "name": "Pose Sensing & Servo",
+      "desc": "Comprehensively uses vision, force, proximity and other sensors to track workpiece pose in real-time during assembly, with adaptive adjustment forming closed-loop control."
+    },
+    "jiguangduizhun": {
+      "name": "Adaptive Mating Alignment",
+      "desc": "For contact, friction, and tolerance-based mating actions (surface fitting, shaft-hole insertion, snap-fit), uses force control strategies to adaptively adjust execution, preventing jamming or damage."
+    },
+    "jixiedingwei": {
+      "name": "Multi-Body Coordinated Positioning",
+      "desc": "Coordinates multiple execution units (dual robotic arms, human-robot, multi-robot) to jointly complete gripping, pose adjustment, and assembly of multi-component, heavy, or complex structures."
+    },
+    "luoshuaningsuo": {
+      "name": "Adaptive Connection Control",
+      "desc": "Dynamically adjusts connection process parameters (torque, current, temperature, speed, pressure, etc.) based on real-time sensing of workpiece state (material, gap, alignment) to adapt to workpiece variations and environmental changes."
+    },
+    "maojieliangjie": {
+      "name": "Connection Path Planning",
+      "desc": "Generates or corrects tool (welding gun, glue gun, screwdriver) motion trajectories and poses in real-time based on actual workpiece features (weld grooves, glue surface shapes, screw hole positions), ensuring correct coverage and optimal orientation."
+    },
+    "jiaozhanyajie": {
+      "name": "End-Effector Smart Switching",
+      "desc": "For complex assembly tasks requiring multiple connection processes, automatically completes rapid changeover, calibration, and coordinated sequential operation of different end-effectors (electric gun, welding gun, glue gun, etc.)."
+    },
+    "kakouguding": {
+      "name": "Quality Sensing & Warning",
+      "desc": "During connection processes, monitors connection state in real-time through multi-sensor fusion (force, vision, acoustic, thermal imaging), including weld pool morphology, adhesive bead continuity, and screw seating, with online quality judgment and early warning."
+    },
+    "zhinenghuanxian": {
+      "name": "Smart Changeover",
+      "desc": "Records complete process parameters and quality data for each connection, forming traceable 'digital process packages' that can be quickly recalled and adjusted by product model or order for small-batch rapid changeover."
+    },
+    "zhuangpeiyanzheng": {
+      "name": "Assembly Online Verification",
+      "desc": "Before the assembly is removed, quickly verifies assembly completeness, critical dimensions, or function through vision, force sensing, or functional testing, ensuring defective products don't flow to downstream processes."
+    },
+    "chengpinfenjian": {
+      "name": "Product Sorting & Unloading",
+      "desc": "Based on verification results, picks and places good and defective products separately to designated areas (transfer trays, rework line), while ensuring placement pose meets downstream requirements."
+    },
+    "gongweifuwei": {
+      "name": "Station Reset & Cleanup",
+      "desc": "After unloading, inspects fixtures and positioning mechanisms, clears residual materials, and resets the station to prepare for the next assembly cycle, ensuring process consistency."
+    },
+    "biaomianhuahen": {
+      "name": "Appearance & Surface Quality",
+      "desc": "Surface defects (scratches, cracks, burrs, dents, oxidation, oil stains, coating delamination, weld spatter); color and gloss (color difference, glossiness, coating thickness, missed coating, texture); cleanliness (foreign objects, dust, oil stains)."
+    },
+    "liewen": {
+      "name": "Structural Dimension & Label",
+      "desc": "Comprehensive inspection of product geometric dimensions, assembly completeness, and identification information, ensuring physical characteristics and traceability data comply with design specifications."
+    },
+    "bianse": {
+      "name": "Product & Packaging Quality",
+      "desc": "Packaging appearance (box damage, sealing, banding); packaging accessories (manuals, accessories, cushioning); palletizing and pallets (stability, labels, stretch wrap)."
+    },
+    "likongshiying": {
+      "name": "Inspection Standardized Modeling",
+      "desc": "Converts product drawings and acceptance standards into digital inspection templates (defect examples, tolerances, rules)."
+    },
+    "qumiandamoqi": {
+      "name": "Adaptive Inspection Execution",
+      "desc": "Automatically generates equipment execution programs (robot paths, camera parameters, algorithm configurations) based on templates."
+    },
+    "rousunkongzhi": {
+      "name": "Resource Dynamic Scheduling",
+      "desc": "Intelligently allocates inspection stations and resources based on production line cycle time and equipment status."
+    },
+    "chaoshengbojiance": {
+      "name": "Internal NDT",
+      "desc": "Without destroying the product, uses non-destructive testing techniques to inspect internal structures, detecting defects that affect performance and reliability."
+    },
+    "dianqiceshi": {
+      "name": "Functional Performance Testing",
+      "desc": "Electrical (continuity, insulation, withstand voltage, LCR, logic); mechanical (insertion force, torque, tensile, hardness, fatigue); sealing (air-tight, water-tight, helium); optical/acoustic (transmittance, color coordinates, noise); environmental (temperature, salt spray, aging)."
+    },
+    "hunhemaduo": {
+      "name": "Adaptive Position Adjustment",
+      "desc": "Compensates for pallet position errors or lower box displacement through vision-based secondary positioning before placement."
+    },
+    "gaosumaduo": {
+      "name": "Adaptive Force-Controlled Placement",
+      "desc": "For deformable products (e.g., cartons), uses force control mode for contact placement, avoiding toppling of already-stacked boxes."
+    },
+    "chaizhuomaduo": {
+      "name": "Online Pattern Dynamic Correction",
+      "desc": "After stacking several layers, 3D scans the actual stack pattern, compares with the planned model, and re-plans subsequent stacking if deviations are found."
+    },
+    "agvdiaodu": {
+      "name": "Inbound Shelving",
+      "desc": "Smart equipment transports completed pallets to designated rack locations."
+    },
+    "liticangku": {
+      "name": "AS/RS Docking",
+      "desc": "Coordinates with stacker cranes via smart equipment for high-bay rack storage and retrieval operations."
+    },
+    "jingquejizhong": {
+      "name": "Incoming Recognition & Matching",
+      "desc": "In multi-variety mixed production, product specs, dimensions, poses, and incoming sequences constantly change. RGB-D cameras perform inline measurement, barcode recognition, and WMS order verification to handle product changeover diversity."
+    },
+    "zidongfengxiang": {
+      "name": "Pick Sequence Decision",
+      "desc": "Pick point detection algorithms with sequence optimization based on current pallet pattern and incoming order, ensuring each pick best supports pallet stability."
+    },
+    "tiebiaodabao": {
+      "name": "Pick Method Adjustment",
+      "desc": "Different products (cartons, plastic bags, wooden boxes, irregular items) require different pick methods (suction, gripping, embracing). The system auto-selects appropriate methods and dynamically adjusts parameters based on real-time sensing of material properties, dimensions, weight, and surface characteristics."
+    },
+    "bizhangguihua": {
+      "name": "Pallet Pattern Tracking",
+      "desc": "Uses 3D vision to identify incoming dimensions, materials, and remaining pallet space, auto-calculating optimal stacking patterns (flat, interlocked, rotated nesting) and generating pick/place sequences with dynamic adjustment during stacking."
+    },
+    "zuijianlujing": {
+      "name": "Palletizing Path Optimization",
+      "desc": "During placement, plans smooth collision-free trajectories based on environment sensing (pallet boundaries, stacked materials, surrounding equipment), dynamically correcting via vision or force feedback to handle pallet drift and material sliding."
+    },
+    "duojixietong": {
+      "name": "Multi-Robot Stacking Control",
+      "desc": "For large-format or high-throughput palletizing, employs dual robotic arms or multi-device coordination through master-slave control, path synchronization, and collision prediction for collaborative stacking operations."
+    },
+    "zhinengfenjian": {
+      "name": "Unit Reinforcement",
+      "desc": "Based on material properties (cartons, soft packs, irregular items), stack height, and transport requirements, auto-selects reinforcement methods (stretch wrap, banding, corner protectors) to ensure pallet unit stability during downstream transfer."
+    },
+    "lujingpeisong": {
+      "name": "Label Binding",
+      "desc": "Auto-generates labels containing product specs, quantities, batches, and destinations based on pallet order information, precisely applying them to designated positions for reliable physical-information binding."
+    },
+    "duodanxietong": {
+      "name": "Logistics Coordination",
+      "desc": "After palletizing, automatically notifies and dispatches downstream logistics equipment (AGV, conveyors) for docking, or triggers warehouse entry with status handshake and information synchronization."
+    },
+    "tuopanyizai": {
+      "name": "Pallet Transfer",
+      "desc": "Transfers fully processed pallets from palletizing stations to docking points (AGV carrier plates, conveyor entrances) via transfer machines or robots, ensuring pose compliance with downstream equipment interfaces."
+    }
+  },
+  "companyDesc": {
+    "tiancheng": {
+      "brief": "Founded in 2008, Shanghai Tiancheng Precision Co. is a multinational enterprise specializing in precision component machining, equipped with advanced CNC centers and automated inspection systems, serving automotive, aerospace, and medical industries.",
+      "progressNote": "Production line automation design and technical validation completed. Currently integrating and commissioning the loading/unloading station, with trial production expected next month."
+    },
+    "huarui": {
+      "brief": "Huarui Smart Technology is a state-owned intelligent manufacturing solution provider, specializing in industrial robot integration and smart production line planning, having served over 200 manufacturing enterprises.",
+      "progressNote": "Connection & fastening process validated. Flexible enablement module is being deployed on-site with parameter tuning in progress."
+    },
+    "zhongke": {
+      "brief": "Zhongke Automation Equipment is a leading domestic automation equipment manufacturer, focused on intelligent warehousing logistics and palletizing system R&D, with products widely used in food, FMCG, and e-commerce industries.",
+      "progressNote": "Smart palletizing system installed. Warehouse interface integration under joint testing, expected full-line commissioning within two weeks."
+    },
+    "dongfang": {
+      "brief": "Dongfang Heavy Machinery Group is a large state-owned equipment manufacturer, specializing in heavy machinery R&D, manufacturing and services, with deep expertise in energy equipment and mining machinery.",
+      "progressNote": "Material handling system operational. Path planning module undergoing multi-scenario adaptation testing with good overall progress."
+    },
+    "minghe": {
+      "brief": "Minghe Electronics Technology specializes in consumer and industrial electronics R&D and manufacturing, with multiple SMT lines and advanced test laboratories, with annual capacity exceeding 50 million units.",
+      "progressNote": "Finished product packaging line plan confirmed. Performance testing station under construction, equipment installation expected by month-end."
+    },
+    "baoshan": {
+      "brief": "Baoshan Iron & Steel is one of China's largest steel enterprises, specializing in steel smelting and deep processing, covering plate, tube, and specialty steel products with 30M ton annual capacity.",
+      "progressNote": "NDT system online and operational. Defect detection algorithm under continuous optimization, detection rate improved to 98.5%."
+    },
+    "hengda": {
+      "brief": "Hengda Precision Machinery is a Sino-foreign JV specializing in high-precision transmission components and precision mold design & manufacturing, with products exported to over 30 countries.",
+      "progressNote": "Positioning & alignment system calibrated. Connection & fastening process undergoing multi-variety changeover validation, mass production preparation expected next week."
+    },
+    "xinda": {
+      "brief": "Xinda New Materials Technology is dedicated to high-performance composite materials and functional coatings R&D and production, with applications in new energy, electronics, and construction.",
+      "progressNote": "Flexible enablement module initially integrated. Smart palletizing system undergoing material adaptation testing."
+    },
+    "ruiguang": {
+      "brief": "Ruiguang Optoelectronics is a multinational enterprise specializing in optoelectronic devices and precision optical components, covering LED chips, optical communication modules, and automotive optical systems.",
+      "progressNote": "Material handling automation implemented. Warehouse interface system undergoing WMS integration testing."
+    },
+    "changjiang": {
+      "brief": "Changjiang Power Systems is a large state-owned power equipment manufacturer, specializing in marine diesel engines, gas turbines, and industrial power systems for domestic and international energy and marine industries.",
+      "progressNote": "Path planning system simulation validated. Performance testing platform under construction, multiple metrics on track."
+    },
+    "feiyu": {
+      "brief": "Feiyu Aero Parts specializes in aerospace precision component manufacturing and inspection, AS9100 certified, providing supporting services to major domestic and international aerospace manufacturers.",
+      "progressNote": "Finished product packaging system in trial operation. NDT production line undergoing final acceptance."
+    },
+    "yongxin": {
+      "brief": "Yongxin Industrial Automation is a state-owned industrial automation solution provider, covering PLC control systems, industrial sensors, and intelligent actuators, serving petrochemical, metallurgy, and power industries.",
+      "progressNote": "Positioning & alignment system accuracy verified. Defect detection module undergoing product adaptation and algorithm optimization."
+    },
+    "guohua": {
+      "brief": "Guohua Energy Equipment is a multinational energy equipment manufacturer, specializing in wind power equipment, PV inverters, and energy storage systems, with business across over 20 countries.",
+      "progressNote": "Connection & fastening automated line delivered and operational. Smart palletizing system in capacity ramp-up phase."
+    },
+    "jingwei": {
+      "brief": "Jingwei Semiconductor Technology is an emerging domestic semiconductor equipment and materials supplier, focused on wafer processing equipment and electronic-grade chemicals for the IC industry chain.",
+      "progressNote": "Cleanroom material handling solution implemented. Flexible enablement module undergoing wafer-level process adaptation."
+    },
+    "senbo": {
+      "brief": "Senbo Robotics Technology is an innovative robotics R&D enterprise, specializing in collaborative and mobile robots, with products widely used in 3C electronics, auto parts, and logistics.",
+      "progressNote": "Cooperation requirements confirmed. Material handling and positioning & alignment solutions undergoing technical evaluation and feasibility study."
+    },
+    "weichuang": {
+      "brief": "Weichuang Medical Devices is a multinational medical device manufacturer, specializing in minimally invasive surgical instruments and in-vitro diagnostic equipment, with FDA and CE certifications.",
+      "progressNote": "Cooperation framework signed. Connection & fastening and defect detection solutions undergoing medical-grade compliance review."
+    },
+    "jiali": {
+      "brief": "Jiali Auto Parts is a large state-owned automotive parts supplier, specializing in engine components, transmission housings, and chassis parts, supplying to multiple major automakers.",
+      "progressNote": "Smart palletizing requirements analysis completed. Path planning solution undergoing production line simulation."
+    },
+    "rongsheng": {
+      "brief": "Rongsheng New Energy Tech specializes in lithium battery materials and energy storage system R&D and manufacturing, covering cathode materials, electrolytes, and battery management systems.",
+      "progressNote": "Cooperation intent established. Flexible enablement and NDT technical solutions undergoing preliminary evaluation."
+    },
+    "zhiyuan": {
+      "brief": "Zhiyuan Sensor Technology is a multinational sensor manufacturer, specializing in industrial sensors, MEMS chips, and smart detection modules for intelligent manufacturing and IoT applications.",
+      "progressNote": "Performance testing requirements defined. Finished product packaging solution undergoing technical discussion and equipment selection."
+    },
+    "dexin": {
+      "brief": "Dexin Heavy Equipment is a state-owned heavy equipment manufacturer, specializing in large cranes, port machinery, and special vehicles, with an extensive customer base in infrastructure construction.",
+      "progressNote": "Warehouse interface system requirements documented. Material handling solution undergoing site survey and scheme design."
+    },
+    "longyu": {
+      "brief": "Longyu Precision Manufacturing is a Sino-foreign JV specializing in precision structural components for aerospace and automotive industries, equipped with 5-axis machining and laser welding capabilities.",
+      "progressNote": "Material handling and connection & fastening lines in mass production. Defect detection system undergoing final optimization."
+    },
+    "tianhe": {
+      "brief": "Tianhe Smart Systems specializes in intelligent control systems and industrial software, providing MES, digital twin, and smart scheduling solutions for manufacturing clients.",
+      "progressNote": "Positioning & alignment and smart palletizing systems operational. Currently optimizing capacity and cycle time."
+    },
+    "boyu": {
+      "brief": "Boyu Aerospace Technology is a state-owned aerospace equipment manufacturer, specializing in satellite structures, launch vehicle components, and space station supporting equipment.",
+      "progressNote": "Flexible enablement and path planning systems delivered and accepted. Excellent client satisfaction, now being rolled out to other lines."
+    },
+    "haiwei": {
+      "brief": "Haiwei Electrical Equipment is a multinational electrical equipment manufacturer, specializing in high/low voltage switchgear, intelligent power distribution, and power automation products.",
+      "progressNote": "NDT and performance testing lines fully accepted. Now being promoted to other group factories."
+    },
+    "shengshi": {
+      "brief": "Shengshi Packaging Materials is a leading domestic packaging solution provider, specializing in intelligent packaging equipment, eco-friendly materials, and packaging automation systems.",
+      "progressNote": "Finished product packaging and warehouse interface systems running stable. Phase 2 expansion planning in progress."
+    },
+    "qiangxin": {
+      "brief": "Qiangxin Telecom Equipment is a state-owned telecom equipment manufacturer, specializing in 5G base stations, optical transmission systems, and communication terminals for China's three major carriers.",
+      "progressNote": "Material handling and positioning & alignment lines in stable operation. Now being replicated to newly built workshops."
+    },
+    "zhongheng": {
+      "brief": "Zhongheng Solar Technology is a multinational PV industry chain company, covering silicon wafer, cell, and module R&D and manufacturing, ranking among global top 10 in PV module shipments.",
+      "progressNote": "Connection & fastening and smart palletizing lines at full capacity. Project passed final acceptance, cooperation successfully completed."
+    },
+    "yifei": {
+      "brief": "Yifei Laser Technology specializes in high-power lasers and laser processing equipment R&D and manufacturing, covering fiber lasers, laser cutting machines, and laser welding systems.",
+      "progressNote": "Defect detection and flexible enablement systems deployed. Process parameter solidification and operator training in progress."
+    },
+    "xincheng": {
+      "brief": "Xincheng Rail Transit is a state-owned rail transit equipment manufacturer, specializing in metro vehicles, intercity EMUs, and rail transit signaling systems, participating in multiple urban rail projects.",
+      "progressNote": "Path planning and NDT systems running stable. Full-line automation coverage improvement in progress."
+    },
+    "dacheng": {
+      "brief": "Dacheng Bioengineering is a Sino-foreign JV biotech enterprise, specializing in biopharmaceutical equipment, fermentation engineering equipment, and biological detection instruments.",
+      "progressNote": "Performance testing and finished product packaging lines in full production. Now being rolled out to overseas production bases."
+    }
+  }
+}
