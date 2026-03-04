@@ -2,15 +2,17 @@
 /**
  * CompanyDetailModal.vue - 企业详情弹窗
  *
- * 对照设计图 "显示企业详情.png"，弹窗分三块：
+ * 弹窗分五块：
  * 1. 顶部：公司简要信息 (名称、行业、类型)
- * 2. 中间：核心业务场景 (流程步骤 + 进度条)
- * 3. 底部：核心技能列表 (技能图标)
+ * 2. 公司简介：来自 JSON 配置的公司背景介绍
+ * 3. 核心业务场景：流程步骤图标
+ * 4. 核心技能列表：技能徽章
+ * 5. 合作推进进度：进度条 + 进展说明文字
  *
  * 根据企业状态 (reserve/implementation/promotion) 使用对应的配色主题
  */
 import type { CompanyDetail, CompanyStatus, Skill } from '@/types'
-import { computed, ref, reactive, onMounted } from 'vue'
+import { computed, ref, reactive } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import btnCloseUrl from '@/assets/buttons/btn_close.png'
 
@@ -20,6 +22,8 @@ const props = defineProps<{
   detail: CompanyDetail
   skills: Skill[]
   status: CompanyStatus
+  /** 合作推进进度 (0-100)，来自 Company.progress */
+  progress: number
 }>()
 
 defineEmits<{
@@ -104,39 +108,6 @@ function onBadgeEnter(sub: ResolvedSubSkill, event: MouseEvent) {
   tooltipPos.left = rect.left + rect.width / 2
 }
 
-/** 进度条默认目标宽度百分比 */
-const progressPercent = computed(() => {
-  const flow = props.detail.scenarioFlow
-  const completed = flow.filter(s => s.progress && s.progress >= 100).length
-  return (completed / flow.length) * 100
-})
-
-/** 当前悬停的工序索引 (-1 表示未悬停) */
-const hoveredStepIndex = ref(-1)
-
-/** 进度条实际显示宽度：hover 时跟随到对应节点位置，否则用默认值 */
-const animatedWidth = ref(0)
-const isInitialFill = ref(true)
-
-onMounted(() => {
-  requestAnimationFrame(() => {
-    animatedWidth.value = progressPercent.value
-    // 初始填充动画结束后切换为快速过渡
-    setTimeout(() => { isInitialFill.value = false }, 1600)
-  })
-})
-
-function onStepEnter(index: number) {
-  hoveredStepIndex.value = index
-  const total = props.detail.scenarioFlow.length
-  animatedWidth.value = ((index + 1) / total) * 100
-}
-
-function onStepLeave() {
-  hoveredStepIndex.value = -1
-  animatedWidth.value = progressPercent.value
-}
-
 /** 动态加载技能图标 */
 const skillIcons = import.meta.glob('@/assets/skills/*.png', { eager: true, import: 'default' }) as Record<string, string>
 
@@ -175,17 +146,18 @@ function getSkillIconUrl(iconName: string): string {
           </div>
         </div>
 
-        <!-- 2. 核心业务场景 -->
+        <!-- 2. 公司简介 -->
+        <div class="modal-content__section">
+          <h3 class="modal-content__section-title">{{ t('modal.briefDesc') }}</h3>
+          <p class="modal-content__brief-text">{{ t(detail.briefDescKey) }}</p>
+        </div>
+
+        <!-- 3. 核心业务场景 -->
         <div class="modal-content__section">
           <h3 class="modal-content__section-title">{{ t('modal.coreScenario') }}</h3>
           <div class="modal-content__scenario-flow">
             <template v-for="(step, index) in detail.scenarioFlow" :key="index">
-              <div
-                class="scenario-step"
-                :class="{ 'scenario-step--hovered': hoveredStepIndex === index }"
-                @mouseenter="onStepEnter(index)"
-                @mouseleave="onStepLeave"
-              >
+              <div class="scenario-step">
                 <div class="scenario-step__icon">
                   <img
                     v-if="getSkillIconUrl(`ic_skill_${step.icon}`)"
@@ -194,23 +166,13 @@ function getSkillIconUrl(iconName: string): string {
                   />
                 </div>
                 <span class="scenario-step__label">{{ t(step.labelKey) }}</span>
-
               </div>
-              <!-- 步骤间箭头连接线（独立 flex 子元素，不重叠） -->
               <div v-if="index < detail.scenarioFlow.length - 1" class="scenario-connector" />
             </template>
           </div>
-          <!-- 进度条 -->
-          <div class="modal-content__progress">
-            <div
-              class="modal-content__progress-bar"
-              :class="{ 'modal-content__progress-bar--fast': !isInitialFill }"
-              :style="{ width: `${animatedWidth}%` }"
-            />
-          </div>
         </div>
 
-        <!-- 3. 核心技能列表 -->
+        <!-- 4. 核心技能列表 -->
         <div class="modal-content__section">
           <h3 class="modal-content__section-title">{{ t('modal.coreSkills') }}</h3>
           <div class="modal-content__skills">
@@ -226,6 +188,21 @@ function getSkillIconUrl(iconName: string): string {
               <span class="skill-badge__name">{{ t(sub.nameKey) }}</span>
             </div>
           </div>
+        </div>
+
+        <!-- 5. 合作推进进度 -->
+        <div class="modal-content__section">
+          <h3 class="modal-content__section-title">{{ t('modal.progressTitle') }}</h3>
+          <div class="modal-content__progress-section">
+            <div class="modal-content__progress">
+              <div
+                class="modal-content__progress-bar"
+                :style="{ width: `${progress}%` }"
+              />
+            </div>
+            <span class="modal-content__progress-value">{{ progress }}%</span>
+          </div>
+          <p class="modal-content__progress-note">{{ t(detail.progressNoteKey) }}</p>
         </div>
       </div>
     </div>
@@ -266,7 +243,7 @@ function getSkillIconUrl(iconName: string): string {
 
 .modal-content {
   width: 580px;
-  max-height: 520px;
+  max-height: 640px;
   border-radius: 16px;
   padding: 32px;
   position: relative;
@@ -368,33 +345,43 @@ function getSkillIconUrl(iconName: string): string {
     }
   }
 
+  &__brief-text {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
   &__scenario-flow {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     gap: 16px;
-    margin-bottom: 16px;
+  }
+
+  &__progress-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
   }
 
   &__progress {
-    width: 100%;
+    flex: 1;
     height: 6px;
     border-radius: 3px;
     background: rgba(255, 255, 255, 0.08);
     overflow: hidden;
   }
 
-  // 进度条：填充动画 + 流光效果，使用主题色
   &__progress-bar {
     height: 100%;
     border-radius: 3px;
     background: linear-gradient(90deg, var(--accent-from), var(--accent-to));
-    // 从 0 宽度过渡到目标宽度，产生填充动画
-    transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
 
-    // 流光效果（在填充过程中同时运行）
     &::after {
       content: '';
       position: absolute;
@@ -409,6 +396,22 @@ function getSkillIconUrl(iconName: string): string {
       );
       animation: progress-flow 2.5s ease-in-out infinite;
     }
+  }
+
+  &__progress-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-from);
+    flex-shrink: 0;
+    min-width: 36px;
+    text-align: right;
+  }
+
+  &__progress-note {
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin: 0;
   }
 
   &__skills {

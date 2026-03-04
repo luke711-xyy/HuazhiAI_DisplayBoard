@@ -263,274 +263,334 @@
     {
       "companyId": "tiancheng",
       "briefInfoKeys": { "name": "company.tiancheng.name", "industry": "company.tiancheng.industry", "type": "company.tiancheng.type" },
+      "briefDescKey": "companyDesc.tiancheng.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 100 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 80 }
       ],
-      "coreSkills": ["wuliaoshaicha", "youxugongliao", "shijuedingwei", "biaomianhuahen"]
+      "coreSkills": ["wuliaoshaicha", "youxugongliao", "shijuedingwei", "biaomianhuahen"],
+      "progressNoteKey": "companyDesc.tiancheng.progressNote"
     },
     {
       "companyId": "huarui",
       "briefInfoKeys": { "name": "company.huarui.name", "industry": "company.huarui.industry", "type": "company.huarui.type" },
+      "briefDescKey": "companyDesc.huarui.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 100 },
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 85 }
       ],
-      "coreSkills": ["luoshuaningsuo", "kakouguding", "likongshiying"]
+      "coreSkills": ["luoshuaningsuo", "kakouguding", "likongshiying"],
+      "progressNoteKey": "companyDesc.huarui.progressNote"
     },
     {
       "companyId": "zhongke",
       "briefInfoKeys": { "name": "company.zhongke.name", "industry": "company.zhongke.industry", "type": "company.zhongke.type" },
+      "briefDescKey": "companyDesc.zhongke.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 100 },
         { "labelKey": "scenario.warehousing", "icon": "cankuduijie", "progress": 90 }
       ],
-      "coreSkills": ["hunhemaduo", "gaosumaduo", "chaizhuomaduo", "agvdiaodu"]
+      "coreSkills": ["hunhemaduo", "gaosumaduo", "chaizhuomaduo", "agvdiaodu"],
+      "progressNoteKey": "companyDesc.zhongke.progressNote"
     },
     {
       "companyId": "dongfang",
       "briefInfoKeys": { "name": "company.dongfang.name", "industry": "company.dongfang.industry", "type": "company.dongfang.type" },
+      "briefDescKey": "companyDesc.dongfang.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 75 }
       ],
-      "coreSkills": ["wuxulailiao", "duowuliaoxietong", "xialiaofendao", "bizhangguihua", "zuijianlujing"]
+      "coreSkills": ["wuxulailiao", "duowuliaoxietong", "xialiaofendao", "bizhangguihua", "zuijianlujing"],
+      "progressNoteKey": "companyDesc.dongfang.progressNote"
     },
     {
       "companyId": "minghe",
       "briefInfoKeys": { "name": "company.minghe.name", "industry": "company.minghe.industry", "type": "company.minghe.type" },
+      "briefDescKey": "companyDesc.minghe.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 100 },
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 80 }
       ],
-      "coreSkills": ["jingquejizhong", "tiebiaodabao", "dianqiceshi"]
+      "coreSkills": ["jingquejizhong", "tiebiaodabao", "dianqiceshi"],
+      "progressNoteKey": "companyDesc.minghe.progressNote"
     },
     {
       "companyId": "baoshan",
       "briefInfoKeys": { "name": "company.baoshan.name", "industry": "company.baoshan.industry", "type": "company.baoshan.type" },
+      "briefDescKey": "companyDesc.baoshan.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 100 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 90 }
       ],
-      "coreSkills": ["chaoshengbojiance", "biaomianhuahen", "liewen", "bianse"]
+      "coreSkills": ["chaoshengbojiance", "biaomianhuahen", "liewen", "bianse"],
+      "progressNoteKey": "companyDesc.baoshan.progressNote"
     },
     {
       "companyId": "hengda",
       "briefInfoKeys": { "name": "company.hengda.name", "industry": "company.hengda.industry", "type": "company.hengda.type" },
+      "briefDescKey": "companyDesc.hengda.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 100 },
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 85 }
       ],
-      "coreSkills": ["shijuedingwei", "jiguangduizhun", "jixiedingwei", "maojieliangjie", "jiaozhanyajie"]
+      "coreSkills": ["shijuedingwei", "jiguangduizhun", "jixiedingwei", "maojieliangjie", "jiaozhanyajie"],
+      "progressNoteKey": "companyDesc.hengda.progressNote"
     },
     {
       "companyId": "xinda",
       "briefInfoKeys": { "name": "company.xinda.name", "industry": "company.xinda.industry", "type": "company.xinda.type" },
+      "briefDescKey": "companyDesc.xinda.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 100 },
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 70 }
       ],
-      "coreSkills": ["likongshiying", "qumiandamoqi", "rousunkongzhi", "hunhemaduo"]
+      "coreSkills": ["likongshiying", "qumiandamoqi", "rousunkongzhi", "hunhemaduo"],
+      "progressNoteKey": "companyDesc.xinda.progressNote"
     },
     {
       "companyId": "ruiguang",
       "briefInfoKeys": { "name": "company.ruiguang.name", "industry": "company.ruiguang.industry", "type": "company.ruiguang.type" },
+      "briefDescKey": "companyDesc.ruiguang.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.warehousing", "icon": "cankuduijie", "progress": 80 }
       ],
-      "coreSkills": ["wuliaoshaicha", "youxugongliao", "agvdiaodu", "liticangku"]
+      "coreSkills": ["wuliaoshaicha", "youxugongliao", "agvdiaodu", "liticangku"],
+      "progressNoteKey": "companyDesc.ruiguang.progressNote"
     },
     {
       "companyId": "changjiang",
       "briefInfoKeys": { "name": "company.changjiang.name", "industry": "company.changjiang.industry", "type": "company.changjiang.type" },
+      "briefDescKey": "companyDesc.changjiang.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 100 },
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 85 }
       ],
-      "coreSkills": ["bizhangguihua", "duojixietong", "dianqiceshi"]
+      "coreSkills": ["bizhangguihua", "duojixietong", "dianqiceshi"],
+      "progressNoteKey": "companyDesc.changjiang.progressNote"
     },
     {
       "companyId": "feiyu",
       "briefInfoKeys": { "name": "company.feiyu.name", "industry": "company.feiyu.industry", "type": "company.feiyu.type" },
+      "briefDescKey": "companyDesc.feiyu.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 100 },
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 90 }
       ],
-      "coreSkills": ["jingquejizhong", "zidongfengxiang", "chaoshengbojiance"]
+      "coreSkills": ["jingquejizhong", "zidongfengxiang", "chaoshengbojiance"],
+      "progressNoteKey": "companyDesc.feiyu.progressNote"
     },
     {
       "companyId": "yongxin",
       "briefInfoKeys": { "name": "company.yongxin.name", "industry": "company.yongxin.industry", "type": "company.yongxin.type" },
+      "briefDescKey": "companyDesc.yongxin.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 100 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 75 }
       ],
-      "coreSkills": ["shijuedingwei", "jiguangduizhun", "biaomianhuahen", "liewen"]
+      "coreSkills": ["shijuedingwei", "jiguangduizhun", "biaomianhuahen", "liewen"],
+      "progressNoteKey": "companyDesc.yongxin.progressNote"
     },
     {
       "companyId": "guohua",
       "briefInfoKeys": { "name": "company.guohua.name", "industry": "company.guohua.industry", "type": "company.guohua.type" },
+      "briefDescKey": "companyDesc.guohua.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 100 },
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 80 }
       ],
-      "coreSkills": ["luoshuaningsuo", "maojieliangjie", "zhinenghuanxian", "gaosumaduo", "chaizhuomaduo"]
+      "coreSkills": ["luoshuaningsuo", "maojieliangjie", "zhinenghuanxian", "gaosumaduo", "chaizhuomaduo"],
+      "progressNoteKey": "companyDesc.guohua.progressNote"
     },
     {
       "companyId": "jingwei",
       "briefInfoKeys": { "name": "company.jingwei.name", "industry": "company.jingwei.industry", "type": "company.jingwei.type" },
+      "briefDescKey": "companyDesc.jingwei.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 85 }
       ],
-      "coreSkills": ["wuliaoshaicha", "wuxulailiao", "likongshiying", "rousunkongzhi"]
+      "coreSkills": ["wuliaoshaicha", "wuxulailiao", "likongshiying", "rousunkongzhi"],
+      "progressNoteKey": "companyDesc.jingwei.progressNote"
     },
     {
       "companyId": "senbo",
       "briefInfoKeys": { "name": "company.senbo.name", "industry": "company.senbo.industry", "type": "company.senbo.type" },
+      "briefDescKey": "companyDesc.senbo.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 70 }
       ],
-      "coreSkills": ["youxugongliao", "duowuliaoxietong", "shijuedingwei"]
+      "coreSkills": ["youxugongliao", "duowuliaoxietong", "shijuedingwei"],
+      "progressNoteKey": "companyDesc.senbo.progressNote"
     },
     {
       "companyId": "weichuang",
       "briefInfoKeys": { "name": "company.weichuang.name", "industry": "company.weichuang.industry", "type": "company.weichuang.type" },
+      "briefDescKey": "companyDesc.weichuang.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 100 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 80 }
       ],
-      "coreSkills": ["luoshuaningsuo", "jiaozhanyajie", "kakouguding", "biaomianhuahen", "bianse"]
+      "coreSkills": ["luoshuaningsuo", "jiaozhanyajie", "kakouguding", "biaomianhuahen", "bianse"],
+      "progressNoteKey": "companyDesc.weichuang.progressNote"
     },
     {
       "companyId": "jiali",
       "briefInfoKeys": { "name": "company.jiali.name", "industry": "company.jiali.industry", "type": "company.jiali.type" },
+      "briefDescKey": "companyDesc.jiali.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 100 },
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 75 }
       ],
-      "coreSkills": ["hunhemaduo", "chaizhuomaduo", "zuijianlujing", "duojixietong"]
+      "coreSkills": ["hunhemaduo", "chaizhuomaduo", "zuijianlujing", "duojixietong"],
+      "progressNoteKey": "companyDesc.jiali.progressNote"
     },
     {
       "companyId": "rongsheng",
       "briefInfoKeys": { "name": "company.rongsheng.name", "industry": "company.rongsheng.industry", "type": "company.rongsheng.type" },
+      "briefDescKey": "companyDesc.rongsheng.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 100 },
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 80 }
       ],
-      "coreSkills": ["likongshiying", "qumiandamoqi", "chaoshengbojiance"]
+      "coreSkills": ["likongshiying", "qumiandamoqi", "chaoshengbojiance"],
+      "progressNoteKey": "companyDesc.rongsheng.progressNote"
     },
     {
       "companyId": "zhiyuan",
       "briefInfoKeys": { "name": "company.zhiyuan.name", "industry": "company.zhiyuan.industry", "type": "company.zhiyuan.type" },
+      "briefDescKey": "companyDesc.zhiyuan.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 100 },
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 70 }
       ],
-      "coreSkills": ["dianqiceshi", "jingquejizhong", "zidongfengxiang", "tiebiaodabao"]
+      "coreSkills": ["dianqiceshi", "jingquejizhong", "zidongfengxiang", "tiebiaodabao"],
+      "progressNoteKey": "companyDesc.zhiyuan.progressNote"
     },
     {
       "companyId": "dexin",
       "briefInfoKeys": { "name": "company.dexin.name", "industry": "company.dexin.industry", "type": "company.dexin.type" },
+      "briefDescKey": "companyDesc.dexin.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.warehousing", "icon": "cankuduijie", "progress": 100 },
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 85 }
       ],
-      "coreSkills": ["agvdiaodu", "liticangku", "wuliaoshaicha", "xialiaofendao"]
+      "coreSkills": ["agvdiaodu", "liticangku", "wuliaoshaicha", "xialiaofendao"],
+      "progressNoteKey": "companyDesc.dexin.progressNote"
     },
     {
       "companyId": "longyu",
       "briefInfoKeys": { "name": "company.longyu.name", "industry": "company.longyu.industry", "type": "company.longyu.type" },
+      "briefDescKey": "companyDesc.longyu.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 90 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 75 }
       ],
-      "coreSkills": ["wuliaoshaicha", "youxugongliao", "luoshuaningsuo", "maojieliangjie", "biaomianhuahen", "liewen"]
+      "coreSkills": ["wuliaoshaicha", "youxugongliao", "luoshuaningsuo", "maojieliangjie", "biaomianhuahen", "liewen"],
+      "progressNoteKey": "companyDesc.longyu.progressNote"
     },
     {
       "companyId": "tianhe",
       "briefInfoKeys": { "name": "company.tianhe.name", "industry": "company.tianhe.industry", "type": "company.tianhe.type" },
+      "briefDescKey": "companyDesc.tianhe.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 100 },
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 80 }
       ],
-      "coreSkills": ["shijuedingwei", "jixiedingwei", "hunhemaduo", "gaosumaduo"]
+      "coreSkills": ["shijuedingwei", "jixiedingwei", "hunhemaduo", "gaosumaduo"],
+      "progressNoteKey": "companyDesc.tianhe.progressNote"
     },
     {
       "companyId": "boyu",
       "briefInfoKeys": { "name": "company.boyu.name", "industry": "company.boyu.industry", "type": "company.boyu.type" },
+      "briefDescKey": "companyDesc.boyu.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 100 },
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 85 }
       ],
-      "coreSkills": ["likongshiying", "qumiandamoqi", "rousunkongzhi", "bizhangguihua", "zuijianlujing"]
+      "coreSkills": ["likongshiying", "qumiandamoqi", "rousunkongzhi", "bizhangguihua", "zuijianlujing"],
+      "progressNoteKey": "companyDesc.boyu.progressNote"
     },
     {
       "companyId": "haiwei",
       "briefInfoKeys": { "name": "company.haiwei.name", "industry": "company.haiwei.industry", "type": "company.haiwei.type" },
+      "briefDescKey": "companyDesc.haiwei.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 100 },
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 90 }
       ],
-      "coreSkills": ["chaoshengbojiance", "dianqiceshi"]
+      "coreSkills": ["chaoshengbojiance", "dianqiceshi"],
+      "progressNoteKey": "companyDesc.haiwei.progressNote"
     },
     {
       "companyId": "shengshi",
       "briefInfoKeys": { "name": "company.shengshi.name", "industry": "company.shengshi.industry", "type": "company.shengshi.type" },
+      "briefDescKey": "companyDesc.shengshi.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 100 },
         { "labelKey": "scenario.warehousing", "icon": "cankuduijie", "progress": 80 }
       ],
-      "coreSkills": ["jingquejizhong", "zidongfengxiang", "tiebiaodabao", "agvdiaodu"]
+      "coreSkills": ["jingquejizhong", "zidongfengxiang", "tiebiaodabao", "agvdiaodu"],
+      "progressNoteKey": "companyDesc.shengshi.progressNote"
     },
     {
       "companyId": "qiangxin",
       "briefInfoKeys": { "name": "company.qiangxin.name", "industry": "company.qiangxin.industry", "type": "company.qiangxin.type" },
+      "briefDescKey": "companyDesc.qiangxin.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 85 }
       ],
-      "coreSkills": ["wuliaoshaicha", "wuxulailiao", "duowuliaoxietong", "shijuedingwei", "jiguangduizhun"]
+      "coreSkills": ["wuliaoshaicha", "wuxulailiao", "duowuliaoxietong", "shijuedingwei", "jiguangduizhun"],
+      "progressNoteKey": "companyDesc.qiangxin.progressNote"
     },
     {
       "companyId": "zhongheng",
       "briefInfoKeys": { "name": "company.zhongheng.name", "industry": "company.zhongheng.industry", "type": "company.zhongheng.type" },
+      "briefDescKey": "companyDesc.zhongheng.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 100 },
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 75 }
       ],
-      "coreSkills": ["luoshuaningsuo", "kakouguding", "hunhemaduo", "gaosumaduo"]
+      "coreSkills": ["luoshuaningsuo", "kakouguding", "hunhemaduo", "gaosumaduo"],
+      "progressNoteKey": "companyDesc.zhongheng.progressNote"
     },
     {
       "companyId": "yifei",
       "briefInfoKeys": { "name": "company.yifei.name", "industry": "company.yifei.industry", "type": "company.yifei.type" },
+      "briefDescKey": "companyDesc.yifei.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 100 },
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 80 }
       ],
-      "coreSkills": ["biaomianhuahen", "liewen", "bianse", "likongshiying", "qumiandamoqi"]
+      "coreSkills": ["biaomianhuahen", "liewen", "bianse", "likongshiying", "qumiandamoqi"],
+      "progressNoteKey": "companyDesc.yifei.progressNote"
     },
     {
       "companyId": "xincheng",
       "briefInfoKeys": { "name": "company.xincheng.name", "industry": "company.xincheng.industry", "type": "company.xincheng.type" },
+      "briefDescKey": "companyDesc.xincheng.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 100 },
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 85 }
       ],
-      "coreSkills": ["bizhangguihua", "zuijianlujing", "chaoshengbojiance"]
+      "coreSkills": ["bizhangguihua", "zuijianlujing", "chaoshengbojiance"],
+      "progressNoteKey": "companyDesc.xincheng.progressNote"
     },
     {
       "companyId": "dacheng",
       "briefInfoKeys": { "name": "company.dacheng.name", "industry": "company.dacheng.industry", "type": "company.dacheng.type" },
+      "briefDescKey": "companyDesc.dacheng.brief",
       "scenarioFlow": [
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 100 },
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 90 }
       ],
-      "coreSkills": ["dianqiceshi", "jingquejizhong", "zidongfengxiang", "tiebiaodabao"]
+      "coreSkills": ["dianqiceshi", "jingquejizhong", "zidongfengxiang", "tiebiaodabao"],
+      "progressNoteKey": "companyDesc.dacheng.progressNote"
     }
   ]
 }

@@ -117,6 +117,13 @@ const selectedCompanyStatus = computed(() => {
   return company?.status ?? 'reserve'
 })
 
+/** 选中企业的合作推进进度 */
+const selectedCompanyProgress = computed(() => {
+  if (!selectedCompanyId.value) return 0
+  const company = config.companies.find(c => c.id === selectedCompanyId.value)
+  return company?.progress ?? 0
+})
+
 /** 企业名称映射 (使用 i18n 翻译) */
 const companyNames = computed(() => {
   const map: Record<string, string> = {}
@@ -283,6 +290,7 @@ const { lines: connectionLines } = useConnectionLines(
       :detail="selectedCompanyDetail"
       :skills="config.skills"
       :status="selectedCompanyStatus"
+      :progress="selectedCompanyProgress"
       @close="onCloseModal"
     />
   </DashboardContainer>

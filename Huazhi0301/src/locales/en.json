@@ -120,7 +120,9 @@
     "coreSkills": "Core Skills",
     "close": "Close",
     "industry": "Industry",
-    "type": "Type"
+    "type": "Type",
+    "briefDesc": "Company Profile",
+    "progressTitle": "Cooperation Progress"
   },
   "settings": {
     "title": "Settings",
@@ -291,6 +293,128 @@
     "tuopanyizai": {
       "name": "Pallet Transfer",
       "desc": "Transfers fully processed pallets from palletizing stations to docking points (AGV carrier plates, conveyor entrances) via transfer machines or robots, ensuring pose compliance with downstream equipment interfaces."
+    }
+  },
+  "companyDesc": {
+    "tiancheng": {
+      "brief": "Founded in 2008, Shanghai Tiancheng Precision Co. is a multinational enterprise specializing in precision component machining, equipped with advanced CNC centers and automated inspection systems, serving automotive, aerospace, and medical industries.",
+      "progressNote": "Production line automation design and technical validation completed. Currently integrating and commissioning the loading/unloading station, with trial production expected next month."
+    },
+    "huarui": {
+      "brief": "Huarui Smart Technology is a state-owned intelligent manufacturing solution provider, specializing in industrial robot integration and smart production line planning, having served over 200 manufacturing enterprises.",
+      "progressNote": "Connection & fastening process validated. Flexible enablement module is being deployed on-site with parameter tuning in progress."
+    },
+    "zhongke": {
+      "brief": "Zhongke Automation Equipment is a leading domestic automation equipment manufacturer, focused on intelligent warehousing logistics and palletizing system R&D, with products widely used in food, FMCG, and e-commerce industries.",
+      "progressNote": "Smart palletizing system installed. Warehouse interface integration under joint testing, expected full-line commissioning within two weeks."
+    },
+    "dongfang": {
+      "brief": "Dongfang Heavy Machinery Group is a large state-owned equipment manufacturer, specializing in heavy machinery R&D, manufacturing and services, with deep expertise in energy equipment and mining machinery.",
+      "progressNote": "Material handling system operational. Path planning module undergoing multi-scenario adaptation testing with good overall progress."
+    },
+    "minghe": {
+      "brief": "Minghe Electronics Technology specializes in consumer and industrial electronics R&D and manufacturing, with multiple SMT lines and advanced test laboratories, with annual capacity exceeding 50 million units.",
+      "progressNote": "Finished product packaging line plan confirmed. Performance testing station under construction, equipment installation expected by month-end."
+    },
+    "baoshan": {
+      "brief": "Baoshan Iron & Steel is one of China's largest steel enterprises, specializing in steel smelting and deep processing, covering plate, tube, and specialty steel products with 30M ton annual capacity.",
+      "progressNote": "NDT system online and operational. Defect detection algorithm under continuous optimization, detection rate improved to 98.5%."
+    },
+    "hengda": {
+      "brief": "Hengda Precision Machinery is a Sino-foreign JV specializing in high-precision transmission components and precision mold design & manufacturing, with products exported to over 30 countries.",
+      "progressNote": "Positioning & alignment system calibrated. Connection & fastening process undergoing multi-variety changeover validation, mass production preparation expected next week."
+    },
+    "xinda": {
+      "brief": "Xinda New Materials Technology is dedicated to high-performance composite materials and functional coatings R&D and production, with applications in new energy, electronics, and construction.",
+      "progressNote": "Flexible enablement module initially integrated. Smart palletizing system undergoing material adaptation testing."
+    },
+    "ruiguang": {
+      "brief": "Ruiguang Optoelectronics is a multinational enterprise specializing in optoelectronic devices and precision optical components, covering LED chips, optical communication modules, and automotive optical systems.",
+      "progressNote": "Material handling automation implemented. Warehouse interface system undergoing WMS integration testing."
+    },
+    "changjiang": {
+      "brief": "Changjiang Power Systems is a large state-owned power equipment manufacturer, specializing in marine diesel engines, gas turbines, and industrial power systems for domestic and international energy and marine industries.",
+      "progressNote": "Path planning system simulation validated. Performance testing platform under construction, multiple metrics on track."
+    },
+    "feiyu": {
+      "brief": "Feiyu Aero Parts specializes in aerospace precision component manufacturing and inspection, AS9100 certified, providing supporting services to major domestic and international aerospace manufacturers.",
+      "progressNote": "Finished product packaging system in trial operation. NDT production line undergoing final acceptance."
+    },
+    "yongxin": {
+      "brief": "Yongxin Industrial Automation is a state-owned industrial automation solution provider, covering PLC control systems, industrial sensors, and intelligent actuators, serving petrochemical, metallurgy, and power industries.",
+      "progressNote": "Positioning & alignment system accuracy verified. Defect detection module undergoing product adaptation and algorithm optimization."
+    },
+    "guohua": {
+      "brief": "Guohua Energy Equipment is a multinational energy equipment manufacturer, specializing in wind power equipment, PV inverters, and energy storage systems, with business across over 20 countries.",
+      "progressNote": "Connection & fastening automated line delivered and operational. Smart palletizing system in capacity ramp-up phase."
+    },
+    "jingwei": {
+      "brief": "Jingwei Semiconductor Technology is an emerging domestic semiconductor equipment and materials supplier, focused on wafer processing equipment and electronic-grade chemicals for the IC industry chain.",
+      "progressNote": "Cleanroom material handling solution implemented. Flexible enablement module undergoing wafer-level process adaptation."
+    },
+    "senbo": {
+      "brief": "Senbo Robotics Technology is an innovative robotics R&D enterprise, specializing in collaborative and mobile robots, with products widely used in 3C electronics, auto parts, and logistics.",
+      "progressNote": "Cooperation requirements confirmed. Material handling and positioning & alignment solutions undergoing technical evaluation and feasibility study."
+    },
+    "weichuang": {
+      "brief": "Weichuang Medical Devices is a multinational medical device manufacturer, specializing in minimally invasive surgical instruments and in-vitro diagnostic equipment, with FDA and CE certifications.",
+      "progressNote": "Cooperation framework signed. Connection & fastening and defect detection solutions undergoing medical-grade compliance review."
+    },
+    "jiali": {
+      "brief": "Jiali Auto Parts is a large state-owned automotive parts supplier, specializing in engine components, transmission housings, and chassis parts, supplying to multiple major automakers.",
+      "progressNote": "Smart palletizing requirements analysis completed. Path planning solution undergoing production line simulation."
+    },
+    "rongsheng": {
+      "brief": "Rongsheng New Energy Tech specializes in lithium battery materials and energy storage system R&D and manufacturing, covering cathode materials, electrolytes, and battery management systems.",
+      "progressNote": "Cooperation intent established. Flexible enablement and NDT technical solutions undergoing preliminary evaluation."
+    },
+    "zhiyuan": {
+      "brief": "Zhiyuan Sensor Technology is a multinational sensor manufacturer, specializing in industrial sensors, MEMS chips, and smart detection modules for intelligent manufacturing and IoT applications.",
+      "progressNote": "Performance testing requirements defined. Finished product packaging solution undergoing technical discussion and equipment selection."
+    },
+    "dexin": {
+      "brief": "Dexin Heavy Equipment is a state-owned heavy equipment manufacturer, specializing in large cranes, port machinery, and special vehicles, with an extensive customer base in infrastructure construction.",
+      "progressNote": "Warehouse interface system requirements documented. Material handling solution undergoing site survey and scheme design."
+    },
+    "longyu": {
+      "brief": "Longyu Precision Manufacturing is a Sino-foreign JV specializing in precision structural components for aerospace and automotive industries, equipped with 5-axis machining and laser welding capabilities.",
+      "progressNote": "Material handling and connection & fastening lines in mass production. Defect detection system undergoing final optimization."
+    },
+    "tianhe": {
+      "brief": "Tianhe Smart Systems specializes in intelligent control systems and industrial software, providing MES, digital twin, and smart scheduling solutions for manufacturing clients.",
+      "progressNote": "Positioning & alignment and smart palletizing systems operational. Currently optimizing capacity and cycle time."
+    },
+    "boyu": {
+      "brief": "Boyu Aerospace Technology is a state-owned aerospace equipment manufacturer, specializing in satellite structures, launch vehicle components, and space station supporting equipment.",
+      "progressNote": "Flexible enablement and path planning systems delivered and accepted. Excellent client satisfaction, now being rolled out to other lines."
+    },
+    "haiwei": {
+      "brief": "Haiwei Electrical Equipment is a multinational electrical equipment manufacturer, specializing in high/low voltage switchgear, intelligent power distribution, and power automation products.",
+      "progressNote": "NDT and performance testing lines fully accepted. Now being promoted to other group factories."
+    },
+    "shengshi": {
+      "brief": "Shengshi Packaging Materials is a leading domestic packaging solution provider, specializing in intelligent packaging equipment, eco-friendly materials, and packaging automation systems.",
+      "progressNote": "Finished product packaging and warehouse interface systems running stable. Phase 2 expansion planning in progress."
+    },
+    "qiangxin": {
+      "brief": "Qiangxin Telecom Equipment is a state-owned telecom equipment manufacturer, specializing in 5G base stations, optical transmission systems, and communication terminals for China's three major carriers.",
+      "progressNote": "Material handling and positioning & alignment lines in stable operation. Now being replicated to newly built workshops."
+    },
+    "zhongheng": {
+      "brief": "Zhongheng Solar Technology is a multinational PV industry chain company, covering silicon wafer, cell, and module R&D and manufacturing, ranking among global top 10 in PV module shipments.",
+      "progressNote": "Connection & fastening and smart palletizing lines at full capacity. Project passed final acceptance, cooperation successfully completed."
+    },
+    "yifei": {
+      "brief": "Yifei Laser Technology specializes in high-power lasers and laser processing equipment R&D and manufacturing, covering fiber lasers, laser cutting machines, and laser welding systems.",
+      "progressNote": "Defect detection and flexible enablement systems deployed. Process parameter solidification and operator training in progress."
+    },
+    "xincheng": {
+      "brief": "Xincheng Rail Transit is a state-owned rail transit equipment manufacturer, specializing in metro vehicles, intercity EMUs, and rail transit signaling systems, participating in multiple urban rail projects.",
+      "progressNote": "Path planning and NDT systems running stable. Full-line automation coverage improvement in progress."
+    },
+    "dacheng": {
+      "brief": "Dacheng Bioengineering is a Sino-foreign JV biotech enterprise, specializing in biopharmaceutical equipment, fermentation engineering equipment, and biological detection instruments.",
+      "progressNote": "Performance testing and finished product packaging lines in full production. Now being rolled out to overseas production bases."
     }
   }
 }

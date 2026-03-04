@@ -53,8 +53,12 @@ export interface CompanyDetail {
     industry: string
     type: string
   }
+  /** i18n 键名：公司简要介绍 */
+  briefDescKey: string
   /** 核心业务场景流程步骤 */
   scenarioFlow: ScenarioStep[]
   /** 核心技能 ID 数组 */
   coreSkills: string[]
+  /** i18n 键名：合作进展说明 */
+  progressNoteKey: string
 }
