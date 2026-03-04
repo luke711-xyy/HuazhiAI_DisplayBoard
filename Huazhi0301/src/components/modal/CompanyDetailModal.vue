@@ -10,7 +10,7 @@
  * 根据企业状态 (reserve/implementation/promotion) 使用对应的配色主题
  */
 import type { CompanyDetail, CompanyStatus, Skill } from '@/types'
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, reactive, onMounted } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import btnCloseUrl from '@/assets/buttons/btn_close.png'
 
@@ -34,6 +34,75 @@ const statusColorMap: Record<CompanyStatus, { from: string; to: string }> = {
 }
 
 const accentColors = computed(() => statusColorMap[props.status])
+
+/** 场景分类 → 颜色映射（与主页面 skillCategories.color 保持一致） */
+const categoryColorMap: Record<string, string> = {
+  assembly:    '#3B82F6',
+  inspection:  '#22D3EE',
+  palletizing: '#8B5CF6',
+}
+
+/** 解析后的三级技能徽章数据 */
+interface ResolvedSubSkill {
+  id: string
+  nameKey: string
+  descriptionKey: string
+  categoryId: string
+  parentIcon: string
+}
+
+/** 构建 subSkillId → { subSkill + 父级分类/图标 } 的查找表 */
+const subSkillLookup = computed(() => {
+  const map = new Map<string, ResolvedSubSkill>()
+  for (const skill of props.skills) {
+    if (!skill.subSkills) continue
+    for (const sub of skill.subSkills) {
+      map.set(sub.id, {
+        id: sub.id,
+        nameKey: sub.nameKey,
+        descriptionKey: sub.descriptionKey,
+        categoryId: skill.categoryId,
+        parentIcon: skill.icon,
+      })
+    }
+  }
+  return map
+})
+
+/** 获取核心三级技能的完整数据 */
+const coreSubSkillsData = computed(() => {
+  return props.detail.coreSkills
+    .map(id => subSkillLookup.value.get(id))
+    .filter((s): s is ResolvedSubSkill => s !== undefined)
+})
+
+function getBadgeColor(sub: ResolvedSubSkill): string {
+  return categoryColorMap[sub.categoryId] ?? '#3B82F6'
+}
+
+/** 当前悬停的技能徽章 ID + 浮层定位 */
+const hoveredBadgeId = ref<string | null>(null)
+const tooltipPos = reactive({ top: 0, left: 0 })
+
+/** 悬停的三级技能数据（用于 Teleport 浮层） */
+const hoveredSubSkill = computed(() => {
+  if (!hoveredBadgeId.value) return null
+  return subSkillLookup.value.get(hoveredBadgeId.value) ?? null
+})
+
+/** 悬停技能的分类颜色 */
+const hoveredBadgeColor = computed(() => {
+  if (!hoveredSubSkill.value) return '#3B82F6'
+  return getBadgeColor(hoveredSubSkill.value)
+})
+
+function onBadgeEnter(sub: ResolvedSubSkill, event: MouseEvent) {
+  hoveredBadgeId.value = sub.id
+  const el = (event.currentTarget as HTMLElement)
+  const rect = el.getBoundingClientRect()
+  tooltipPos.top = rect.bottom + 10
+  tooltipPos.left = rect.left + rect.width / 2
+}
 
 /** 进度条默认目标宽度百分比 */
 const progressPercent = computed(() => {
@@ -67,18 +136,6 @@ function onStepLeave() {
   hoveredStepIndex.value = -1
   animatedWidth.value = progressPercent.value
 }
-
-/** 根据工序 icon 字段查找对应的 Skill 完整数据（用于 tooltip） */
-function getSkillByStepIcon(icon: string): Skill | undefined {
-  return props.skills.find(s => s.id === icon)
-}
-
-/** 获取核心技能的完整数据 */
-const coreSkillsData = computed(() => {
-  return props.detail.coreSkills
-    .map(skillId => props.skills.find(s => s.id === skillId))
-    .filter((s): s is Skill => s !== undefined)
-})
 
 /** 动态加载技能图标 */
 const skillIcons = import.meta.glob('@/assets/skills/*.png', { eager: true, import: 'default' }) as Record<string, string>
@@ -138,20 +195,6 @@ function getSkillIconUrl(iconName: string): string {
                 </div>
                 <span class="scenario-step__label">{{ t(step.labelKey) }}</span>
 
-                <!-- 悬浮技能详情 tooltip -->
-                <Transition name="step-tooltip">
-                  <div
-                    v-if="hoveredStepIndex === index && getSkillByStepIcon(step.icon)"
-                    class="scenario-step__tooltip"
-                  >
-                    <h4 class="scenario-step__tooltip-title">
-                      {{ t(getSkillByStepIcon(step.icon)!.nameKey) }}
-                    </h4>
-                    <p class="scenario-step__tooltip-desc">
-                      {{ t(getSkillByStepIcon(step.icon)!.descriptionKey) }}
-                    </p>
-                  </div>
-                </Transition>
               </div>
               <!-- 步骤间箭头连接线（独立 flex 子元素，不重叠） -->
               <div v-if="index < detail.scenarioFlow.length - 1" class="scenario-connector" />
@@ -172,18 +215,39 @@ function getSkillIconUrl(iconName: string): string {
           <h3 class="modal-content__section-title">{{ t('modal.coreSkills') }}</h3>
           <div class="modal-content__skills">
             <div
-              v-for="skill in coreSkillsData"
-              :key="skill.id"
+              v-for="sub in coreSubSkillsData"
+              :key="sub.id"
               class="skill-badge"
+              :style="{ '--badge-color': getBadgeColor(sub) }"
+              @mouseenter="onBadgeEnter(sub, $event)"
+              @mouseleave="hoveredBadgeId = null"
             >
-              <img :src="getSkillIconUrl(skill.icon)" alt="" class="skill-badge__icon" />
-              <span class="skill-badge__name">{{ t(skill.nameKey) }}</span>
+              <img :src="getSkillIconUrl(sub.parentIcon)" alt="" class="skill-badge__icon" />
+              <span class="skill-badge__name">{{ t(sub.nameKey) }}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </Transition>
+
+  <!-- 技能详情浮层 — Teleport 到 body，独立于弹窗层级 -->
+  <Teleport to="body">
+    <Transition name="badge-tip">
+      <div
+        v-if="hoveredSubSkill"
+        class="skill-badge-floating-tip"
+        :style="{
+          top: tooltipPos.top + 'px',
+          left: tooltipPos.left + 'px',
+          '--badge-color': hoveredBadgeColor,
+        }"
+      >
+        <h4 class="skill-badge-floating-tip__title">{{ t(hoveredSubSkill.nameKey) }}</h4>
+        <p class="skill-badge-floating-tip__desc">{{ t(hoveredSubSkill.descriptionKey) }}</p>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 
 <style scoped lang="scss">
@@ -415,15 +479,27 @@ function getSkillIconUrl(iconName: string): string {
   100% { transform: translateX(200%); }
 }
 
-// 技能徽章 — 边框使用主题色微光
+// 技能徽章 — 按所属场景分类颜色区分边框 + 辉光
 .skill-badge {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 8px 14px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid color-mix(in srgb, var(--accent-from) 15%, rgba(255, 255, 255, 0.08));
+  border: 1px solid color-mix(in srgb, var(--badge-color) 30%, transparent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--badge-color) 12%, transparent);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--badge-color) 55%, transparent);
+    box-shadow:
+      0 0 10px color-mix(in srgb, var(--badge-color) 20%, transparent),
+      0 0 24px color-mix(in srgb, var(--badge-color) 10%, transparent);
+    background: color-mix(in srgb, var(--badge-color) 8%, transparent);
+  }
 
   &__icon {
     width: 24px;
@@ -435,5 +511,73 @@ function getSkillIconUrl(iconName: string): string {
     font-size: 12px;
     color: var(--color-text-secondary);
   }
+
+}
+</style>
+
+<!-- 全局样式：Teleport 到 body 的浮层不受 scoped 限制 -->
+<style lang="scss">
+.skill-badge-floating-tip {
+  position: fixed;
+  transform: translateX(-50%);
+  max-width: 320px;
+  min-width: 180px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(5, 10, 25, 0.92),
+      color-mix(in srgb, var(--badge-color) 12%, rgba(5, 10, 25, 0.88))
+    );
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 12px color-mix(in srgb, var(--badge-color) 15%, transparent);
+  z-index: 99999;
+  pointer-events: none;
+
+  // 顶部小三角
+  &::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: rgba(5, 10, 25, 0.92);
+    border-top: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
+    border-left: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid color-mix(in srgb, var(--badge-color) 20%, transparent);
+  }
+
+  &__desc {
+    font-size: 11px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+}
+
+// 徽章浮层过渡动画
+.badge-tip-enter-active,
+.badge-tip-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.badge-tip-enter-from,
+.badge-tip-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-4px);
 }
 </style>

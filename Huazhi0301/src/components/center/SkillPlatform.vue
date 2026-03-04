@@ -22,7 +22,7 @@ const { t } = useI18n()
 import bottomLayer from '@/assets/platforms/block_layer_buttom.png'
 import midDark from '@/assets/platforms/block_layer_mid_dark.png'
 import midLight from '@/assets/platforms/block_layer_mid_light.png'
-import upperL from '@/assets/platforms/block_layer_upper_l.png'
+import upperL from '@/assets/platforms/block_layer_upper_r.png'
 import upperM from '@/assets/platforms/block_layer_upper_m.png'
 import upperR from '@/assets/platforms/block_layer_upper_r.png'
 import connectLeft from '@/assets/connectors/block_connect_left@2x.png'
@@ -79,9 +79,9 @@ const categoryLabelPositions: Record<string, { top: string; left: string; rotate
  */
 const skillPositions: Record<string, { top: string; left: string; scale?: number }> = {
   // 柔性装配 (upper_l - 3 个圆位)
-  shangxiawuliao: { top: '21%', left: '30%' },
+  shangxiawuliao: { top: '11%', left: '11.5%' },
   dingweiduiqi: { top: '2%', left: '38%', scale: 0.95 },
-  lianjieguding: { top: '16%', left: '64%', scale: 0.95 },
+  lianjieguding: { top: '16%', left: '66%', scale: 0.95 },
   // 柔性质检 (upper_r - 4 个位)
   quexianjiance: { top: '2%', left: '38%' },
   rouxingshineng: { top: '28%', left: '37%' },

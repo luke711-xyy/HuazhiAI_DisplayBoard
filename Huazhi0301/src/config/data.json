@@ -268,7 +268,7 @@
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 100 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 80 }
       ],
-      "coreSkills": ["shangxiawuliao", "dingweiduiqi", "quexianjiance"]
+      "coreSkills": ["wuliaoshaicha", "youxugongliao", "shijuedingwei", "biaomianhuahen"]
     },
     {
       "companyId": "huarui",
@@ -277,7 +277,7 @@
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 100 },
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 85 }
       ],
-      "coreSkills": ["lianjieguding", "rouxingshineng"]
+      "coreSkills": ["luoshuaningsuo", "kakouguding", "likongshiying"]
     },
     {
       "companyId": "zhongke",
@@ -286,7 +286,7 @@
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 100 },
         { "labelKey": "scenario.warehousing", "icon": "cankuduijie", "progress": 90 }
       ],
-      "coreSkills": ["zhinengmaduo", "cankuduijie"]
+      "coreSkills": ["hunhemaduo", "gaosumaduo", "chaizhuomaduo", "agvdiaodu"]
     },
     {
       "companyId": "dongfang",
@@ -295,7 +295,7 @@
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 75 }
       ],
-      "coreSkills": ["shangxiawuliao", "lujinguihua"]
+      "coreSkills": ["wuxulailiao", "duowuliaoxietong", "xialiaofendao", "bizhangguihua", "zuijianlujing"]
     },
     {
       "companyId": "minghe",
@@ -304,7 +304,7 @@
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 100 },
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 80 }
       ],
-      "coreSkills": ["chengpingbaoz", "xingneng"]
+      "coreSkills": ["jingquejizhong", "tiebiaodabao", "dianqiceshi"]
     },
     {
       "companyId": "baoshan",
@@ -313,7 +313,7 @@
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 100 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 90 }
       ],
-      "coreSkills": ["wusunjiance", "quexianjiance"]
+      "coreSkills": ["chaoshengbojiance", "biaomianhuahen", "liewen", "bianse"]
     },
     {
       "companyId": "hengda",
@@ -322,7 +322,7 @@
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 100 },
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 85 }
       ],
-      "coreSkills": ["dingweiduiqi", "lianjieguding"]
+      "coreSkills": ["shijuedingwei", "jiguangduizhun", "jixiedingwei", "maojieliangjie", "jiaozhanyajie"]
     },
     {
       "companyId": "xinda",
@@ -331,7 +331,7 @@
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 100 },
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 70 }
       ],
-      "coreSkills": ["rouxingshineng", "zhinengmaduo"]
+      "coreSkills": ["likongshiying", "qumiandamoqi", "rousunkongzhi", "hunhemaduo"]
     },
     {
       "companyId": "ruiguang",
@@ -340,7 +340,7 @@
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.warehousing", "icon": "cankuduijie", "progress": 80 }
       ],
-      "coreSkills": ["shangxiawuliao", "cankuduijie"]
+      "coreSkills": ["wuliaoshaicha", "youxugongliao", "agvdiaodu", "liticangku"]
     },
     {
       "companyId": "changjiang",
@@ -349,7 +349,7 @@
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 100 },
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 85 }
       ],
-      "coreSkills": ["lujinguihua", "xingneng"]
+      "coreSkills": ["bizhangguihua", "duojixietong", "dianqiceshi"]
     },
     {
       "companyId": "feiyu",
@@ -358,7 +358,7 @@
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 100 },
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 90 }
       ],
-      "coreSkills": ["chengpingbaoz", "wusunjiance"]
+      "coreSkills": ["jingquejizhong", "zidongfengxiang", "chaoshengbojiance"]
     },
     {
       "companyId": "yongxin",
@@ -367,7 +367,7 @@
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 100 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 75 }
       ],
-      "coreSkills": ["dingweiduiqi", "quexianjiance"]
+      "coreSkills": ["shijuedingwei", "jiguangduizhun", "biaomianhuahen", "liewen"]
     },
     {
       "companyId": "guohua",
@@ -376,7 +376,7 @@
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 100 },
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 80 }
       ],
-      "coreSkills": ["lianjieguding", "zhinengmaduo"]
+      "coreSkills": ["luoshuaningsuo", "maojieliangjie", "zhinenghuanxian", "gaosumaduo", "chaizhuomaduo"]
     },
     {
       "companyId": "jingwei",
@@ -385,7 +385,7 @@
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 85 }
       ],
-      "coreSkills": ["shangxiawuliao", "rouxingshineng"]
+      "coreSkills": ["wuliaoshaicha", "wuxulailiao", "likongshiying", "rousunkongzhi"]
     },
     {
       "companyId": "senbo",
@@ -394,7 +394,7 @@
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 70 }
       ],
-      "coreSkills": ["shangxiawuliao", "dingweiduiqi"]
+      "coreSkills": ["youxugongliao", "duowuliaoxietong", "shijuedingwei"]
     },
     {
       "companyId": "weichuang",
@@ -403,7 +403,7 @@
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 100 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 80 }
       ],
-      "coreSkills": ["lianjieguding", "quexianjiance"]
+      "coreSkills": ["luoshuaningsuo", "jiaozhanyajie", "kakouguding", "biaomianhuahen", "bianse"]
     },
     {
       "companyId": "jiali",
@@ -412,7 +412,7 @@
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 100 },
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 75 }
       ],
-      "coreSkills": ["zhinengmaduo", "lujinguihua"]
+      "coreSkills": ["hunhemaduo", "chaizhuomaduo", "zuijianlujing", "duojixietong"]
     },
     {
       "companyId": "rongsheng",
@@ -421,7 +421,7 @@
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 100 },
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 80 }
       ],
-      "coreSkills": ["rouxingshineng", "wusunjiance"]
+      "coreSkills": ["likongshiying", "qumiandamoqi", "chaoshengbojiance"]
     },
     {
       "companyId": "zhiyuan",
@@ -430,7 +430,7 @@
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 100 },
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 70 }
       ],
-      "coreSkills": ["xingneng", "chengpingbaoz"]
+      "coreSkills": ["dianqiceshi", "jingquejizhong", "zidongfengxiang", "tiebiaodabao"]
     },
     {
       "companyId": "dexin",
@@ -439,7 +439,7 @@
         { "labelKey": "scenario.warehousing", "icon": "cankuduijie", "progress": 100 },
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 85 }
       ],
-      "coreSkills": ["cankuduijie", "shangxiawuliao"]
+      "coreSkills": ["agvdiaodu", "liticangku", "wuliaoshaicha", "xialiaofendao"]
     },
     {
       "companyId": "longyu",
@@ -449,7 +449,7 @@
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 90 },
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 75 }
       ],
-      "coreSkills": ["shangxiawuliao", "lianjieguding", "quexianjiance"]
+      "coreSkills": ["wuliaoshaicha", "youxugongliao", "luoshuaningsuo", "maojieliangjie", "biaomianhuahen", "liewen"]
     },
     {
       "companyId": "tianhe",
@@ -458,7 +458,7 @@
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 100 },
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 80 }
       ],
-      "coreSkills": ["dingweiduiqi", "zhinengmaduo"]
+      "coreSkills": ["shijuedingwei", "jixiedingwei", "hunhemaduo", "gaosumaduo"]
     },
     {
       "companyId": "boyu",
@@ -467,7 +467,7 @@
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 100 },
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 85 }
       ],
-      "coreSkills": ["rouxingshineng", "lujinguihua"]
+      "coreSkills": ["likongshiying", "qumiandamoqi", "rousunkongzhi", "bizhangguihua", "zuijianlujing"]
     },
     {
       "companyId": "haiwei",
@@ -476,7 +476,7 @@
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 100 },
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 90 }
       ],
-      "coreSkills": ["wusunjiance", "xingneng"]
+      "coreSkills": ["chaoshengbojiance", "dianqiceshi"]
     },
     {
       "companyId": "shengshi",
@@ -485,7 +485,7 @@
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 100 },
         { "labelKey": "scenario.warehousing", "icon": "cankuduijie", "progress": 80 }
       ],
-      "coreSkills": ["chengpingbaoz", "cankuduijie"]
+      "coreSkills": ["jingquejizhong", "zidongfengxiang", "tiebiaodabao", "agvdiaodu"]
     },
     {
       "companyId": "qiangxin",
@@ -494,7 +494,7 @@
         { "labelKey": "scenario.loading", "icon": "shangxiawuliao", "progress": 100 },
         { "labelKey": "scenario.positioning", "icon": "dingweiduiqi", "progress": 85 }
       ],
-      "coreSkills": ["shangxiawuliao", "dingweiduiqi"]
+      "coreSkills": ["wuliaoshaicha", "wuxulailiao", "duowuliaoxietong", "shijuedingwei", "jiguangduizhun"]
     },
     {
       "companyId": "zhongheng",
@@ -503,7 +503,7 @@
         { "labelKey": "scenario.connecting", "icon": "lianjieguding", "progress": 100 },
         { "labelKey": "scenario.palletizing", "icon": "zhinengmaduo", "progress": 75 }
       ],
-      "coreSkills": ["lianjieguding", "zhinengmaduo"]
+      "coreSkills": ["luoshuaningsuo", "kakouguding", "hunhemaduo", "gaosumaduo"]
     },
     {
       "companyId": "yifei",
@@ -512,7 +512,7 @@
         { "labelKey": "scenario.inspection", "icon": "quexianjiance", "progress": 100 },
         { "labelKey": "scenario.flexibility", "icon": "rouxingshineng", "progress": 80 }
       ],
-      "coreSkills": ["quexianjiance", "rouxingshineng"]
+      "coreSkills": ["biaomianhuahen", "liewen", "bianse", "likongshiying", "qumiandamoqi"]
     },
     {
       "companyId": "xincheng",
@@ -521,7 +521,7 @@
         { "labelKey": "scenario.pathplan", "icon": "lujinguihua", "progress": 100 },
         { "labelKey": "scenario.ndt", "icon": "wusunjiance", "progress": 85 }
       ],
-      "coreSkills": ["lujinguihua", "wusunjiance"]
+      "coreSkills": ["bizhangguihua", "zuijianlujing", "chaoshengbojiance"]
     },
     {
       "companyId": "dacheng",
@@ -530,7 +530,7 @@
         { "labelKey": "scenario.performance", "icon": "xingneng", "progress": 100 },
         { "labelKey": "scenario.weighpack", "icon": "chengpingbaoz", "progress": 90 }
       ],
-      "coreSkills": ["xingneng", "chengpingbaoz"]
+      "coreSkills": ["dianqiceshi", "jingquejizhong", "zidongfengxiang", "tiebiaodabao"]
     }
   ]
 }
