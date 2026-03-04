@@ -16,7 +16,7 @@ import SkillNode from './SkillNode.vue'
 import { ref, computed } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // 图片资源导入
 import bottomLayer from '@/assets/platforms/block_layer_buttom.png'
@@ -68,21 +68,31 @@ const categoryPositions: Record<string, { midTop: string; midLeft: string; upper
 
 /**
  * 父级分类标签的绝对位置（独立于平台图片，便于手动微调）
+ * 中英文文字宽度不同，需要按语言分别调整坐标
  */
-const categoryLabelPositions: Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string }> = {
-  assembly:    { top: '350px', left: '130px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  inspection:  { top: '350px', left: '952px', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
-  palletizing: { top: '506px', left: '400px', rotate: '30deg',   skewX: '-30deg', skewY: '0deg' },
+const categoryLabelPositionsMap: Record<string, Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string }>> = {
+  zh: {
+    assembly:    { top: '350px', left: '130px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+    inspection:  { top: '350px', left: '952px', rotate: '-30deg', skewX: '30deg',  skewY: '0deg' },
+    palletizing: { top: '506px', left: '400px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  },
+  en: {
+    assembly:    { top: '350px', left: '90px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+    inspection:  { top: '348px', left: '872px', rotate: '-30deg', skewX: '30deg',  skewY: '0deg' },
+    palletizing: { top: '506px', left: '340px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  },
 }
+const categoryLabelPositions = computed(() => categoryLabelPositionsMap[locale.value] || categoryLabelPositionsMap.zh)
 
 /**
  * 每个技能在其上层平台中的相对位置 (百分比)
  */
 const skillPositions: Record<string, { top: string; left: string; scale?: number }> = {
-  // 柔性装配 (upper_l - 3 个圆位)
+  // 柔性装配 (upper_l - 4 个圆位)
   shangxiawuliao: { top: '11%', left: '11.5%' },
   dingweiduiqi: { top: '2%', left: '38%', scale: 0.95 },
   lianjieguding: { top: '16%', left: '66%', scale: 0.95 },
+  liuzhuanfuwei: { top: '26%', left: '38%', scale: 0.93 },
   // 柔性质检 (upper_r - 4 个位)
   quexianjiance: { top: '2%', left: '38%' },
   rouxingshineng: { top: '28%', left: '37%' },
@@ -104,7 +114,6 @@ const skillSubmenuDirection: Record<string, 'up' | 'down'> = {
   chengpingbaoz: 'down',
   zhinengmaduo: 'down',
   cankuduijie: 'down',
-  rouxingshineng: 'down',
 }
 
 /**
@@ -118,6 +127,7 @@ const skillLabelOffsets: Record<string, { top: string; left: string; rotate: str
   shangxiawuliao: { top: '78px', left: '20%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   dingweiduiqi:   { top: '60px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   lianjieguding:  { top: '73px', left: '15%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  liuzhuanfuwei:  { top: '78px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   // 柔性质检
   quexianjiance:  { top: '68px', left: '70%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   rouxingshineng: { top: '72px', left: '92%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },

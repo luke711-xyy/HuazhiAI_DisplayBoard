@@ -7,6 +7,9 @@
  */
 import logoUrl from '@/assets/logo/huazhi_logo.png'
 import settingUrl from '@/assets/icons/ic-setting.png'
+import { useI18n } from '@/composables/useI18n'
+
+const { locale } = useI18n()
 
 defineEmits<{
   (e: 'toggleSettings'): void
@@ -25,7 +28,7 @@ defineProps<{
     </div>
 
     <!-- 中间标题 -->
-    <h1 class="header-bar__title">{{ title }}</h1>
+    <h1 class="header-bar__title" :class="{ 'header-bar__title--en': locale === 'en' }">{{ title }}</h1>
 
     <!-- 右侧设置按钮 -->
     <button class="header-bar__settings hover-lift" @click="$emit('toggleSettings')">
@@ -74,6 +77,11 @@ defineProps<{
     letter-spacing: 14px;
     color: var(--color-text-primary);
     white-space: nowrap;
+
+    &--en {
+      letter-spacing: 4px;
+      font-size: 28px;
+    }
   }
 
   &__settings {

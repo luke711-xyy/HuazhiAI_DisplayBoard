@@ -122,7 +122,8 @@ function getHoveredSubSkill(): SubSkill | undefined {
   // 子技能胶囊
   &__pill {
     position: relative;
-    width: 120px;
+    min-width: 120px;
+    width: max-content;
     padding: 4px 14px;
     border-radius: 14px;
     white-space: nowrap;
