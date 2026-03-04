@@ -167,7 +167,7 @@ onMounted(() => {
     padding: 3px 10px;
     border-radius: 12px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
     color: #fff;
     white-space: nowrap;
     pointer-events: none;

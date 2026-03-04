@@ -449,7 +449,7 @@ defineExpose({ skillNodeRefs })
   padding: 6px 20px;
   border-radius: 20px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
   white-space: nowrap;
   letter-spacing: 3px;

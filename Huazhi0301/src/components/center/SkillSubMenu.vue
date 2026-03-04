@@ -122,6 +122,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
   // 子技能胶囊
   &__pill {
     position: relative;
+    isolation: isolate;
     min-width: 120px;
     width: max-content;
     padding: 4px 14px;
@@ -132,15 +133,6 @@ function getHoveredSubSkill(): SubSkill | undefined {
     align-items: center;
     justify-content: center;
     gap: 6px;
-
-    // 毛玻璃背景
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.5) 0%,
-      color-mix(in srgb, var(--pill-color) 20%, transparent) 80%
-    );
-    backdrop-filter: blur(12px) saturate(1.3);
-    -webkit-backdrop-filter: blur(12px) saturate(1.3);
 
     // 发光边框
     border: 1px solid color-mix(in srgb, var(--pill-color) 30%, transparent);
@@ -156,19 +148,41 @@ function getHoveredSubSkill(): SubSkill | undefined {
 
     transition: all 0.2s var(--ease-smooth);
 
+    // 毛玻璃层（与文字分离，避免模糊）
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.5) 0%,
+        color-mix(in srgb, var(--pill-color) 20%, transparent) 80%
+      );
+      backdrop-filter: blur(12px) saturate(1.3);
+      -webkit-backdrop-filter: blur(12px) saturate(1.3);
+      transition: background 0.2s var(--ease-smooth);
+    }
+
     // hover / active 增强发光
     &:hover,
     &--active {
-      background: linear-gradient(
-        135deg,
-        rgba(0, 0, 0, 0.35) 0%,
-        color-mix(in srgb, var(--pill-color) 35%, transparent) 100%
-      );
       border-color: color-mix(in srgb, var(--pill-color) 55%, transparent);
       box-shadow:
         0 0 10px color-mix(in srgb, var(--pill-color) 40%, transparent),
         0 0 24px color-mix(in srgb, var(--pill-color) 18%, transparent),
         0 2px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    &:hover::after,
+    &--active::after {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.35) 0%,
+        color-mix(in srgb, var(--pill-color) 35%, transparent) 100%
+      );
     }
 
     // 外部高亮时，非关联技能变暗
@@ -233,6 +247,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
   // 详情描述浮窗
   &__detail {
     position: absolute;
+    isolation: isolate;
     left: calc(100% + 14px);
     top: 50%;
     transform: translateY(-50%);
@@ -240,19 +255,28 @@ function getHoveredSubSkill(): SubSkill | undefined {
     padding: 12px 14px;
     border-radius: 10px;
 
-    // 毛玻璃
-    background: linear-gradient(
-      135deg,
-      rgba(5, 10, 25, 0.92) 0%,
-      color-mix(in srgb, var(--pill-color) 12%, rgba(5, 10, 25, 0.92)) 100%
-    );
-    backdrop-filter: blur(20px) saturate(1.4);
-    -webkit-backdrop-filter: blur(20px) saturate(1.4);
     border: 1px solid color-mix(in srgb, var(--pill-color) 25%, transparent);
     box-shadow:
       0 0 10px color-mix(in srgb, var(--pill-color) 18%, transparent),
       0 0 24px color-mix(in srgb, var(--pill-color) 8%, transparent),
       0 8px 32px rgba(0, 0, 0, 0.5);
+
+    // 毛玻璃层（与文字分离，避免模糊）
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(
+        135deg,
+        rgba(5, 10, 25, 0.92) 0%,
+        color-mix(in srgb, var(--pill-color) 12%, rgba(5, 10, 25, 0.92)) 100%
+      );
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    }
 
     // 左侧高光线
     &::before {
