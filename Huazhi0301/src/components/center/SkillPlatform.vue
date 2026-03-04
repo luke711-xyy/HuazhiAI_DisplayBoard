@@ -32,6 +32,7 @@ const props = defineProps<{
   categories: SkillCategory[]
   skills: Skill[]
   highlightedSkillIds: string[]
+  highlightedSubSkillIds: string[]
   hoveredSkillId: string | null
 }>()
 
@@ -154,6 +155,10 @@ const activeCategoryIds = computed(() => {
 /** 是否有子菜单正在展开（用于临时提升平台 z-index） */
 const isSubmenuOpen = ref(false)
 
+/** 外部高亮导致子菜单展开时也要提升 z-index */
+const hasExternalSubmenu = computed(() => props.highlightedSubSkillIds.length > 0)
+const effectiveSubmenuOpen = computed(() => isSubmenuOpen.value || hasExternalSubmenu.value)
+
 const emit = defineEmits<{
   (e: 'hoverSkill', skillId: string | null): void
 }>()
@@ -180,7 +185,7 @@ defineExpose({ skillNodeRefs })
 </script>
 
 <template>
-  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': isSubmenuOpen }">
+  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': effectiveSubmenuOpen }">
     <!-- 底层网格大平台 -->
     <img :src="bottomLayer" alt="" class="skill-platform__bottom" />
 
@@ -230,6 +235,7 @@ defineExpose({ skillNodeRefs })
           :key="skill.id"
           :skill="skill"
           :is-highlighted="highlightedSkillIds.includes(skill.id)"
+          :highlighted-sub-skill-ids="highlightedSubSkillIds"
           :category-color="categoryColorMap[category.id] || '#3B82F6'"
           :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
           :style="{

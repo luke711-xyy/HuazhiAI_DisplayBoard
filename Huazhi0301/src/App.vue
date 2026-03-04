@@ -97,6 +97,13 @@ const highlightedSkillIds = computed(() => {
   return company?.relatedSkillIds || []
 })
 
+/** 当悬停企业时，计算该企业关联的三级技能（subSkill）ID 列表 */
+const highlightedSubSkillIds = computed(() => {
+  if (!hoveredCompanyId.value) return []
+  const detail = getCompanyDetailById(hoveredCompanyId.value)
+  return detail?.coreSkills || []
+})
+
 /** 选中企业的详情数据 (用于弹窗) */
 const selectedCompanyDetail = computed(() => {
   if (!selectedCompanyId.value) return null
@@ -245,6 +252,7 @@ const { lines: connectionLines } = useConnectionLines(
       :categories="config.skillCategories"
       :skills="config.skills"
       :highlighted-skill-ids="highlightedSkillIds"
+      :highlighted-sub-skill-ids="highlightedSubSkillIds"
       :hovered-skill-id="hoveredSkillId"
       @hover-skill="onHoverSkill"
     />

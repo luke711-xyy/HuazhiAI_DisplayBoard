@@ -7,24 +7,42 @@
  * 每个胶囊被悬停时，在右侧弹出详细描述浮窗。
  */
 import type { SubSkill } from '@/types'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()
 
-defineProps<{
+const props = defineProps<{
   subSkills: SubSkill[]
   /** 父技能名称 (i18n key) */
   parentNameKey: string
   categoryColor: string
+  /** 外部高亮的子技能 ID（来自企业 hover），空数组表示无外部控制 */
+  externalActiveIds?: string[]
 }>()
 
 /** 当前悬停的子技能 ID，用于控制描述浮窗显示 */
 const hoveredSubSkillId = ref<string | null>(null)
 
-function getHoveredSubSkill(subSkills: SubSkill[]): SubSkill | undefined {
-  return subSkills.find(s => s.id === hoveredSubSkillId.value)
+/** 该子技能是否应被高亮（本地 hover 或外部指定） */
+function isPillActive(subId: string): boolean {
+  if (hoveredSubSkillId.value === subId) return true
+  return props.externalActiveIds?.includes(subId) ?? false
 }
+
+/** 详情浮窗显示的子技能：优先本地 hover，其次外部高亮的第一个 */
+const activeDetailSubSkill = computed((): SubSkill | undefined => {
+  if (hoveredSubSkillId.value) {
+    return props.subSkills.find(s => s.id === hoveredSubSkillId.value)
+  }
+  if (props.externalActiveIds && props.externalActiveIds.length > 0) {
+    // 按列表顺序找到第一个匹配的子技能
+    for (const sub of props.subSkills) {
+      if (props.externalActiveIds.includes(sub.id)) return sub
+    }
+  }
+  return undefined
+})
 </script>
 
 <template>
@@ -37,7 +55,7 @@ function getHoveredSubSkill(subSkills: SubSkill[]): SubSkill | undefined {
       v-for="(sub, index) in [...subSkills].reverse()"
       :key="sub.id"
       class="skill-submenu__pill"
-      :class="{ 'skill-submenu__pill--active': hoveredSubSkillId === sub.id }"
+      :class="{ 'skill-submenu__pill--active': isPillActive(sub.id) }"
       :style="{
         '--pill-color': categoryColor,
         'animation-delay': `${index * 60}ms`,
@@ -52,15 +70,16 @@ function getHoveredSubSkill(subSkills: SubSkill[]): SubSkill | undefined {
     <!-- 详情描述浮窗 -->
     <Transition name="desc-fade">
       <div
-        v-if="hoveredSubSkillId && getHoveredSubSkill(subSkills)"
+        v-if="activeDetailSubSkill"
+        :key="activeDetailSubSkill.id"
         class="skill-submenu__detail"
         :style="{ '--pill-color': categoryColor }"
       >
         <h4 class="skill-submenu__detail-title">
-          {{ t(getHoveredSubSkill(subSkills)!.nameKey) }}
+          {{ t(activeDetailSubSkill.nameKey) }}
         </h4>
         <p class="skill-submenu__detail-desc">
-          {{ t(getHoveredSubSkill(subSkills)!.descriptionKey) }}
+          {{ t(activeDetailSubSkill.descriptionKey) }}
         </p>
       </div>
     </Transition>
@@ -114,7 +133,7 @@ function getHoveredSubSkill(subSkills: SubSkill[]): SubSkill | undefined {
     background: linear-gradient(
       135deg,
       rgba(0, 0, 0, 0.5) 0%,
-      color-mix(in srgb, var(--pill-color) 20%, transparent) 100%
+      color-mix(in srgb, var(--pill-color) 20%, transparent) 80%
     );
     backdrop-filter: blur(12px) saturate(1.3);
     -webkit-backdrop-filter: blur(12px) saturate(1.3);

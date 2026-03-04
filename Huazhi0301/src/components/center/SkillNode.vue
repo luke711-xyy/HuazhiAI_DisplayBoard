@@ -18,6 +18,8 @@ const { t } = useI18n()
 const props = defineProps<{
   skill: Skill
   isHighlighted: boolean
+  /** 外部高亮的三级技能 ID 列表（来自企业 hover） */
+  highlightedSubSkillIds: string[]
   categoryColor: string
   /** 标签相对于节点左上角的偏移及变形 */
   labelOffset: { top: string; left: string; rotate?: string; skewX?: string; skewY?: string }
@@ -54,9 +56,17 @@ const iconUrl = computed(() => {
   return findIcon(props.skill.icon)
 })
 
-/** 是否展示二级子菜单 */
+/** 该技能下被外部高亮的子技能 ID 列表 */
+const matchingSubSkillIds = computed(() => {
+  if (!props.skill.subSkills || props.highlightedSubSkillIds.length === 0) return []
+  const mySubIds = new Set(props.skill.subSkills.map(s => s.id))
+  return props.highlightedSubSkillIds.filter(id => mySubIds.has(id))
+})
+
+/** 是否展示二级子菜单（本地 hover 或有外部匹配的子技能） */
 const showSubMenu = computed(() => {
-  return isHovered.value && props.skill.subSkills && props.skill.subSkills.length > 0
+  if (!props.skill.subSkills || props.skill.subSkills.length === 0) return false
+  return isHovered.value || matchingSubSkillIds.value.length > 0
 })
 
 /** 暴露根元素供连线坐标计算 */
@@ -103,6 +113,7 @@ onMounted(() => {
       :sub-skills="skill.subSkills!"
       :parent-name-key="skill.nameKey"
       :category-color="categoryColor"
+      :external-active-ids="matchingSubSkillIds"
     />
 
     <!-- 默认 slot (tooltip 等) -->
