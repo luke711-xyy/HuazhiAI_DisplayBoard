@@ -7,7 +7,7 @@
  * 每个胶囊被悬停时，在右侧弹出详细描述浮窗。
  */
 import type { SubSkill } from '@/types'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()
@@ -19,6 +19,8 @@ const props = defineProps<{
   categoryColor: string
   /** 外部高亮的子技能 ID（来自企业 hover），空数组表示无外部控制 */
   externalActiveIds?: string[]
+  /** 展开方向：向上(默认) 或 向下 */
+  direction?: 'up' | 'down'
 }>()
 
 /** 当前悬停的子技能 ID，用于控制描述浮窗显示 */
@@ -30,32 +32,33 @@ function isPillActive(subId: string): boolean {
   return props.externalActiveIds?.includes(subId) ?? false
 }
 
-/** 详情浮窗显示的子技能：优先本地 hover，其次外部高亮的第一个 */
-const activeDetailSubSkill = computed((): SubSkill | undefined => {
-  if (hoveredSubSkillId.value) {
-    return props.subSkills.find(s => s.id === hoveredSubSkillId.value)
-  }
-  if (props.externalActiveIds && props.externalActiveIds.length > 0) {
-    // 按列表顺序找到第一个匹配的子技能
-    for (const sub of props.subSkills) {
-      if (props.externalActiveIds.includes(sub.id)) return sub
-    }
-  }
-  return undefined
-})
+/** 该子技能是否应变暗（外部有指定高亮列表，但此项不在列表中） */
+function isDimmed(subId: string): boolean {
+  if (!props.externalActiveIds || props.externalActiveIds.length === 0) return false
+  return !props.externalActiveIds.includes(subId)
+}
+
+/** 本地 hover 的子技能数据（仅鼠标直接 hover 时显示详情弹窗） */
+function getHoveredSubSkill(): SubSkill | undefined {
+  if (!hoveredSubSkillId.value) return undefined
+  return props.subSkills.find(s => s.id === hoveredSubSkillId.value)
+}
 </script>
 
 <template>
-  <div class="skill-submenu" @mouseenter.stop @mouseleave.stop>
+  <div class="skill-submenu" :class="{ 'skill-submenu--down': direction === 'down' }" @mouseenter.stop @mouseleave.stop>
     <!-- 垂直连接线 -->
     <div class="skill-submenu__stem" :style="{ '--stem-color': categoryColor }" />
 
     <!-- 子技能胶囊列表 (从下往上排列，最近的在最下方) -->
     <div
-      v-for="(sub, index) in [...subSkills].reverse()"
+      v-for="(sub, index) in (direction === 'down' ? subSkills : [...subSkills].reverse())"
       :key="sub.id"
       class="skill-submenu__pill"
-      :class="{ 'skill-submenu__pill--active': isPillActive(sub.id) }"
+      :class="{
+        'skill-submenu__pill--active': isPillActive(sub.id),
+        'skill-submenu__pill--dimmed': isDimmed(sub.id),
+      }"
       :style="{
         '--pill-color': categoryColor,
         'animation-delay': `${index * 60}ms`,
@@ -67,19 +70,19 @@ const activeDetailSubSkill = computed((): SubSkill | undefined => {
       <span class="skill-submenu__pill-text">{{ t(sub.nameKey) }}</span>
     </div>
 
-    <!-- 详情描述浮窗 -->
+    <!-- 详情描述浮窗（仅鼠标直接 hover 时展示） -->
     <Transition name="desc-fade">
       <div
-        v-if="activeDetailSubSkill"
-        :key="activeDetailSubSkill.id"
+        v-if="hoveredSubSkillId && getHoveredSubSkill()"
+        :key="hoveredSubSkillId"
         class="skill-submenu__detail"
         :style="{ '--pill-color': categoryColor }"
       >
         <h4 class="skill-submenu__detail-title">
-          {{ t(activeDetailSubSkill.nameKey) }}
+          {{ t(getHoveredSubSkill()!.nameKey) }}
         </h4>
         <p class="skill-submenu__detail-desc">
-          {{ t(activeDetailSubSkill.descriptionKey) }}
+          {{ t(getHoveredSubSkill()!.descriptionKey) }}
         </p>
       </div>
     </Transition>
@@ -165,6 +168,17 @@ const activeDetailSubSkill = computed((): SubSkill | undefined => {
         0 0 10px color-mix(in srgb, var(--pill-color) 40%, transparent),
         0 0 24px color-mix(in srgb, var(--pill-color) 18%, transparent),
         0 2px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    // 外部高亮时，非关联技能变暗
+    &--dimmed {
+      opacity: 0.3;
+      box-shadow: none;
+
+      // hover 时恢复正常亮度
+      &:hover {
+        opacity: 1;
+      }
     }
 
     // 顶部高光线
@@ -269,6 +283,42 @@ const activeDetailSubSkill = computed((): SubSkill | undefined => {
       line-height: 1.7;
       color: rgba(255, 255, 255, 0.7);
     }
+  }
+}
+
+// 向下展开变体
+.skill-submenu--down {
+  bottom: auto;
+  top: 100%;
+  padding-bottom: 0;
+  padding-top: 6px;
+
+  .skill-submenu__stem {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--stem-color) 40%, transparent),
+      color-mix(in srgb, var(--stem-color) 15%, transparent)
+    );
+    bottom: auto;
+    top: 0;
+  }
+
+  .skill-submenu__pill {
+    animation-name: pill-drop;
+  }
+
+  // 详情浮窗保持在右侧（无需改变）
+}
+
+// 胶囊入场动画：从上方淡入下落
+@keyframes pill-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

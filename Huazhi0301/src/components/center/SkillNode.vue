@@ -23,6 +23,8 @@ const props = defineProps<{
   categoryColor: string
   /** 标签相对于节点左上角的偏移及变形 */
   labelOffset: { top: string; left: string; rotate?: string; skewX?: string; skewY?: string }
+  /** 子菜单展开方向 */
+  submenuDirection?: 'up' | 'down'
 }>()
 
 defineEmits<{
@@ -114,6 +116,7 @@ onMounted(() => {
       :parent-name-key="skill.nameKey"
       :category-color="categoryColor"
       :external-active-ids="matchingSubSkillIds"
+      :direction="submenuDirection || 'up'"
     />
 
     <!-- 默认 slot (tooltip 等) -->

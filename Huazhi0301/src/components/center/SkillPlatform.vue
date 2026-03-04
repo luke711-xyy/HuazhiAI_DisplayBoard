@@ -89,11 +89,22 @@ const skillPositions: Record<string, { top: string; left: string; scale?: number
   wusunjiance: { top: '16%', left: '66%' },
   xingneng: { top: '15%', left: '12%' },
   // 柔性码垛 (upper_m - 5 个圆位)
-  zhinengmaduo: { top: '32%', left: '37.5%', scale: 0.93 },
+  zhinengmaduo: { top: '31%', left: '37.5%', scale: 0.93 },
   cankuduijie: { top: '17%', left: '64%' },
   chengpingbaoz: { top: '16%', left: '15%' },
   lujinguihua: { top: '2%', left: '37.5%' },
   fenjianpeisong: { top: '14.5%', left: '40%', scale: 0.88 },
+}
+
+/**
+ * 指定需要向下展开 SkillSubMenu 的技能 ID
+ */
+const skillSubmenuDirection: Record<string, 'up' | 'down'> = {
+  liuzhuanfuwei: 'down',
+  chengpingbaoz: 'down',
+  zhinengmaduo: 'down',
+  cankuduijie: 'down',
+  rouxingshineng: 'down',
 }
 
 /**
@@ -159,6 +170,25 @@ const isSubmenuOpen = ref(false)
 const hasExternalSubmenu = computed(() => props.highlightedSubSkillIds.length > 0)
 const effectiveSubmenuOpen = computed(() => isSubmenuOpen.value || hasExternalSubmenu.value)
 
+/** 当前有子菜单展开的分类 ID 集合（用于提升对应 __upper 的 z-index，防止被其他平台遮挡） */
+const categoriesWithSubmenu = computed(() => {
+  const ids = new Set<string>()
+  // 直接 hover 触发
+  if (localHoveredSkillId.value) {
+    const skill = props.skills.find(s => s.id === localHoveredSkillId.value)
+    if (skill?.subSkills?.length) ids.add(skill.categoryId)
+  }
+  // 外部企业 hover 触发
+  if (props.highlightedSubSkillIds.length > 0) {
+    for (const skill of props.skills) {
+      if (skill.subSkills?.some(sub => props.highlightedSubSkillIds.includes(sub.id))) {
+        ids.add(skill.categoryId)
+      }
+    }
+  }
+  return ids
+})
+
 const emit = defineEmits<{
   (e: 'hoverSkill', skillId: string | null): void
 }>()
@@ -222,6 +252,7 @@ defineExpose({ skillNodeRefs })
       <!-- 上层技能承载平台 + 技能图标 -->
       <div
         class="skill-platform__upper"
+        :class="{ 'skill-platform__upper--elevated': categoriesWithSubmenu.has(category.id) }"
         :style="{
           top: categoryPositions[category.id]?.upperTop,
           left: categoryPositions[category.id]?.upperLeft,
@@ -238,6 +269,7 @@ defineExpose({ skillNodeRefs })
           :highlighted-sub-skill-ids="highlightedSubSkillIds"
           :category-color="categoryColorMap[category.id] || '#3B82F6'"
           :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
+          :submenu-direction="skillSubmenuDirection[skill.id] || 'up'"
           :style="{
             position: 'absolute',
             top: skillPositions[skill.id]?.top || '50%',
@@ -355,6 +387,11 @@ defineExpose({ skillNodeRefs })
     width: 450px;
     height: 450px;
     z-index: var(--z-platform-upper);
+
+    // 有子菜单展开时提升 z-index，防止被其他平台遮挡
+    &--elevated {
+      z-index: var(--z-skill-submenu);
+    }
 
     &-img {
       width: 100%;
