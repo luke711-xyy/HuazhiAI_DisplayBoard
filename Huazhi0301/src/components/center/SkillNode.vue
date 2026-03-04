@@ -121,10 +121,11 @@ onMounted(() => {
   transition: all var(--duration-normal) var(--ease-smooth);
   position: relative;
   z-index: var(--z-skill-nodes);
+  transform: scale(var(--node-scale, 1));
 
   &:hover,
   &--highlighted {
-    transform: scale(1.10);
+    transform: scale(calc(var(--node-scale, 1) * 1.10));
     filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
     z-index: calc(var(--z-skill-nodes) + 10);
   }

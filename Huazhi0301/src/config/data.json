@@ -33,7 +33,7 @@
       "upperLayerImage": "block_layer_upper_l",
       "barImage": "bar_zhuangpei",
       "color": "#3B82F6",
-      "skills": ["shangxiawuliao", "dingweiduiqi", "lianjieguding"]
+      "skills": ["shangxiawuliao", "dingweiduiqi", "lianjieguding", "liuzhuanfuwei"]
     },
     {
       "id": "inspection",
@@ -63,11 +63,11 @@
       "iconSelect": "ic_skill_shangxiawuliao_select",
       "categoryId": "assembly",
       "subSkills": [
+        { "id": "wuliaoshaicha", "nameKey": "subSkill.wuliaoshaicha.name", "descriptionKey": "subSkill.wuliaoshaicha.desc" },
         { "id": "wuxulailiao", "nameKey": "subSkill.wuxulailiao.name", "descriptionKey": "subSkill.wuxulailiao.desc" },
         { "id": "youxugongliao", "nameKey": "subSkill.youxugongliao.name", "descriptionKey": "subSkill.youxugongliao.desc" },
         { "id": "duowuliaoxietong", "nameKey": "subSkill.duowuliaoxietong.name", "descriptionKey": "subSkill.duowuliaoxietong.desc" },
-        { "id": "xialiaofendao", "nameKey": "subSkill.xialiaofendao.name", "descriptionKey": "subSkill.xialiaofendao.desc" },
-        { "id": "wuliaoshaicha", "nameKey": "subSkill.wuliaoshaicha.name", "descriptionKey": "subSkill.wuliaoshaicha.desc" }
+        { "id": "xialiaofendao", "nameKey": "subSkill.xialiaofendao.name", "descriptionKey": "subSkill.xialiaofendao.desc" }
       ]
     },
     {
@@ -80,8 +80,7 @@
       "subSkills": [
         { "id": "shijuedingwei", "nameKey": "subSkill.shijuedingwei.name", "descriptionKey": "subSkill.shijuedingwei.desc" },
         { "id": "jiguangduizhun", "nameKey": "subSkill.jiguangduizhun.name", "descriptionKey": "subSkill.jiguangduizhun.desc" },
-        { "id": "jixiedingwei", "nameKey": "subSkill.jixiedingwei.name", "descriptionKey": "subSkill.jixiedingwei.desc" },
-        { "id": "liuweibuchang", "nameKey": "subSkill.liuweibuchang.name", "descriptionKey": "subSkill.liuweibuchang.desc" }
+        { "id": "jixiedingwei", "nameKey": "subSkill.jixiedingwei.name", "descriptionKey": "subSkill.jixiedingwei.desc" }
       ]
     },
     {
@@ -95,7 +94,21 @@
         { "id": "luoshuaningsuo", "nameKey": "subSkill.luoshuaningsuo.name", "descriptionKey": "subSkill.luoshuaningsuo.desc" },
         { "id": "maojieliangjie", "nameKey": "subSkill.maojieliangjie.name", "descriptionKey": "subSkill.maojieliangjie.desc" },
         { "id": "jiaozhanyajie", "nameKey": "subSkill.jiaozhanyajie.name", "descriptionKey": "subSkill.jiaozhanyajie.desc" },
-        { "id": "kakouguding", "nameKey": "subSkill.kakouguding.name", "descriptionKey": "subSkill.kakouguding.desc" }
+        { "id": "kakouguding", "nameKey": "subSkill.kakouguding.name", "descriptionKey": "subSkill.kakouguding.desc" },
+        { "id": "zhinenghuanxian", "nameKey": "subSkill.zhinenghuanxian.name", "descriptionKey": "subSkill.zhinenghuanxian.desc" }
+      ]
+    },
+    {
+      "id": "liuzhuanfuwei",
+      "nameKey": "skill.liuzhuanfuwei.name",
+      "descriptionKey": "skill.liuzhuanfuwei.desc",
+      "icon": "ic_skill_liuzhuanfuwei",
+      "iconSelect": "ic_skill_liuzhuanfuwei_select",
+      "categoryId": "assembly",
+      "subSkills": [
+        { "id": "zhuangpeiyanzheng", "nameKey": "subSkill.zhuangpeiyanzheng.name", "descriptionKey": "subSkill.zhuangpeiyanzheng.desc" },
+        { "id": "chengpinfenjian", "nameKey": "subSkill.chengpinfenjian.name", "descriptionKey": "subSkill.chengpinfenjian.desc" },
+        { "id": "gongweifuwei", "nameKey": "subSkill.gongweifuwei.name", "descriptionKey": "subSkill.gongweifuwei.desc" }
       ]
     },
     {
@@ -108,8 +121,7 @@
       "subSkills": [
         { "id": "biaomianhuahen", "nameKey": "subSkill.biaomianhuahen.name", "descriptionKey": "subSkill.biaomianhuahen.desc" },
         { "id": "liewen", "nameKey": "subSkill.liewen.name", "descriptionKey": "subSkill.liewen.desc" },
-        { "id": "bianse", "nameKey": "subSkill.bianse.name", "descriptionKey": "subSkill.bianse.desc" },
-        { "id": "chicunpiancha", "nameKey": "subSkill.chicunpiancha.name", "descriptionKey": "subSkill.chicunpiancha.desc" }
+        { "id": "bianse", "nameKey": "subSkill.bianse.name", "descriptionKey": "subSkill.bianse.desc" }
       ]
     },
     {
@@ -133,9 +145,7 @@
       "iconSelect": "ic_skill_wusunjiance_select",
       "categoryId": "inspection",
       "subSkills": [
-        { "id": "chaoshengbojiance", "nameKey": "subSkill.chaoshengbojiance.name", "descriptionKey": "subSkill.chaoshengbojiance.desc" },
-        { "id": "xshexianjiance", "nameKey": "subSkill.xshexianjiance.name", "descriptionKey": "subSkill.xshexianjiance.desc" },
-        { "id": "waiguansuomiao", "nameKey": "subSkill.waiguansuomiao.name", "descriptionKey": "subSkill.waiguansuomiao.desc" }
+        { "id": "chaoshengbojiance", "nameKey": "subSkill.chaoshengbojiance.name", "descriptionKey": "subSkill.chaoshengbojiance.desc" }
       ]
     },
     {
@@ -146,10 +156,7 @@
       "iconSelect": "ic_skill_xingneng_select",
       "categoryId": "inspection",
       "subSkills": [
-        { "id": "dianqiceshi", "nameKey": "subSkill.dianqiceshi.name", "descriptionKey": "subSkill.dianqiceshi.desc" },
-        { "id": "jixieqiangdu", "nameKey": "subSkill.jixieqiangdu.name", "descriptionKey": "subSkill.jixieqiangdu.desc" },
-        { "id": "mifengxing", "nameKey": "subSkill.mifengxing.name", "descriptionKey": "subSkill.mifengxing.desc" },
-        { "id": "naijiuxing", "nameKey": "subSkill.naijiuxing.name", "descriptionKey": "subSkill.naijiuxing.desc" }
+        { "id": "dianqiceshi", "nameKey": "subSkill.dianqiceshi.name", "descriptionKey": "subSkill.dianqiceshi.desc" }
       ]
     },
     {
@@ -174,7 +181,6 @@
       "categoryId": "palletizing",
       "subSkills": [
         { "id": "agvdiaodu", "nameKey": "subSkill.agvdiaodu.name", "descriptionKey": "subSkill.agvdiaodu.desc" },
-        { "id": "wmsjicheng", "nameKey": "subSkill.wmsjicheng.name", "descriptionKey": "subSkill.wmsjicheng.desc" },
         { "id": "liticangku", "nameKey": "subSkill.liticangku.name", "descriptionKey": "subSkill.liticangku.desc" }
       ]
     },
@@ -214,7 +220,8 @@
       "subSkills": [
         { "id": "zhinengfenjian", "nameKey": "subSkill.zhinengfenjian.name", "descriptionKey": "subSkill.zhinengfenjian.desc" },
         { "id": "lujingpeisong", "nameKey": "subSkill.lujingpeisong.name", "descriptionKey": "subSkill.lujingpeisong.desc" },
-        { "id": "duodanxietong", "nameKey": "subSkill.duodanxietong.name", "descriptionKey": "subSkill.duodanxietong.desc" }
+        { "id": "duodanxietong", "nameKey": "subSkill.duodanxietong.name", "descriptionKey": "subSkill.duodanxietong.desc" },
+        { "id": "tuopanyizai", "nameKey": "subSkill.tuopanyizai.name", "descriptionKey": "subSkill.tuopanyizai.desc" }
       ]
     }
   ],

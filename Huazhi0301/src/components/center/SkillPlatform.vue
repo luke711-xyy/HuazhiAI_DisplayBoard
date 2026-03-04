@@ -25,8 +25,8 @@ import midLight from '@/assets/platforms/block_layer_mid_light.png'
 import upperL from '@/assets/platforms/block_layer_upper_l.png'
 import upperM from '@/assets/platforms/block_layer_upper_m.png'
 import upperR from '@/assets/platforms/block_layer_upper_r.png'
-import connectLeft from '@/assets/connectors/block_connect_left.png'
-import connectRight from '@/assets/connectors/block_connect_right.png'
+import connectLeft from '@/assets/connectors/block_connect_left@2x.png'
+import connectRight from '@/assets/connectors/block_connect_right@2x.png'
 
 const props = defineProps<{
   categories: SkillCategory[]
@@ -77,22 +77,22 @@ const categoryLabelPositions: Record<string, { top: string; left: string; rotate
 /**
  * 每个技能在其上层平台中的相对位置 (百分比)
  */
-const skillPositions: Record<string, { top: string; left: string  }> = {
+const skillPositions: Record<string, { top: string; left: string; scale?: number }> = {
   // 柔性装配 (upper_l - 3 个圆位)
-  shangxiawuliao: { top: '20%', left: '30%' },
-  dingweiduiqi: { top: '2%', left: '38%' },
-  lianjieguding: { top: '16%', left: '64%' },
+  shangxiawuliao: { top: '21%', left: '30%' },
+  dingweiduiqi: { top: '2%', left: '38%', scale: 0.95 },
+  lianjieguding: { top: '16%', left: '64%', scale: 0.95 },
   // 柔性质检 (upper_r - 4 个位)
   quexianjiance: { top: '2%', left: '38%' },
   rouxingshineng: { top: '28%', left: '37%' },
   wusunjiance: { top: '16%', left: '66%' },
   xingneng: { top: '15%', left: '12%' },
   // 柔性码垛 (upper_m - 5 个圆位)
-  zhinengmaduo: { top: '30%', left: '37.5%' },
+  zhinengmaduo: { top: '32%', left: '37.5%', scale: 0.93 },
   cankuduijie: { top: '17%', left: '64%' },
-  chengpingbaoz: { top: '17%', left: '13%' },
+  chengpingbaoz: { top: '16%', left: '15%' },
   lujinguihua: { top: '2%', left: '37.5%' },
-  fenjianpeisong: { top: '13%', left: '39%' },
+  fenjianpeisong: { top: '14.5%', left: '40%', scale: 0.88 },
 }
 
 /**
@@ -103,20 +103,20 @@ const skillPositions: Record<string, { top: string; left: string  }> = {
  */
 const skillLabelOffsets: Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string }> = {
   // 柔性装配
-  shangxiawuliao: { top: '90px', left: '30%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  dingweiduiqi:   { top: '60px', left: '80%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  lianjieguding:  { top: '63px', left: '75%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  shangxiawuliao: { top: '78px', left: '20%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  dingweiduiqi:   { top: '60px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  lianjieguding:  { top: '73px', left: '15%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   // 柔性质检
   quexianjiance:  { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   rouxingshineng: { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   wusunjiance:    { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   xingneng:       { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   // 柔性码垛
-  zhinengmaduo:   { top: '80px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  cankuduijie:    { top: '80px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  chengpingbaoz:  { top: '80px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  lujinguihua:    { top: '75px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  fenjianpeisong: { top: '80px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  zhinengmaduo:   { top: '75px', left: '23%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  cankuduijie:    { top: '70px', left: '22%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  chengpingbaoz:  { top: '70px', left: '8%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  lujinguihua:    { top: '65px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  fenjianpeisong: { top: '70px', left: '5%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
 }
 
 /**
@@ -236,6 +236,7 @@ defineExpose({ skillNodeRefs })
             position: 'absolute',
             top: skillPositions[skill.id]?.top || '50%',
             left: skillPositions[skill.id]?.left || '50%',
+            '--node-scale': skillPositions[skill.id]?.scale ?? 1,
           }"
           @hover="onSkillHover"
         />
@@ -293,20 +294,21 @@ defineExpose({ skillNodeRefs })
   // 连接装饰线
   &__connector {
     position: absolute;
-    width: 180px;
+    width: 263px;
     height: auto;
     z-index: var(--z-platform-connector);
     pointer-events: none;
     opacity: 0.6;
 
     &--left {
-      top: 380px;
-      left: 340px;
+      top:260px;
+      left: 596px;
     }
 
     &--right {
-      top: 300px;
-      right: 180px;
+      top: 268px;
+      left: 330px;
+      transform: scale(0.90);
     }
   }
 

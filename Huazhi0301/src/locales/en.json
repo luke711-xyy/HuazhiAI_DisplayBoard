@@ -19,12 +19,16 @@
       "desc": "Intelligent material loading & unloading system, enabling automated material handling with multi-station coordination."
     },
     "dingweiduiqi": {
-      "name": "Positioning",
+      "name": "Positioning & Alignment",
       "desc": "High-precision positioning & alignment system with vision-guided sub-millimeter accuracy for precision assembly."
     },
     "lianjieguding": {
-      "name": "Fastening",
+      "name": "Connection & Fastening",
       "desc": "Automated connection & fastening system supporting bolting, riveting, and snap-fit processes."
+    },
+    "liuzhuanfuwei": {
+      "name": "Transfer & Reset",
+      "desc": "Post-assembly online verification, product sorting, and station reset to prevent defective products from flowing downstream."
     },
     "quexianjiance": {
       "name": "Defect Detection",
@@ -40,7 +44,7 @@
     },
     "xingneng": {
       "name": "Performance Testing",
-      "desc": "Comprehensive product testing covering electrical performance, mechanical strength, and sealing integrity."
+      "desc": "Comprehensive product functional and performance testing covering electrical, mechanical, sealing, and environmental dimensions."
     },
     "zhinengmaduo": {
       "name": "Smart Palletizing",
@@ -51,8 +55,8 @@
       "desc": "Automated warehouse docking system enabling seamless integration with AGV dispatch and WMS."
     },
     "chengpingbaoz": {
-      "name": "Weighing & Packing",
-      "desc": "Smart weighing and packaging system for automated sealing, labeling, and bundling processes."
+      "name": "Product Packaging",
+      "desc": "Intelligent product packaging system integrating incoming recognition, pick planning, and method adjustment for multi-variety mixed production."
     },
     "lujinguihua": {
       "name": "Path Planning",
@@ -132,173 +136,161 @@
     "noData": "No data available"
   },
   "subSkill": {
+    "wuliaoshaicha": {
+      "name": "Material Screening",
+      "desc": "Uses vision, sensors, and other methods to identify and verify incoming material dimensions, surface quality, pose state, and identification information, ensuring materials meet assembly requirements and match production order data."
+    },
     "wuxulailiao": {
       "name": "Unordered Picking",
-      "desc": "Uses 3D vision and robotic arm planning to pick randomly stacked parts and place them into a sorting buffer for orderly feeding."
+      "desc": "For randomly stacked parts, uses 3D vision recognition and grasp planning to achieve occlusion-resistant picking, placing parts into temporary sorting buffers or feeders for subsequent orderly feeding."
     },
     "youxugongliao": {
       "name": "Ordered Feeding",
-      "desc": "Organizes scattered parts via vibratory feeders and conveyors into uniform orientation, with vision-guided precision placement to workstations."
+      "desc": "From sorted or oriented feeding devices (vibratory bowls, sorting trays, conveyors), uses high-precision vision guidance to control robotic arms for precise pose picking, accurately placing parts into assembly station fixtures or positioning mechanisms."
     },
     "duowuliaoxietong": {
       "name": "Multi-Material Sync",
-      "desc": "Manages multiple material types simultaneously, coordinating feeders and conveyor lines for accurate mixed-model production."
+      "desc": "When assembly requires multiple parts in specific sequence or simultaneously, coordinates multiple devices or robotic arms to complete synchronized feeding per assembly process sequence and cycle time requirements."
     },
     "xialiaofendao": {
       "name": "Sortation & Diversion",
-      "desc": "Diverts finished or semi-finished products to different channels based on model, quality grade, or target process."
-    },
-    "wuliaoshaicha": {
-      "name": "Material Screening",
-      "desc": "Pre-inspects incoming materials for appearance, size, and weight, automatically rejecting non-conforming items to ensure line quality."
+      "desc": "Removes completed products or semi-finished goods from assembly stations, sorting them into different transfer containers, trays, or conveyor lines based on inline inspection results (pass/fail) or downstream process routes."
     },
     "shijuedingwei": {
-      "name": "Vision Positioning",
-      "desc": "High-speed 2D/3D industrial cameras with deep learning algorithms identify part pose and guide robots to precise pick/place positions."
+      "name": "Pose Sensing & Servo",
+      "desc": "Comprehensively uses vision, force, proximity and other sensors to track workpiece pose in real-time during assembly, with adaptive adjustment forming closed-loop control."
     },
     "jiguangduizhun": {
-      "name": "Laser Alignment",
-      "desc": "Laser rangefinding and structured light projection for sub-millimeter real-time measurement and alignment of assembly surfaces or weld seams."
+      "name": "Adaptive Mating Alignment",
+      "desc": "For contact, friction, and tolerance-based mating actions (surface fitting, shaft-hole insertion, snap-fit), uses force control strategies to adaptively adjust execution, preventing jamming or damage."
     },
     "jixiedingwei": {
-      "name": "Mechanical Locating",
-      "desc": "Pin-based fixtures and guide mechanisms achieve high-repeatability positioning, with quick-change systems for multi-variant production."
-    },
-    "liuweibuchang": {
-      "name": "6-DOF Compensation",
-      "desc": "Six-axis force sensors detect contact forces in real-time, automatically compensating pose deviations for peg-in-hole and surface fitting tasks."
+      "name": "Multi-Body Coordinated Positioning",
+      "desc": "Coordinates multiple execution units (dual robotic arms, human-robot, multi-robot) to jointly complete gripping, pose adjustment, and assembly of multi-component, heavy, or complex structures."
     },
     "luoshuaningsuo": {
-      "name": "Bolt Tightening",
-      "desc": "Smart tightening systems with torque and angle monitoring execute bolting strategies (torque, angle, yield-point) automatically."
+      "name": "Adaptive Connection Control",
+      "desc": "Dynamically adjusts connection process parameters (torque, current, temperature, speed, pressure, etc.) based on real-time sensing of workpiece state (material, gap, alignment) to adapt to workpiece variations and environmental changes."
     },
     "maojieliangjie": {
-      "name": "Riveting",
-      "desc": "Self-piercing riveting or press riveting for high-strength joining of dissimilar materials (e.g., aluminum-steel) without pre-drilling."
+      "name": "Connection Path Planning",
+      "desc": "Generates or corrects tool (welding gun, glue gun, screwdriver) motion trajectories and poses in real-time based on actual workpiece features (weld grooves, glue surface shapes, screw hole positions), ensuring correct coverage and optimal orientation."
     },
     "jiaozhanyajie": {
-      "name": "Adhesive Bonding",
-      "desc": "Precision dispensing systems combined with press mechanisms for structural and thermal adhesives, ensuring consistent bead width and thickness."
+      "name": "End-Effector Smart Switching",
+      "desc": "For complex assembly tasks requiring multiple connection processes, automatically completes rapid changeover, calibration, and coordinated sequential operation of different end-effectors (electric gun, welding gun, glue gun, etc.)."
     },
     "kakouguding": {
-      "name": "Snap-Fit Assembly",
-      "desc": "Force-controlled robots identify snap-fit positions, apply controlled pressure, and verify seat confirmation through force feedback."
+      "name": "Quality Sensing & Warning",
+      "desc": "During connection processes, monitors connection state in real-time through multi-sensor fusion (force, vision, acoustic, thermal imaging), including weld pool morphology, adhesive bead continuity, and screw seating, with online quality judgment and early warning."
+    },
+    "zhinenghuanxian": {
+      "name": "Smart Changeover",
+      "desc": "Records complete process parameters and quality data for each connection, forming traceable 'digital process packages' that can be quickly recalled and adjusted by product model or order for small-batch rapid changeover."
+    },
+    "zhuangpeiyanzheng": {
+      "name": "Assembly Online Verification",
+      "desc": "Before the assembly is removed, quickly verifies assembly completeness, critical dimensions, or function through vision, force sensing, or functional testing, ensuring defective products don't flow to downstream processes."
+    },
+    "chengpinfenjian": {
+      "name": "Product Sorting & Unloading",
+      "desc": "Based on verification results, picks and places good and defective products separately to designated areas (transfer trays, rework line), while ensuring placement pose meets downstream requirements."
+    },
+    "gongweifuwei": {
+      "name": "Station Reset & Cleanup",
+      "desc": "After unloading, inspects fixtures and positioning mechanisms, clears residual materials, and resets the station to prepare for the next assembly cycle, ensuring process consistency."
     },
     "biaomianhuahen": {
-      "name": "Scratch Detection",
-      "desc": "High-resolution line-scan cameras with multi-angle lighting detect micro-scratches on metal or plastic surfaces down to 0.02mm width."
+      "name": "Appearance & Surface Quality",
+      "desc": "Surface defects (scratches, cracks, burrs, dents, oxidation, oil stains, coating delamination, weld spatter); color and gloss (color difference, glossiness, coating thickness, missed coating, texture); cleanliness (foreign objects, dust, oil stains)."
     },
     "liewen": {
-      "name": "Crack Detection",
-      "desc": "Combines fluorescent penetrant, magnetic particle inspection and AI image analysis to detect surface and subsurface cracks in castings and forgings."
+      "name": "Structural Dimension & Label",
+      "desc": "Comprehensive inspection of product geometric dimensions, assembly completeness, and identification information, ensuring physical characteristics and traceability data comply with design specifications."
     },
     "bianse": {
-      "name": "Discoloration Check",
-      "desc": "Colorimeters and multispectral cameras analyze surface color consistency, detecting oxidation, burn marks, and coating defects with ΔE<0.5."
-    },
-    "chicunpiancha": {
-      "name": "Dimensional Check",
-      "desc": "Blue-light scanning or laser profilers perform 100% inline measurement of critical dimensions, auto-comparing against CAD models."
+      "name": "Product & Packaging Quality",
+      "desc": "Packaging appearance (box damage, sealing, banding); packaging accessories (manuals, accessories, cushioning); palletizing and pallets (stability, labels, stretch wrap)."
     },
     "likongshiying": {
-      "name": "Force-Adaptive Control",
-      "desc": "Integrated 6-axis force sensor compliant control system that adjusts end-effector force and pose in real-time to adapt to workpiece variations."
+      "name": "Inspection Standardized Modeling",
+      "desc": "Converts product drawings and acceptance standards into digital inspection templates (defect examples, tolerances, rules)."
     },
     "qumiandamoqi": {
-      "name": "Surface Polishing",
-      "desc": "Flexible polishing tools with force feedback automatically adjust contact pressure and angle along complex curved surfaces for uniform finishing."
+      "name": "Adaptive Inspection Execution",
+      "desc": "Automatically generates equipment execution programs (robot paths, camera parameters, algorithm configurations) based on templates."
     },
     "rousunkongzhi": {
-      "name": "Compliant Control",
-      "desc": "Combined impedance and admittance control enables robots to respond compliantly to unknown environments, ideal for human-robot collaboration."
+      "name": "Resource Dynamic Scheduling",
+      "desc": "Intelligently allocates inspection stations and resources based on production line cycle time and equipment status."
     },
     "chaoshengbojiance": {
-      "name": "Ultrasonic Testing",
-      "desc": "Detects internal voids, inclusions, and lack-of-fusion defects in welds and castings using ultrasonic wave propagation and reflection."
-    },
-    "xshexianjiance": {
-      "name": "X-Ray Inspection",
-      "desc": "Industrial CT/DR digital radiography provides 3D internal structure imaging of metals and composites with micrometer-level resolution."
-    },
-    "waiguansuomiao": {
-      "name": "Surface Scanning",
-      "desc": "360° multi-angle 3D scanning captures complete surface point clouds for reconstruction and comparison against reference models."
+      "name": "Internal NDT",
+      "desc": "Without destroying the product, uses non-destructive testing techniques to inspect internal structures, detecting defects that affect performance and reliability."
     },
     "dianqiceshi": {
-      "name": "Electrical Testing",
-      "desc": "Automated electrical test systems covering withstand voltage, insulation resistance, contact resistance, and continuity with high-speed parallel channels."
-    },
-    "jixieqiangdu": {
-      "name": "Mechanical Strength",
-      "desc": "Universal testing machines with auto-clamping for tensile, compression, bending, and impact tests with automatic force-displacement recording."
-    },
-    "mifengxing": {
-      "name": "Leak Testing",
-      "desc": "Differential pressure or flow-based leak detection for housings and sealed assemblies, with sensitivity down to 0.01 cc/min."
-    },
-    "naijiuxing": {
-      "name": "Durability Testing",
-      "desc": "Accelerated life testing under coupled temperature, humidity, and vibration stresses to rapidly evaluate expected product lifespan."
+      "name": "Functional Performance Testing",
+      "desc": "Electrical (continuity, insulation, withstand voltage, LCR, logic); mechanical (insertion force, torque, tensile, hardness, fatigue); sealing (air-tight, water-tight, helium); optical/acoustic (transmittance, color coordinates, noise); environmental (temperature, salt spray, aging)."
     },
     "hunhemaduo": {
-      "name": "Mixed Palletizing",
-      "desc": "Real-time algorithms compute optimal stacking combinations for multi-SKU boxes, achieving 95%+ pallet space utilization."
+      "name": "Adaptive Position Adjustment",
+      "desc": "Compensates for pallet position errors or lower box displacement through vision-based secondary positioning before placement."
     },
     "gaosumaduo": {
-      "name": "High-Speed Palletizing",
-      "desc": "Delta robots with vision tracking achieve 30+ picks per minute, meeting FMCG production line throughput requirements."
+      "name": "Adaptive Force-Controlled Placement",
+      "desc": "For deformable products (e.g., cartons), uses force control mode for contact placement, avoiding toppling of already-stacked boxes."
     },
     "chaizhuomaduo": {
-      "name": "Depalletizing",
-      "desc": "3D vision identifies layer-by-layer positions and orientations on incoming pallets, sequentially picking and placing onto conveyors."
+      "name": "Online Pattern Dynamic Correction",
+      "desc": "After stacking several layers, 3D scans the actual stack pattern, compares with the planned model, and re-plans subsequent stacking if deviations are found."
     },
     "agvdiaodu": {
-      "name": "AGV Dispatching",
-      "desc": "Multi-vehicle coordination system managing path planning, task allocation, and traffic control for dozens of AGV/AMR units in the facility."
-    },
-    "wmsjicheng": {
-      "name": "WMS Integration",
-      "desc": "Deep integration with warehouse management systems for fully automated inbound, outbound, and inventory operations with FIFO and batch tracing."
+      "name": "Inbound Shelving",
+      "desc": "Smart equipment transports completed pallets to designated rack locations."
     },
     "liticangku": {
       "name": "AS/RS Docking",
-      "desc": "Communication interface with automated storage/retrieval systems (stacker cranes, shuttles) for end-to-end unmanned material flow."
+      "desc": "Coordinates with stacker cranes via smart equipment for high-bay rack storage and retrieval operations."
     },
     "jingquejizhong": {
-      "name": "Precision Weighing",
-      "desc": "High-precision dynamic weighing system measures in-line with ±0.5g accuracy, auto-rejecting over/under-weight products."
+      "name": "Incoming Recognition & Matching",
+      "desc": "In multi-variety mixed production, product specs, dimensions, poses, and incoming sequences constantly change. RGB-D cameras perform inline measurement, barcode recognition, and WMS order verification to handle product changeover diversity."
     },
     "zidongfengxiang": {
-      "name": "Auto Case Packing",
-      "desc": "Integrated case erecting, packing, and sealing line with auto box selection, hot-melt or tape sealing at 20 cases/minute."
+      "name": "Pick Sequence Decision",
+      "desc": "Pick point detection algorithms with sequence optimization based on current pallet pattern and incoming order, ensuring each pick best supports pallet stability."
     },
     "tiebiaodabao": {
-      "name": "Labeling & Banding",
-      "desc": "Print-and-apply labeling with barcode/QR generation, combined with PP strapping or stretch wrapping for secure packaging."
+      "name": "Pick Method Adjustment",
+      "desc": "Different products (cartons, plastic bags, wooden boxes, irregular items) require different pick methods (suction, gripping, embracing). The system auto-selects appropriate methods and dynamically adjusts parameters based on real-time sensing of material properties, dimensions, weight, and surface characteristics."
     },
     "bizhangguihua": {
-      "name": "Obstacle Avoidance",
-      "desc": "Real-time dynamic obstacle avoidance fusing LiDAR and depth camera data for safe robot navigation in complex workstation environments."
+      "name": "Pallet Pattern Tracking",
+      "desc": "Uses 3D vision to identify incoming dimensions, materials, and remaining pallet space, auto-calculating optimal stacking patterns (flat, interlocked, rotated nesting) and generating pick/place sequences with dynamic adjustment during stacking."
     },
     "zuijianlujing": {
-      "name": "Shortest Path",
-      "desc": "A*, RRT*, and other path search algorithms compute time-optimal or energy-optimal trajectories under given kinematic constraints."
+      "name": "Palletizing Path Optimization",
+      "desc": "During placement, plans smooth collision-free trajectories based on environment sensing (pallet boundaries, stacked materials, surrounding equipment), dynamically correcting via vision or force feedback to handle pallet drift and material sliding."
     },
     "duojixietong": {
-      "name": "Multi-Robot Sync",
-      "desc": "Multiple robots coordinate in shared workspaces through real-time communication and collision prediction for interference-free scheduling."
+      "name": "Multi-Robot Stacking Control",
+      "desc": "For large-format or high-throughput palletizing, employs dual robotic arms or multi-device coordination through master-slave control, path synchronization, and collision prediction for collaborative stacking operations."
     },
     "zhinengfenjian": {
-      "name": "Smart Sorting",
-      "desc": "Vision-based intelligent sorting system that auto-identifies item categories for high-speed precision classification."
+      "name": "Unit Reinforcement",
+      "desc": "Based on material properties (cartons, soft packs, irregular items), stack height, and transport requirements, auto-selects reinforcement methods (stretch wrap, banding, corner protectors) to ensure pallet unit stability during downstream transfer."
     },
     "lujingpeisong": {
-      "name": "Route Delivery",
-      "desc": "Dynamic delivery route optimization based on order priority and real-time conditions for maximum logistics efficiency."
+      "name": "Label Binding",
+      "desc": "Auto-generates labels containing product specs, quantities, batches, and destinations based on pallet order information, precisely applying them to designated positions for reliable physical-information binding."
     },
     "duodanxietong": {
-      "name": "Multi-Order Sync",
-      "desc": "Parallel multi-order processing with smart route merging to reduce empty loads and delivery time."
+      "name": "Logistics Coordination",
+      "desc": "After palletizing, automatically notifies and dispatches downstream logistics equipment (AGV, conveyors) for docking, or triggers warehouse entry with status handshake and information synchronization."
+    },
+    "tuopanyizai": {
+      "name": "Pallet Transfer",
+      "desc": "Transfers fully processed pallets from palletizing stations to docking points (AGV carrier plates, conveyor entrances) via transfer machines or robots, ensuring pose compliance with downstream equipment interfaces."
     }
   }
 }
