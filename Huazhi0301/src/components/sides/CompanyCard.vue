@@ -12,6 +12,9 @@
  */
 import type { Company } from '@/types'
 import { ref, computed, inject, onMounted, onUnmounted } from 'vue'
+import { useSettings } from '@/composables/useSettings'
+
+const { deviceMode } = useSettings()
 
 // 预加载所有 cube 图片
 import cubeChubei from '@/assets/cubes/cube_company_chubei_hover.png'
@@ -70,7 +73,8 @@ onUnmounted(() => {
     :data-company-id="company.id"
     @mouseenter="$emit('hover', company.id)"
     @mouseleave="$emit('hover', null)"
-    @click="$emit('click', company.id)"
+    @click="deviceMode === 'pc' ? $emit('click', company.id) : undefined"
+    @dblclick="deviceMode === 'mobile' ? $emit('click', company.id) : undefined"
   >
     <!-- 方块立体图 -->
     <img :src="cubeUrl" alt="" class="company-card__cube" />

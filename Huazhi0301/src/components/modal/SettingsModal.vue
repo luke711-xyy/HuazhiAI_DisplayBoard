@@ -5,13 +5,13 @@
  * 包含三项设置：
  * 1. 语言切换 (zh/en) - 真实功能
  * 2. 声音大小 - 架空 UI (滑块)
- * 3. 夜间/日间模式 - 架空 UI (开关)
+ * 3. 电脑/移动端模式 (开关) - 移动端模式下公司卡片需双击打开弹窗
  */
 import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
 
 const { t, locale, setLocale } = useI18n()
-const { soundVolume, themeMode, hideBottomPanels } = useSettings()
+const { soundVolume, deviceMode, hideBottomPanels } = useSettings()
 
 defineEmits<{
   (e: 'close'): void
@@ -53,13 +53,13 @@ defineEmits<{
       />
     </div>
 
-    <!-- 夜间/日间模式 (架空 UI) -->
+    <!-- 电脑/移动端模式 -->
     <div class="settings-modal__item">
       <span class="settings-modal__label">{{ t('settings.theme') }}</span>
       <button
         class="settings-modal__toggle"
-        :class="{ 'settings-modal__toggle--light': themeMode === 'light' }"
-        @click="themeMode = themeMode === 'dark' ? 'light' : 'dark'"
+        :class="{ 'settings-modal__toggle--light': deviceMode === 'mobile' }"
+        @click="deviceMode = deviceMode === 'pc' ? 'mobile' : 'pc'"
       >
         <span class="settings-modal__toggle-knob" />
       </button>

@@ -53,7 +53,7 @@ defineEmits<{
 <style scoped lang="scss">
 .bottom-panel {
   width: 360px;
-  height: 180px;
+  height: 185px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -98,7 +98,7 @@ defineEmits<{
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 0;
+    padding: 5px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     cursor: pointer;
     transition: background 0.15s var(--ease-smooth);

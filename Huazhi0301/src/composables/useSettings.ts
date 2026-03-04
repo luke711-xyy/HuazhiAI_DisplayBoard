@@ -4,7 +4,7 @@
  * 管理设置菜单的可见性和各项配置：
  * - 语言切换 (与 useI18n 联动)
  * - 声音大小 (架空 UI)
- * - 夜间/日间模式 (架空 UI)
+ * - 电脑/移动端模式 (移动端模式下公司卡片需双击打开弹窗)
  */
 import { ref } from 'vue'
 
@@ -14,8 +14,8 @@ const isSettingsOpen = ref(false)
 /** 声音大小 (0-100, 架空 UI) */
 const soundVolume = ref(50)
 
-/** 主题模式 (架空 UI) */
-const themeMode = ref<'dark' | 'light'>('dark')
+/** 设备模式：pc = 单击打开弹窗, mobile = 双击打开弹窗 */
+const deviceMode = ref<'pc' | 'mobile'>('pc')
 
 /** 常闭底部列表：开启后底部三个滚动列表永远不显示，KPI 数字也隐藏 */
 const hideBottomPanels = ref(false)
@@ -34,7 +34,7 @@ export function useSettings() {
   return {
     isSettingsOpen,
     soundVolume,
-    themeMode,
+    deviceMode,
     hideBottomPanels,
     toggleSettings,
     closeSettings,
