@@ -19,8 +19,8 @@ const props = defineProps<{
   skill: Skill
   isHighlighted: boolean
   categoryColor: string
-  /** 标签相对于节点左上角的偏移 { top, left }，支持任意 CSS 值 */
-  labelOffset: { top: string; left: string }
+  /** 标签相对于节点左上角的偏移及变形 */
+  labelOffset: { top: string; left: string; rotate?: string; skewX?: string; skewY?: string }
 }>()
 
 defineEmits<{
@@ -36,6 +36,10 @@ const isHovered = ref(false)
 const skillIcons = import.meta.glob('@/assets/skills/*.png', { eager: true, import: 'default' }) as Record<string, string>
 
 function findIcon(name: string): string {
+  // 优先使用 @2x 高清图，找不到再回退到 1x
+  for (const [path, url] of Object.entries(skillIcons)) {
+    if (path.includes(`/${name}@2x.png`)) return url
+  }
   for (const [path, url] of Object.entries(skillIcons)) {
     if (path.includes(`/${name}.png`) && !path.includes('@2x')) return url
   }
@@ -87,6 +91,7 @@ onMounted(() => {
         '--label-color': categoryColor,
         top: labelOffset.top,
         left: labelOffset.left,
+        transform: `translateX(-50%) rotate(${labelOffset.rotate || '0deg'}) skewX(${labelOffset.skewX || '0deg'}) skewY(${labelOffset.skewY || '0deg'})`,
       }"
     >
       {{ t(skill.nameKey) }}
@@ -119,7 +124,7 @@ onMounted(() => {
 
   &:hover,
   &--highlighted {
-    transform: scale(1.15);
+    transform: scale(1.10);
     filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
     z-index: calc(var(--z-skill-nodes) + 10);
   }
@@ -133,7 +138,7 @@ onMounted(() => {
   // 子级技能标签 — 小号胶囊 · 毛玻璃 + 光效
   &__label {
     position: absolute;
-    transform: translateX(-50%);
+    // transform 由内联 style 控制（含 translateX(-50%) + rotate + skew）
     padding: 3px 10px;
     border-radius: 12px;
     font-size: 11px;

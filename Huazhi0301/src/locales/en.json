@@ -57,6 +57,10 @@
     "lujinguihua": {
       "name": "Path Planning",
       "desc": "Robot motion path planning with environment sensing for obstacle avoidance and multi-robot coordination."
+    },
+    "fenjianpeisong": {
+      "name": "Sorting & Delivery",
+      "desc": "Intelligent sorting and delivery system using visual recognition and path optimization for automated classification and precise distribution."
     }
   },
   "company": {
@@ -283,6 +287,18 @@
     "duojixietong": {
       "name": "Multi-Robot Sync",
       "desc": "Multiple robots coordinate in shared workspaces through real-time communication and collision prediction for interference-free scheduling."
+    },
+    "zhinengfenjian": {
+      "name": "Smart Sorting",
+      "desc": "Vision-based intelligent sorting system that auto-identifies item categories for high-speed precision classification."
+    },
+    "lujingpeisong": {
+      "name": "Route Delivery",
+      "desc": "Dynamic delivery route optimization based on order priority and real-time conditions for maximum logistics efficiency."
+    },
+    "duodanxietong": {
+      "name": "Multi-Order Sync",
+      "desc": "Parallel multi-order processing with smart route merging to reduce empty loads and delivery time."
     }
   }
 }

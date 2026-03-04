@@ -69,9 +69,12 @@ function getIconUrl(icon: string): string {
   position: relative;
   isolation: isolate;
 
-  // 毛玻璃边框 + 阴影
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  // 边框辉光
+  border: 1px solid color-mix(in srgb, var(--kpi-color) 25%, transparent);
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--kpi-color) 15%, transparent),
+    0 0 28px color-mix(in srgb, var(--kpi-color) 8%, transparent),
+    0 2px 12px rgba(0, 0, 0, 0.25);
 
   // 毛玻璃背景层（伪元素，不影响文字清晰度）
   &::before {
@@ -93,9 +96,10 @@ function getIconUrl(icon: string): string {
 
   &--active {
     // 选中时加强边框发光
-    border-color: color-mix(in srgb, var(--kpi-color) 35%, transparent);
+    border-color: color-mix(in srgb, var(--kpi-color) 50%, transparent);
     box-shadow:
-      0 0 8px color-mix(in srgb, var(--kpi-color) 20%, transparent),
+      0 0 16px color-mix(in srgb, var(--kpi-color) 35%, transparent),
+      0 0 40px color-mix(in srgb, var(--kpi-color) 18%, transparent),
       0 2px 12px rgba(0, 0, 0, 0.3);
 
     // 底部标识线：宽度与背景底边融合

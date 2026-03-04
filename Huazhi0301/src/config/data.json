@@ -51,7 +51,7 @@
       "upperLayerImage": "block_layer_upper_m",
       "barImage": "bar_maduo",
       "color": "#8B5CF6",
-      "skills": ["zhinengmaduo", "cankuduijie", "chengpingbaoz", "lujinguihua"]
+      "skills": ["zhinengmaduo", "cankuduijie", "chengpingbaoz", "lujinguihua", "fenjianpeisong"]
     }
   ],
   "skills": [
@@ -202,6 +202,19 @@
         { "id": "bizhangguihua", "nameKey": "subSkill.bizhangguihua.name", "descriptionKey": "subSkill.bizhangguihua.desc" },
         { "id": "zuijianlujing", "nameKey": "subSkill.zuijianlujing.name", "descriptionKey": "subSkill.zuijianlujing.desc" },
         { "id": "duojixietong", "nameKey": "subSkill.duojixietong.name", "descriptionKey": "subSkill.duojixietong.desc" }
+      ]
+    },
+    {
+      "id": "fenjianpeisong",
+      "nameKey": "skill.fenjianpeisong.name",
+      "descriptionKey": "skill.fenjianpeisong.desc",
+      "icon": "ic_skill_fenjianpeisong",
+      "iconSelect": "ic_skill_fenjianpeisong-select",
+      "categoryId": "palletizing",
+      "subSkills": [
+        { "id": "zhinengfenjian", "nameKey": "subSkill.zhinengfenjian.name", "descriptionKey": "subSkill.zhinengfenjian.desc" },
+        { "id": "lujingpeisong", "nameKey": "subSkill.lujingpeisong.name", "descriptionKey": "subSkill.lujingpeisong.desc" },
+        { "id": "duodanxietong", "nameKey": "subSkill.duodanxietong.name", "descriptionKey": "subSkill.duodanxietong.desc" }
       ]
     }
   ],

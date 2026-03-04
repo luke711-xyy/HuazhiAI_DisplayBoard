@@ -68,30 +68,31 @@ const categoryPositions: Record<string, { midTop: string; midLeft: string; upper
 /**
  * 父级分类标签的绝对位置（独立于平台图片，便于手动微调）
  */
-const categoryLabelPositions: Record<string, { top: string; left: string }> = {
-  assembly: { top: '300px', left: '276px' },
-  inspection: { top: '300px', left: '808px' },
-  palletizing: { top: '460px', left: '544px' },
+const categoryLabelPositions: Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string }> = {
+  assembly:    { top: '350px', left: '130px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  inspection:  { top: '350px', left: '952px', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
+  palletizing: { top: '506px', left: '400px', rotate: '30deg',   skewX: '-30deg', skewY: '0deg' },
 }
 
 /**
  * 每个技能在其上层平台中的相对位置 (百分比)
  */
-const skillPositions: Record<string, { top: string; left: string }> = {
+const skillPositions: Record<string, { top: string; left: string  }> = {
   // 柔性装配 (upper_l - 3 个圆位)
   shangxiawuliao: { top: '20%', left: '30%' },
   dingweiduiqi: { top: '2%', left: '38%' },
   lianjieguding: { top: '16%', left: '64%' },
   // 柔性质检 (upper_r - 4 个位)
-  quexianjiance: { top: '10%', left: '15%' },
-  rouxingshineng: { top: '10%', left: '55%' },
-  wusunjiance: { top: '45%', left: '25%' },
-  xingneng: { top: '45%', left: '65%' },
+  quexianjiance: { top: '2%', left: '38%' },
+  rouxingshineng: { top: '28%', left: '37%' },
+  wusunjiance: { top: '16%', left: '66%' },
+  xingneng: { top: '15%', left: '12%' },
   // 柔性码垛 (upper_m - 5 个圆位)
   zhinengmaduo: { top: '30%', left: '37.5%' },
   cankuduijie: { top: '17%', left: '64%' },
   chengpingbaoz: { top: '17%', left: '13%' },
   lujinguihua: { top: '2%', left: '37.5%' },
+  fenjianpeisong: { top: '13%', left: '39%' },
 }
 
 /**
@@ -100,21 +101,22 @@ const skillPositions: Record<string, { top: string; left: string }> = {
  * 标签水平方向默认以 translateX(-50%) 居中，left 基于节点宽度百分比
  * 可对每个技能单独微调
  */
-const skillLabelOffsets: Record<string, { top: string; left: string }> = {
+const skillLabelOffsets: Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string }> = {
   // 柔性装配
-  shangxiawuliao: { top: '90px', left: '30%' },
-  dingweiduiqi:   { top: '60px', left: '80%' },
-  lianjieguding:  { top: '63px', left: '75%' },
+  shangxiawuliao: { top: '90px', left: '30%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  dingweiduiqi:   { top: '60px', left: '80%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  lianjieguding:  { top: '63px', left: '75%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   // 柔性质检
-  quexianjiance:  { top: '108px', left: '50%' },
-  rouxingshineng: { top: '108px', left: '50%' },
-  wusunjiance:    { top: '108px', left: '50%' },
-  xingneng:       { top: '108px', left: '50%' },
+  quexianjiance:  { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
+  rouxingshineng: { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
+  wusunjiance:    { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
+  xingneng:       { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   // 柔性码垛
-  zhinengmaduo:   { top: '80px', left: '50%' },
-  cankuduijie:    { top: '80px', left: '50%' },
-  chengpingbaoz:  { top: '80px', left: '50%' },
-  lujinguihua:    { top: '75px', left: '50%' },
+  zhinengmaduo:   { top: '80px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  cankuduijie:    { top: '80px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  chengpingbaoz:  { top: '80px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  lujinguihua:    { top: '75px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  fenjianpeisong: { top: '80px', left: '50%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
 }
 
 /**
@@ -250,6 +252,7 @@ defineExpose({ skillNodeRefs })
       :style="{
         top: categoryLabelPositions[category.id]?.top,
         left: categoryLabelPositions[category.id]?.left,
+        transform: `rotate(${categoryLabelPositions[category.id]?.rotate || '0deg'}) skewX(${categoryLabelPositions[category.id]?.skewX || '0deg'}) skewY(${categoryLabelPositions[category.id]?.skewY || '0deg'})`,
         '--label-color': category.color,
       }"
     >
