@@ -33,7 +33,7 @@ import SettingsModal from '@/components/modal/SettingsModal.vue'
 // ==================== Composables ====================
 const { config, getCompanyDetailById } = useDashboardData()
 const { t } = useI18n()
-const { isSettingsOpen, toggleSettings, closeSettings, hideBottomPanels } = useSettings()
+const { isSettingsOpen, toggleSettings, closeSettings, hideBottomPanels, deviceMode } = useSettings()
 
 // ==================== DOM 元素引用（用于连线坐标计算）====================
 
@@ -171,6 +171,14 @@ function onHoverSkill(skillId: string | null) {
   hoveredSkillId.value = skillId
 }
 
+/** 移动端点击遮罩取消 hover */
+function onOverlayClick() {
+  if (deviceMode.value === 'mobile') {
+    hoveredCompanyId.value = null
+    hoveredSkillId.value = null
+  }
+}
+
 // ==================== 连线系统 ====================
 
 /**
@@ -264,6 +272,8 @@ const { lines: connectionLines } = useConnectionLines(
       <div
         v-if="hoveredCompanyId || hoveredSkillId"
         class="company-hover-overlay"
+        :class="{ 'company-hover-overlay--interactive': deviceMode === 'mobile' }"
+        @click="onOverlayClick"
       />
     </Transition>
 
@@ -319,6 +329,11 @@ const { lines: connectionLines } = useConnectionLines(
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   pointer-events: none;
+}
+
+.company-hover-overlay--interactive {
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .overlay-fade-enter-active,

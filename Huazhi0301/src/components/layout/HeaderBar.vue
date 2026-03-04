@@ -71,7 +71,7 @@ defineProps<{
     position: absolute;
     top: 20px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% + 6px));
     font-size: 32px;
     font-weight: 700;
     letter-spacing: 14px;
