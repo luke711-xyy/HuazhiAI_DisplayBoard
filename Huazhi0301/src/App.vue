@@ -90,11 +90,16 @@ const rightCompanies = computed(() => {
   return config.companies.filter(c => activeStatuses.has(c.status) && c.side === 'right')
 })
 
-/** 当悬停企业时，计算该企业关联的技能 ID 列表 */
+/** 当悬停企业或技能节点时，计算高亮的技能 ID 列表 */
 const highlightedSkillIds = computed(() => {
-  if (!hoveredCompanyId.value) return []
-  const company = config.companies.find(c => c.id === hoveredCompanyId.value)
-  return company?.relatedSkillIds || []
+  if (hoveredCompanyId.value) {
+    const company = config.companies.find(c => c.id === hoveredCompanyId.value)
+    return company?.relatedSkillIds || []
+  }
+  if (hoveredSkillId.value) {
+    return [hoveredSkillId.value]
+  }
+  return []
 })
 
 /** 当悬停企业时，计算该企业关联的三级技能（subSkill）ID 列表 */
@@ -257,7 +262,7 @@ const { lines: connectionLines } = useConnectionLines(
     <!-- 公司 hover 全屏遮罩 -->
     <Transition name="overlay-fade">
       <div
-        v-if="hoveredCompanyId"
+        v-if="hoveredCompanyId || hoveredSkillId"
         class="company-hover-overlay"
       />
     </Transition>

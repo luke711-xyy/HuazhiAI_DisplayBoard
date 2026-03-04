@@ -199,8 +199,10 @@ const categoriesWithSubmenu = computed(() => {
   return ids
 })
 
-/** 公司 hover 是否激活（用于平台内部降暗） */
-const isCompanyHoverActive = computed(() => props.highlightedSubSkillIds.length > 0)
+/** hover 遮罩是否激活（公司 hover 或技能节点直接 hover 时触发平台内部降暗） */
+const isOverlayActive = computed(() =>
+  props.highlightedSubSkillIds.length > 0 || props.highlightedSkillIds.length > 0
+)
 
 const emit = defineEmits<{
   (e: 'hoverSkill', skillId: string | null): void
@@ -230,18 +232,18 @@ defineExpose({ skillNodeRefs })
 <template>
   <div class="skill-platform" :class="{ 'skill-platform--submenu-active': effectiveSubmenuOpen }">
     <!-- 底层网格大平台 -->
-    <img :src="bottomLayer" alt="" class="skill-platform__bottom" :class="{ 'skill-platform__bottom--dimmed': isCompanyHoverActive }" />
+    <img :src="bottomLayer" alt="" class="skill-platform__bottom" :class="{ 'skill-platform__bottom--dimmed': isOverlayActive }" />
 
     <!-- 连接装饰线 (左右各一条) -->
-    <img :src="connectLeft" alt="" class="skill-platform__connector skill-platform__connector--left" :class="{ 'skill-platform__connector--dimmed': isCompanyHoverActive }" />
-    <img :src="connectRight" alt="" class="skill-platform__connector skill-platform__connector--right" :class="{ 'skill-platform__connector--dimmed': isCompanyHoverActive }" />
+    <img :src="connectLeft" alt="" class="skill-platform__connector skill-platform__connector--left" :class="{ 'skill-platform__connector--dimmed': isOverlayActive }" />
+    <img :src="connectRight" alt="" class="skill-platform__connector skill-platform__connector--right" :class="{ 'skill-platform__connector--dimmed': isOverlayActive }" />
 
     <!-- 遍历三个分类，渲染中层底座 + 上层平台 + 技能节点 -->
     <template v-for="category in categories" :key="category.id">
       <!-- 中层底座 (不含文字标签，hover/高亮时切换 dark→light) -->
       <div
         class="skill-platform__mid"
-        :class="{ 'skill-platform__mid--dimmed': isCompanyHoverActive && !activeCategoryIds.has(category.id) }"
+        :class="{ 'skill-platform__mid--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }"
         :style="{
           top: categoryPositions[category.id]?.midTop,
           left: categoryPositions[category.id]?.midLeft,
@@ -272,7 +274,7 @@ defineExpose({ skillNodeRefs })
           left: categoryPositions[category.id]?.upperLeft,
         }"
       >
-        <img :src="upperImages[category.upperLayerImage]" alt="" class="skill-platform__upper-img" :class="{ 'skill-platform__upper-img--dimmed': isCompanyHoverActive && !activeCategoryIds.has(category.id) }" />
+        <img :src="upperImages[category.upperLayerImage]" alt="" class="skill-platform__upper-img" :class="{ 'skill-platform__upper-img--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }" />
 
         <!-- 技能图标节点 (不含文字) -->
         <SkillNode
@@ -284,7 +286,7 @@ defineExpose({ skillNodeRefs })
           :category-color="categoryColorMap[category.id] || '#3B82F6'"
           :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
           :submenu-direction="skillSubmenuDirection[skill.id] || 'up'"
-          :is-dimmed-by-overlay="isCompanyHoverActive && !highlightedSkillIds.includes(skill.id)"
+          :is-dimmed-by-overlay="isOverlayActive && !highlightedSkillIds.includes(skill.id)"
           :style="{
             position: 'absolute',
             top: skillPositions[skill.id]?.top || '50%',
@@ -303,7 +305,7 @@ defineExpose({ skillNodeRefs })
       v-for="category in categories"
       :key="`label-${category.id}`"
       class="category-label"
-      :class="{ 'category-label--dimmed': isCompanyHoverActive && !activeCategoryIds.has(category.id) }"
+      :class="{ 'category-label--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }"
       :style="{
         top: categoryLabelPositions[category.id]?.top,
         left: categoryLabelPositions[category.id]?.left,
