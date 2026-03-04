@@ -25,6 +25,8 @@ const props = defineProps<{
   labelOffset: { top: string; left: string; rotate?: string; skewX?: string; skewY?: string }
   /** 子菜单展开方向 */
   submenuDirection?: 'up' | 'down'
+  /** 公司 hover 时，非关联节点降暗 */
+  isDimmedByOverlay?: boolean
 }>()
 
 defineEmits<{
@@ -89,7 +91,7 @@ onMounted(() => {
   <div
     ref="nodeRef"
     class="skill-node"
-    :class="{ 'skill-node--highlighted': isHighlighted, 'skill-node--hovered': isHovered }"
+    :class="{ 'skill-node--highlighted': isHighlighted, 'skill-node--hovered': isHovered, 'skill-node--overlay-dimmed': isDimmedByOverlay }"
     :data-skill-id="skill.id"
     @mouseenter="isHovered = true; $emit('hover', skill.id)"
     @mouseleave="isHovered = false; $emit('hover', null)"
@@ -142,6 +144,14 @@ onMounted(() => {
     transform: scale(calc(var(--node-scale, 1) * 1.10));
     filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
     z-index: calc(var(--z-skill-nodes) + 10);
+  }
+
+  // 公司 hover 遮罩降暗：非关联节点（含图标和标签）整体变暗
+  &--overlay-dimmed {
+    opacity: 0.8;
+    filter: brightness(0.5);
+    pointer-events: none;
+    transition: opacity 0.3s ease, filter 0.3s ease;
   }
 
   &__icon {

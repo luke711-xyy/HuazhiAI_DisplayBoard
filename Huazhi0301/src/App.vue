@@ -247,6 +247,14 @@ const { lines: connectionLines } = useConnectionLines(
       @click-company="onClickCompany"
     />
 
+    <!-- 公司 hover 全屏遮罩 -->
+    <Transition name="overlay-fade">
+      <div
+        v-if="hoveredCompanyId"
+        class="company-hover-overlay"
+      />
+    </Transition>
+
     <!-- 中心 3D 等距技能平台 -->
     <SkillPlatform
       :categories="config.skillCategories"
@@ -290,4 +298,23 @@ const { lines: connectionLines } = useConnectionLines(
   z-index: 89;
 }
 
+.company-hover-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-hover-overlay);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  pointer-events: none;
+}
+
+.overlay-fade-enter-active,
+.overlay-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.overlay-fade-enter-from,
+.overlay-fade-leave-to {
+  opacity: 0;
+}
 </style>

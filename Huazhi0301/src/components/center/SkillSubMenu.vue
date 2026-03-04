@@ -218,12 +218,13 @@ function getHoveredSubSkill(): SubSkill | undefined {
 
   &__pill-text {
     font-size: 11px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
-    transition: color 0.2s var(--ease-smooth);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.2s var(--ease-smooth), font-weight 0.2s var(--ease-smooth);
 
     .skill-submenu__pill--active &,
     .skill-submenu__pill:hover & {
+      font-weight: 600;
       color: #fff;
     }
   }

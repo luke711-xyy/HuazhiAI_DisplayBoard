@@ -86,7 +86,7 @@ const skillPositions: Record<string, { top: string; left: string; scale?: number
   // 柔性质检 (upper_r - 4 个位)
   quexianjiance: { top: '2%', left: '38%' },
   rouxingshineng: { top: '28%', left: '37%' },
-  wusunjiance: { top: '16%', left: '66%' },
+  wusunjiance: { top: '13%', left: '64%' },
   xingneng: { top: '15%', left: '12%' },
   // 柔性码垛 (upper_m - 5 个圆位)
   zhinengmaduo: { top: '31%', left: '37.5%', scale: 0.93 },
@@ -119,10 +119,10 @@ const skillLabelOffsets: Record<string, { top: string; left: string; rotate: str
   dingweiduiqi:   { top: '60px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   lianjieguding:  { top: '73px', left: '15%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   // 柔性质检
-  quexianjiance:  { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
-  rouxingshineng: { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
-  wusunjiance:    { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
-  xingneng:       { top: '108px', left: '50%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
+  quexianjiance:  { top: '68px', left: '70%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
+  rouxingshineng: { top: '72px', left: '92%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
+  wusunjiance:    { top: '78px', left: '80%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
+  xingneng:       { top: '70px', left: '80%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   // 柔性码垛
   zhinengmaduo:   { top: '75px', left: '23%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   cankuduijie:    { top: '70px', left: '22%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
@@ -189,6 +189,9 @@ const categoriesWithSubmenu = computed(() => {
   return ids
 })
 
+/** 公司 hover 是否激活（用于平台内部降暗） */
+const isCompanyHoverActive = computed(() => props.highlightedSubSkillIds.length > 0)
+
 const emit = defineEmits<{
   (e: 'hoverSkill', skillId: string | null): void
 }>()
@@ -217,17 +220,18 @@ defineExpose({ skillNodeRefs })
 <template>
   <div class="skill-platform" :class="{ 'skill-platform--submenu-active': effectiveSubmenuOpen }">
     <!-- 底层网格大平台 -->
-    <img :src="bottomLayer" alt="" class="skill-platform__bottom" />
+    <img :src="bottomLayer" alt="" class="skill-platform__bottom" :class="{ 'skill-platform__bottom--dimmed': isCompanyHoverActive }" />
 
     <!-- 连接装饰线 (左右各一条) -->
-    <img :src="connectLeft" alt="" class="skill-platform__connector skill-platform__connector--left" />
-    <img :src="connectRight" alt="" class="skill-platform__connector skill-platform__connector--right" />
+    <img :src="connectLeft" alt="" class="skill-platform__connector skill-platform__connector--left" :class="{ 'skill-platform__connector--dimmed': isCompanyHoverActive }" />
+    <img :src="connectRight" alt="" class="skill-platform__connector skill-platform__connector--right" :class="{ 'skill-platform__connector--dimmed': isCompanyHoverActive }" />
 
     <!-- 遍历三个分类，渲染中层底座 + 上层平台 + 技能节点 -->
     <template v-for="category in categories" :key="category.id">
       <!-- 中层底座 (不含文字标签，hover/高亮时切换 dark→light) -->
       <div
         class="skill-platform__mid"
+        :class="{ 'skill-platform__mid--dimmed': isCompanyHoverActive && !activeCategoryIds.has(category.id) }"
         :style="{
           top: categoryPositions[category.id]?.midTop,
           left: categoryPositions[category.id]?.midLeft,
@@ -258,7 +262,7 @@ defineExpose({ skillNodeRefs })
           left: categoryPositions[category.id]?.upperLeft,
         }"
       >
-        <img :src="upperImages[category.upperLayerImage]" alt="" class="skill-platform__upper-img" />
+        <img :src="upperImages[category.upperLayerImage]" alt="" class="skill-platform__upper-img" :class="{ 'skill-platform__upper-img--dimmed': isCompanyHoverActive && !activeCategoryIds.has(category.id) }" />
 
         <!-- 技能图标节点 (不含文字) -->
         <SkillNode
@@ -270,6 +274,7 @@ defineExpose({ skillNodeRefs })
           :category-color="categoryColorMap[category.id] || '#3B82F6'"
           :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
           :submenu-direction="skillSubmenuDirection[skill.id] || 'up'"
+          :is-dimmed-by-overlay="isCompanyHoverActive && !highlightedSkillIds.includes(skill.id)"
           :style="{
             position: 'absolute',
             top: skillPositions[skill.id]?.top || '50%',
@@ -288,6 +293,7 @@ defineExpose({ skillNodeRefs })
       v-for="category in categories"
       :key="`label-${category.id}`"
       class="category-label"
+      :class="{ 'category-label--dimmed': isCompanyHoverActive && !activeCategoryIds.has(category.id) }"
       :style="{
         top: categoryLabelPositions[category.id]?.top,
         left: categoryLabelPositions[category.id]?.left,
@@ -318,6 +324,11 @@ defineExpose({ skillNodeRefs })
   }
 
   // 底层大平台
+  &__bottom--dimmed {
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+  }
+
   &__bottom {
     position: absolute;
     top: 50%;
@@ -327,6 +338,11 @@ defineExpose({ skillNodeRefs })
     height: auto;
     z-index: var(--z-platform-base);
     pointer-events: none;
+  }
+
+  &__connector--dimmed {
+    opacity: 0.1 !important;
+    transition: opacity 0.3s ease;
   }
 
   // 连接装饰线
@@ -348,6 +364,11 @@ defineExpose({ skillNodeRefs })
       left: 330px;
       transform: scale(0.90);
     }
+  }
+
+  &__mid--dimmed {
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
   }
 
   // 中层底座
@@ -400,6 +421,11 @@ defineExpose({ skillNodeRefs })
       position: absolute;
       top: 0;
       left: 0;
+      transition: opacity 0.3s ease;
+
+      &--dimmed {
+        opacity: 0.2;
+      }
     }
   }
 }
@@ -434,6 +460,11 @@ defineExpose({ skillNodeRefs })
     0 0 8px color-mix(in srgb, var(--label-color) 35%, transparent),
     0 0 20px color-mix(in srgb, var(--label-color) 15%, transparent),
     0 2px 12px rgba(0, 0, 0, 0.4);
+
+  &--dimmed {
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+  }
 
   // 顶部高光线
   &::before {
