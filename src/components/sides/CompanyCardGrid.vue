@@ -65,19 +65,21 @@ function onBeforeLeave(el: Element) {
 <style scoped lang="scss">
 .company-grid {
   position: absolute;
-  top: 140px;
+  top: 50%;
+  transform: translateY(-50%);
   display: grid;
   grid-template-columns: repeat(3, 90px);
-  gap: 4px;
+  gap: 4px 4px;
+  row-gap: 16px;
   z-index: var(--z-company-cards);
-  align-content: flex-start;
+  align-content: center;
 
   &--left {
-    left: 40px;
+    left: 20px;
   }
 
   &--right {
-    right: 40px;
+    right: 20px;
   }
 }
 

@@ -116,6 +116,10 @@ const skillSubmenuDirection: Record<string, 'up' | 'down'> = {
   chengpingbaoz: 'down',
   zhinengmaduo: 'down',
   cankuduijie: 'down',
+  lianjieguding: 'down',
+  dingweiduiqi: 'down',
+  rouxingshineng: 'down',
+  quexianjiance: 'down',
 }
 
 /**

@@ -105,20 +105,24 @@ onUnmounted(() => {
   width: 90px;
 
   &__cube {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
     transition: filter var(--duration-normal) var(--ease-smooth);
   }
 
   &__name {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--color-text-secondary);
     text-align: center;
     max-width: 86px;
     word-break: break-all;
     white-space: normal;
-    line-height: 1.3;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   // 状态色彩发光
