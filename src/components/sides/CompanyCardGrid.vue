@@ -67,8 +67,8 @@ function onBeforeLeave(el: Element) {
   position: absolute;
   top: 140px;
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  gap: 8px;
+  grid-template-columns: repeat(3, 90px);
+  gap: 4px;
   z-index: var(--z-company-cards);
   align-content: flex-start;
 

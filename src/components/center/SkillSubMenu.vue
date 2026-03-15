@@ -241,7 +241,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
     z-index: 1;
     font-size: 13px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.85);
     transition: color 0.2s var(--ease-smooth), font-weight 0.2s var(--ease-smooth);
 
     .skill-submenu__pill--active &,

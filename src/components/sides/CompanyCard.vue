@@ -102,20 +102,20 @@ onUnmounted(() => {
   align-items: center;
   gap: 2px;
   cursor: pointer;
-  width: 100px;
+  width: 90px;
 
   &__cube {
-    width: 76px;
-    height: 76px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
     transition: filter var(--duration-normal) var(--ease-smooth);
   }
 
   &__name {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--color-text-secondary);
     text-align: center;
-    max-width: 100px;
+    max-width: 86px;
     word-break: break-all;
     white-space: normal;
     line-height: 1.3;

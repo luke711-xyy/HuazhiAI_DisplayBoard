@@ -347,7 +347,7 @@ defineExpose({ skillNodeRefs })
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -48%);
+  transform: translate(-50%, -48%) scale(var(--center-scale, 1));
   width: 1200px;
   height: 700px;
   z-index: var(--z-platform-base);
