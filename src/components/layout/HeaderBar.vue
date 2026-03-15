@@ -22,9 +22,11 @@ defineProps<{
 
 <template>
   <header class="header-bar">
-    <!-- 左侧 Logo -->
+    <!-- 左侧 Logo + 机构名称 -->
     <div class="header-bar__logo">
       <img :src="logoUrl" alt="HUAZHI AI" class="header-bar__logo-img" />
+      <span class="header-bar__logo-divider" />
+      <span class="header-bar__logo-text">无锡（华为云）人工智能创新中心</span>
     </div>
 
     <!-- 中间标题 -->
@@ -59,12 +61,30 @@ defineProps<{
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-top: 30px;
   }
 
   &__logo-img {
     height: 64px;
     width: auto;
-    margin-top: 30px;
+  }
+
+  &__logo-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+    margin-top: -5px;
+  }
+
+  &__logo-text {
+    font-size: 20px;
+    font-weight: 350;
+    color: #fff;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    padding-left: 10px;
   }
 
   &__title {
@@ -72,8 +92,8 @@ defineProps<{
     top: 20px;
     left: 50%;
     transform: translateX(calc(-50% + 6px));
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 38px;
+    font-weight: 520;
     letter-spacing: 14px;
     color: var(--color-text-primary);
     white-space: nowrap;

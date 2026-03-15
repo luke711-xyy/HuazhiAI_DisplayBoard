@@ -76,6 +76,33 @@ npm run preview
 
 在本地启动一个轻量 HTTP 服务器，用于预览 `dist/` 目录中的生产构建产物。
 
+### Excel 数据管理工具
+
+项目提供了基于 Excel 的数据配置工具，非开发者可直接通过编辑 Excel 表格来管理企业、技能等全部业务数据，无需手动编辑 JSON 文件。
+
+#### 导出当前数据到 Excel
+
+```bash
+npm run export-data
+```
+
+将 `data.json`、`zh.json`、`en.json` 三个文件的数据合并导出为一份 `data-template.xlsx`。生成的 Excel 包含 7 个工作表（公司 / 技能 / 子技能 / 分类 / KPI指标 / 场景标签 / UI文本），所有中英文文本都集中在同一行内，便于对照编辑。
+
+#### 从 Excel 导入数据
+
+```bash
+npm run import-data
+```
+
+读取 `data-template.xlsx`，自动生成 `data.json`、`zh.json`、`en.json` 三个文件。导入时会自动校验数据（技能 ID 引用是否存在、状态值是否合法等），并输出警告信息。
+
+#### 典型工作流
+
+1. 运行 `npm run export-data` → 生成 `data-template.xlsx`
+2. 用 Excel / WPS 编辑表格（添加企业、修改技能名称等）
+3. 运行 `npm run import-data` → 自动更新三个 JSON 配置文件
+4. 运行 `npm run dev` 查看效果
+
 ---
 
 ## 3. 功能概述
@@ -218,6 +245,11 @@ Huazhi0301/
 ├── vite.config.ts                          # Vite 构建配置（Vue 插件 + 路径别名）
 ├── README.md                               # 本文档
 ├── start.bat                               # Windows 一键启动脚本
+├── data-template.xlsx                     # Excel 数据模板（npm run export-data 生成）
+│
+├── scripts/                               # ===== 数据管理脚本 =====
+│   ├── export-to-excel.mjs                # JSON → Excel 导出工具
+│   └── import-from-excel.mjs              # Excel → JSON 导入工具
 │
 ├── src/                                    # ===== 源代码根目录 =====
 │   ├── main.ts                             # 应用入口：创建 Vue 实例并挂载
@@ -337,9 +369,11 @@ Huazhi0301/
 
 ## 7. 数据与文本配置指南
 
-本节面向非开发者，介绍如何在不修改代码的情况下更新页面展示内容。所有配置操作仅需编辑 JSON 文件，使用任何文本编辑器（如 VS Code、记事本）即可完成。
+本节面向非开发者，介绍如何在不修改代码的情况下更新页面展示内容。
 
-> **重要提示**：编辑 JSON 文件时请确保语法正确。常见错误包括：缺少逗号、多余逗号、引号不匹配。建议使用 VS Code 等带有 JSON 语法高亮的编辑器。
+> **推荐方式**：使用 Excel 数据管理工具（`npm run export-data` / `npm run import-data`）来编辑数据，无需直接修改 JSON 文件。详见 [第 2 节 — Excel 数据管理工具](#excel-数据管理工具)。以下手动编辑 JSON 的说明仅作为参考。
+
+> **重要提示**：如需手动编辑 JSON 文件，请确保语法正确。常见错误包括：缺少逗号、多余逗号、引号不匹配。建议使用 VS Code 等带有 JSON 语法高亮的编辑器。
 
 ### 7.1 整体配置架构
 
@@ -529,6 +563,7 @@ Huazhi0301/
 | **状态管理** | 无外部库 | Vue 3 ref/reactive + composables 单例模式 |
 | **国际化** | 自定义 i18n | 轻量实现，支持 zh / en 双语 |
 | **数据存储** | 静态 JSON | 无后端、无数据库、无 API 调用 |
+| **数据管理** | xlsx (SheetJS) | Excel 导入/导出工具，devDependency |
 
 ---
 

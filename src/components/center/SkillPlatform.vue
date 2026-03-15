@@ -468,24 +468,16 @@ defineExpose({ skillNodeRefs })
 // 父级分类标签 — 大号胶囊 · 毛玻璃 + 光效
 .category-label {
   position: absolute;
+  isolation: isolate;
   z-index: var(--z-platform-upper);
   padding: 6px 20px;
   border-radius: 20px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 400;
   color: #fff;
   white-space: nowrap;
   letter-spacing: 3px;
   pointer-events: none;
-
-  // 毛玻璃底色：半透明主题色 + 深色底
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.45) 0%,
-    color-mix(in srgb, var(--label-color) 25%, transparent) 100%
-  );
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
 
   // 发光边框
   border: 1px solid color-mix(in srgb, var(--label-color) 40%, transparent);
@@ -495,6 +487,23 @@ defineExpose({ skillNodeRefs })
     0 0 8px color-mix(in srgb, var(--label-color) 35%, transparent),
     0 0 20px color-mix(in srgb, var(--label-color) 15%, transparent),
     0 2px 12px rgba(0, 0, 0, 0.4);
+
+  // 毛玻璃层（与文字分离，避免模糊）
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.45) 0%,
+      color-mix(in srgb, var(--label-color) 25%, transparent) 100%
+    );
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  }
 
   &--dimmed {
     opacity: 0.2;

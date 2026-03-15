@@ -150,9 +150,11 @@ defineEmits<{
   }
 
   &__company-type {
+    width: 42px;
     font-size: 11px;
     color: var(--color-text-muted);
     flex-shrink: 0;
+    text-align: right;
   }
 
   &__empty {

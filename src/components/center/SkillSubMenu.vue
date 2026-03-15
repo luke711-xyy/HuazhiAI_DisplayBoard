@@ -219,6 +219,8 @@ function getHoveredSubSkill(): SubSkill | undefined {
   }
 
   &__pill-dot {
+    position: relative;
+    z-index: 1;
     width: 5px;
     height: 5px;
     border-radius: 50%;
@@ -235,14 +237,16 @@ function getHoveredSubSkill(): SubSkill | undefined {
   }
 
   &__pill-text {
-    font-size: 11px;
-    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    font-weight: 300;
     color: rgba(255, 255, 255, 0.55);
     transition: color 0.2s var(--ease-smooth), font-weight 0.2s var(--ease-smooth);
 
     .skill-submenu__pill--active &,
     .skill-submenu__pill:hover & {
-      font-weight: 600;
+      font-weight: 500;
       color: #fff;
     }
   }
@@ -299,8 +303,10 @@ function getHoveredSubSkill(): SubSkill | undefined {
     }
 
     &-title {
-      font-size: 13px;
-      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
+      font-weight: 500;
       color: #fff;
       margin-bottom: 6px;
       padding-bottom: 5px;
@@ -308,7 +314,9 @@ function getHoveredSubSkill(): SubSkill | undefined {
     }
 
     &-desc {
-      font-size: 11px;
+      position: relative;
+      z-index: 1;
+      font-size: 12px;
       line-height: 1.7;
       color: rgba(255, 255, 255, 0.7);
     }

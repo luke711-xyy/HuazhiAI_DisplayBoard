@@ -165,44 +165,44 @@ onMounted(() => {
   &--hovered,
   &--highlighted {
     transform: scale(calc(var(--node-scale, 1) * 1.10));
-    filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
     z-index: calc(var(--z-skill-nodes) + 10);
+
+    // filter 只作用于图标，避免光栅化文字导致模糊
+    .skill-node__icon {
+      filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    }
   }
 
   // 公司 hover 遮罩降暗：非关联节点（含图标和标签）整体变暗
   &--overlay-dimmed {
     opacity: 0.8;
-    filter: brightness(0.5);
     pointer-events: none;
     transition: opacity 0.3s ease, filter 0.3s ease;
+
+    .skill-node__icon {
+      filter: brightness(0.5);
+    }
   }
 
   &__icon {
     width: 106px;
     height: 106px;
     object-fit: contain;
+    transition: filter var(--duration-normal) var(--ease-smooth);
   }
 
   // 子级技能标签 — 小号胶囊 · 毛玻璃 + 光效
   &__label {
     position: absolute;
+    isolation: isolate;
     // transform 由内联 style 控制（含 translateX(-50%) + rotate + skew）
     padding: 3px 10px;
     border-radius: 12px;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 300;
     color: #fff;
     white-space: nowrap;
     pointer-events: none;
-
-    // 毛玻璃底色
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.4) 0%,
-      color-mix(in srgb, var(--label-color) 20%, transparent) 100%
-    );
-    backdrop-filter: blur(10px) saturate(1.3);
-    -webkit-backdrop-filter: blur(10px) saturate(1.3);
 
     // 发光边框
     border: 1px solid color-mix(in srgb, var(--label-color) 30%, transparent);
@@ -212,6 +212,23 @@ onMounted(() => {
       0 0 6px color-mix(in srgb, var(--label-color) 25%, transparent),
       0 0 14px color-mix(in srgb, var(--label-color) 10%, transparent),
       0 1px 6px rgba(0, 0, 0, 0.35);
+
+    // 毛玻璃层（与文字分离，避免模糊）
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        color-mix(in srgb, var(--label-color) 20%, transparent) 100%
+      );
+      backdrop-filter: blur(10px) saturate(1.3);
+      -webkit-backdrop-filter: blur(10px) saturate(1.3);
+    }
 
     // 顶部高光线
     &::before {

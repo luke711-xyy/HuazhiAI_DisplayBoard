@@ -58,6 +58,10 @@ echo    访问地址: http://localhost:5173
 echo    按 Ctrl+C 可停止服务器
 echo  ----------------------------------------
 echo.
+echo  [提示] 数据管理命令:
+echo    npm run export-data  导出数据到 Excel
+echo    npm run import-data  从 Excel 导入数据
+echo.
 
 REM ---- 延迟 2 秒后打开浏览器 ----
 start "" cmd /c "timeout /t 3 /nobreak >nul && start http://localhost:5173"

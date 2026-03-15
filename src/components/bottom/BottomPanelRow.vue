@@ -39,7 +39,7 @@ function getCompaniesForStatus(statusFilter: string): Company[] {
 <style scoped lang="scss">
 .bottom-panel-row {
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
