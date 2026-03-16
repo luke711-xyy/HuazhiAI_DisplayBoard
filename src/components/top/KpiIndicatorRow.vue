@@ -11,6 +11,7 @@ defineProps<{
   indicators: KpiType[]
   activeKpiIds: Set<string>
   hideCount: boolean
+  dimmed?: boolean
 }>()
 
 defineEmits<{
@@ -19,7 +20,7 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="kpi-row">
+  <div class="kpi-row" :class="{ 'kpi-row--dimmed': dimmed }">
     <KpiIndicator
       v-for="indicator in indicators"
       :key="indicator.id"
@@ -41,5 +42,10 @@ defineEmits<{
   align-items: flex-start;
   gap: 40px;
   z-index: var(--z-kpi-row);
+  transition: opacity 0.3s ease;
+
+  &--dimmed {
+    opacity: 0.3;
+  }
 }
 </style>

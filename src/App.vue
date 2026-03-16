@@ -260,6 +260,7 @@ const { lines: connectionLines } = useConnectionLines(
       :indicators="kpiIndicatorsWithCount"
       :active-kpi-ids="activeKpiIds"
       :hide-count="hideBottomPanels"
+      :dimmed="!!hoveredSkillId || !!hoveredCompanyId"
       @select-kpi="onSelectKpi"
     />
 

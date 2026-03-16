@@ -119,7 +119,7 @@ const skillSubmenuDirection: Record<string, 'up' | 'down'> = {
   lianjieguding: 'down',
   dingweiduiqi: 'down',
   rouxingshineng: 'down',
-  quexianjiance: 'down',
+  xingneng: 'down',
 }
 
 /**

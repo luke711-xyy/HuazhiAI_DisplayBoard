@@ -186,6 +186,11 @@ onMounted(() => {
     .skill-node__icon {
       filter: brightness(0.5);
     }
+
+    .skill-node__label {
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+    }
   }
 
   &__icon {
