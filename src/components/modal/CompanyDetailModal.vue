@@ -271,10 +271,13 @@ function getSkillIconUrl(iconName: string): string {
   isolation: isolate;
 
   // 边框使用主题色发光
-  border: 1px solid color-mix(in srgb, var(--accent-from) 25%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--accent-from) 70%, transparent);
   box-shadow:
     0 16px 64px rgba(0, 0, 0, 0.5),
-    0 0 24px color-mix(in srgb, var(--accent-from) 15%, transparent);
+    0 0 40px color-mix(in srgb, var(--accent-from) 50%, transparent),
+    0 0 80px color-mix(in srgb, var(--accent-from) 30%, transparent),
+    0 0 120px color-mix(in srgb, var(--accent-from) 15%, transparent),
+    inset 0 0 40px color-mix(in srgb, var(--accent-from) 12%, transparent);
 
   // 毛玻璃背景层（伪元素，位于内容之下，不影响文字渲染）
   &::before {

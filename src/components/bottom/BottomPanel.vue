@@ -21,7 +21,7 @@ defineEmits<{
 </script>
 
 <template>
-  <GlassPanel class="bottom-panel" variant="dark" padding="0">
+  <GlassPanel class="bottom-panel" variant="dark" padding="0" :style="{ '--panel-color': kpi.color }">
     <!-- 标题栏 -->
     <div class="bottom-panel__header" :style="{ borderColor: props.kpi.color }">
       <span class="bottom-panel__dot-lg" :style="{ background: props.kpi.color }" />
@@ -56,10 +56,18 @@ defineEmits<{
 <style scoped lang="scss">
 .bottom-panel {
   width: 400px;
-  height: 220px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  // 主题色边框 + 外光晕
+  border: 1.5px solid color-mix(in srgb, var(--panel-color) 55%, transparent) !important;
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--panel-color) 35%, transparent),
+    0 0 40px color-mix(in srgb, var(--panel-color) 20%, transparent),
+    0 0 70px color-mix(in srgb, var(--panel-color) 10%, transparent),
+    0 4px 24px rgba(0, 0, 0, 0.4) !important;
 
   &__header {
     display: flex;

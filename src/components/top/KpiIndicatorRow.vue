@@ -35,7 +35,7 @@ defineEmits<{
 <style scoped lang="scss">
 .kpi-row {
   position: absolute;
-  top: 90px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
