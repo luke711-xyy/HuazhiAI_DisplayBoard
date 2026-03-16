@@ -55,8 +55,8 @@ defineEmits<{
 
 <style scoped lang="scss">
 .bottom-panel {
-  width: 360px;
-  height: 185px;
+  width: 400px;
+  height: 220px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -65,7 +65,7 @@ defineEmits<{
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 16px;
+    padding: 12px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     flex-shrink: 0;
     position: relative;
@@ -79,21 +79,21 @@ defineEmits<{
   }
 
   &__title {
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 600;
     color: var(--color-text-primary);
     flex: 1;
   }
 
   &__count {
-    font-size: 12px;
+    font-size: 15px;
     color: var(--color-text-muted);
     flex-shrink: 0;
   }
 
   &__list {
     flex: 1;
-    padding: 8px 16px;
+    padding: 10px 20px;
     overflow-y: auto;
   }
 
@@ -101,7 +101,7 @@ defineEmits<{
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 0;
+    padding: 6px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     cursor: pointer;
     transition: background 0.15s var(--ease-smooth);
@@ -124,7 +124,8 @@ defineEmits<{
 
   &__company-name {
     flex: 1;
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: 500;
     color: var(--color-text-secondary);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -132,8 +133,8 @@ defineEmits<{
   }
 
   &__progress {
-    width: 48px;
-    height: 4px;
+    width: 56px;
+    height: 5px;
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.08);
     flex-shrink: 0;
@@ -150,8 +151,8 @@ defineEmits<{
   }
 
   &__company-type {
-    width: 42px;
-    font-size: 11px;
+    width: 50px;
+    font-size: 13px;
     color: var(--color-text-muted);
     flex-shrink: 0;
     text-align: right;

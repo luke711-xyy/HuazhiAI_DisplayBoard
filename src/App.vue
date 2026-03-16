@@ -68,6 +68,14 @@ const hoveredSkillId = ref<string | null>(null)
 
 // ==================== 派生数据 ====================
 
+/** KPI 指标列表，count 由实际公司数量动态计算 */
+const kpiIndicatorsWithCount = computed(() =>
+  config.kpiIndicators.map(k => ({
+    ...k,
+    count: config.companies.filter(c => c.status === k.statusFilter).length,
+  }))
+)
+
 /** 根据选中的 KPI 集合过滤左侧企业 */
 const leftCompanies = computed(() => {
   if (activeKpiIds.size === 0) return []
@@ -249,7 +257,7 @@ const { lines: connectionLines } = useConnectionLines(
 
     <!-- KPI 指标行 -->
     <KpiIndicatorRow
-      :indicators="config.kpiIndicators"
+      :indicators="kpiIndicatorsWithCount"
       :active-kpi-ids="activeKpiIds"
       :hide-count="hideBottomPanels"
       @select-kpi="onSelectKpi"
@@ -299,7 +307,7 @@ const { lines: connectionLines } = useConnectionLines(
     <!-- 底部信息面板（各面板由对应 KPI 独立控制，抽屉式滑入/滑出） -->
     <BottomPanelRow
       v-if="!hideBottomPanels"
-      :kpi-indicators="config.kpiIndicators"
+      :kpi-indicators="kpiIndicatorsWithCount"
       :companies="config.companies"
       :active-kpi-ids="activeKpiIds"
       @click-company="onClickCompany"

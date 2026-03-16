@@ -43,7 +43,7 @@ function getCompaniesForStatus(statusFilter: string): Company[] {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 24px;
+  gap: 16px;
   z-index: var(--z-bottom-panels);
 }
 

@@ -262,10 +262,10 @@ function getSkillIconUrl(iconName: string): string {
 }
 
 .modal-content {
-  width: 580px;
-  max-height: 640px;
-  border-radius: 16px;
-  padding: 32px;
+  width: 750px;
+  max-height: 820px;
+  border-radius: 20px;
+  padding: 40px;
   position: relative;
   overflow-y: auto;
   isolation: isolate;
@@ -302,8 +302,8 @@ function getSkillIconUrl(iconName: string): string {
     transition: all var(--duration-fast) var(--ease-smooth);
 
     img {
-      width: 28px;
-      height: 28px;
+      width: 34px;
+      height: 34px;
     }
 
     &:hover {
@@ -319,15 +319,16 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__name {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 700;
     color: var(--color-text-primary);
     margin-bottom: 8px;
   }
 
   &__meta {
-    font-size: 13px;
-    color: var(--color-text-secondary);
+    font-size: 16px;
+    font-weight: 500;
+    color: #b8c5d6;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -338,7 +339,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__section {
-    margin-bottom: 20px;
+    margin-bottom: 26px;
 
     &:last-child {
       margin-bottom: 0;
@@ -347,28 +348,29 @@ function getSkillIconUrl(iconName: string): string {
 
   // 小节标题左侧竖条使用主题色
   &__section-title {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
     color: var(--color-text-primary);
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 
     &::before {
       content: '';
       display: block;
-      width: 3px;
-      height: 14px;
+      width: 4px;
+      height: 18px;
       border-radius: 2px;
       background: var(--accent-from);
     }
   }
 
   &__brief-text {
-    font-size: 12px;
+    font-size: 15px;
+    font-weight: 500;
     line-height: 1.8;
-    color: var(--color-text-secondary);
+    color: #b8c5d6;
     margin: 0;
   }
 
@@ -388,8 +390,8 @@ function getSkillIconUrl(iconName: string): string {
 
   &__progress {
     flex: 1;
-    height: 6px;
-    border-radius: 3px;
+    height: 8px;
+    border-radius: 4px;
     background: rgba(255, 255, 255, 0.08);
     overflow: hidden;
   }
@@ -419,7 +421,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__progress-value {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--accent-from);
     flex-shrink: 0;
@@ -428,9 +430,10 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__progress-note {
-    font-size: 11px;
+    font-size: 14px;
+    font-weight: 500;
     line-height: 1.7;
-    color: var(--color-text-muted);
+    color: #8a9bb5;
     margin: 0;
   }
 
@@ -448,9 +451,9 @@ function getSkillIconUrl(iconName: string): string {
   gap: 6px;
 
   &__icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
     background: rgba(255, 255, 255, 0.06);
     display: flex;
     align-items: center;
@@ -458,15 +461,16 @@ function getSkillIconUrl(iconName: string): string {
     flex-shrink: 0;
 
     img {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       object-fit: contain;
     }
   }
 
   &__label {
-    font-size: 11px;
-    color: var(--color-text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    color: #b8c5d6;
     white-space: nowrap;
   }
 }
@@ -476,7 +480,7 @@ function getSkillIconUrl(iconName: string): string {
   width: 32px;
   height: 2px;
   flex-shrink: 0;
-  margin-top: 19px; // 与图标垂直中心对齐 (40px / 2 - 1px)
+  margin-top: 25px; // 与图标垂直中心对齐 (52px / 2 - 1px)
   background: linear-gradient(
     90deg,
     color-mix(in srgb, var(--accent-from) 30%, transparent),
@@ -507,9 +511,9 @@ function getSkillIconUrl(iconName: string): string {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 8px;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid color-mix(in srgb, var(--badge-color) 30%, transparent);
   box-shadow: 0 0 8px color-mix(in srgb, var(--badge-color) 12%, transparent);
@@ -525,14 +529,15 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__icon {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
   }
 
   &__name {
-    font-size: 12px;
-    color: var(--color-text-secondary);
+    font-size: 15px;
+    font-weight: 500;
+    color: #b8c5d6;
   }
 
 }
@@ -543,10 +548,10 @@ function getSkillIconUrl(iconName: string): string {
 .skill-badge-floating-tip {
   position: fixed;
   transform: translateX(-50%);
-  max-width: 320px;
-  min-width: 180px;
-  padding: 12px 14px;
-  border-radius: 10px;
+  max-width: 400px;
+  min-width: 220px;
+  padding: 16px 18px;
+  border-radius: 12px;
   background:
     linear-gradient(
       135deg,
@@ -577,7 +582,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__title {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
     color: #fff;
     margin-bottom: 8px;
@@ -586,7 +591,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__desc {
-    font-size: 11px;
+    font-size: 14px;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.7);
     margin: 0;

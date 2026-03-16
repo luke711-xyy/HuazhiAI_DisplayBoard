@@ -70,9 +70,9 @@ defineProps<{
   }
 
   &__logo-divider {
-    width: 1px;
+    width: 2px;
     height: 28px;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.6);
     flex-shrink: 0;
     margin-top: -5px;
   }

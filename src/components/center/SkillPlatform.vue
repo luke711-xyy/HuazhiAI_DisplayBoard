@@ -476,8 +476,8 @@ defineExpose({ skillNodeRefs })
   z-index: var(--z-platform-upper);
   padding: 6px 20px;
   border-radius: 20px;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 22px;
+  font-weight: 600;
   color: #fff;
   white-space: nowrap;
   letter-spacing: 3px;

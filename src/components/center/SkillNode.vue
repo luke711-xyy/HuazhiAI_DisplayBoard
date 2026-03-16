@@ -113,7 +113,7 @@ onMounted(() => {
   <div
     ref="nodeRef"
     class="skill-node"
-    :class="{ 'skill-node--highlighted': isHighlighted, 'skill-node--hovered': isHovered, 'skill-node--overlay-dimmed': isDimmedByOverlay }"
+    :class="{ 'skill-node--highlighted': isHighlighted, 'skill-node--hovered': isHovered, 'skill-node--overlay-dimmed': isDimmedByOverlay, 'skill-node--submenu-open': showSubMenu }"
     :data-skill-id="skill.id"
     @mouseenter="deviceMode === 'pc' ? (isHovered = true, $emit('hover', skill.id)) : undefined"
     @mouseleave="deviceMode === 'pc' ? (isHovered = false, $emit('hover', null)) : undefined"
@@ -162,6 +162,10 @@ onMounted(() => {
   z-index: var(--z-skill-nodes);
   transform: scale(var(--node-scale, 1));
 
+  &--submenu-open {
+    z-index: calc(var(--z-skill-nodes) + 20);
+  }
+
   &--hovered,
   &--highlighted {
     transform: scale(calc(var(--node-scale, 1) * 1.10));
@@ -198,8 +202,8 @@ onMounted(() => {
     // transform 由内联 style 控制（含 translateX(-50%) + rotate + skew）
     padding: 3px 10px;
     border-radius: 12px;
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 18px;
+    font-weight: 550;
     color: #fff;
     white-space: nowrap;
     pointer-events: none;
