@@ -255,6 +255,8 @@ function getSkillIconUrl(iconName: string): string {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px) saturate(0.8);
+  -webkit-backdrop-filter: blur(8px) saturate(0.8);
   display: flex;
   align-items: center;
   justify-content: center;

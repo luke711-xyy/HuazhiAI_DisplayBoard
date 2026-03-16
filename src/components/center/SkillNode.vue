@@ -159,6 +159,7 @@ onMounted(() => {
   cursor: pointer;
   transition: all var(--duration-normal) var(--ease-smooth);
   position: relative;
+  pointer-events: auto;
   z-index: var(--z-skill-nodes);
   transform: scale(var(--node-scale, 1));
 

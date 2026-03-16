@@ -43,7 +43,7 @@
   --viewport-height: 1080px;
 
   // --- 中心区域整体缩放 ---
-  --center-scale: 1.1;
+  --center-scale: 1.2;
 
   // --- z-index 分层体系 ---
   --z-background: 1;
@@ -53,10 +53,10 @@
   --z-platform-upper: 30;
   --z-skill-nodes: 31;
   --z-skill-tooltip: 40;
-  --z-company-cards: 50;
-  --z-bottom-panels: 120;
+  --z-company-cards: 90;
+  --z-bottom-panels: 75;
   --z-header: 70;
-  --z-hover-overlay: 42;
+  --z-hover-overlay: 80;
   --z-kpi-row: 50;
   --z-svg-overlay: 120;
   --z-skill-submenu: 105;

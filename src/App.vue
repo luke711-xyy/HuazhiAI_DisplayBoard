@@ -159,9 +159,22 @@ function onSelectKpi(id: string) {
   hoveredCompanyId.value = null
 }
 
-/** 企业悬停 */
+/** 企业悬停（离开时延迟清除，避免公司间流转时闪烁） */
+let hoverCompanyTimer: ReturnType<typeof setTimeout> | null = null
+
 function onHoverCompany(companyId: string | null) {
-  hoveredCompanyId.value = companyId
+  if (hoverCompanyTimer) {
+    clearTimeout(hoverCompanyTimer)
+    hoverCompanyTimer = null
+  }
+  if (companyId) {
+    hoveredCompanyId.value = companyId
+  } else {
+    hoverCompanyTimer = setTimeout(() => {
+      hoveredCompanyId.value = null
+      hoverCompanyTimer = null
+    }, 150)
+  }
 }
 
 /** 企业点击：打开详情弹窗，同时清除所有 hover 高光 */
@@ -287,7 +300,7 @@ const { lines: connectionLines } = useConnectionLines(
     <!-- 公司 hover 全屏遮罩 -->
     <Transition name="overlay-fade">
       <div
-        v-if="hoveredCompanyId || hoveredSkillId"
+        v-if="hoveredCompanyId || hoveredSkillId || selectedCompanyId"
         class="company-hover-overlay"
         :class="{ 'company-hover-overlay--interactive': deviceMode === 'mobile' }"
         @click="onOverlayClick"

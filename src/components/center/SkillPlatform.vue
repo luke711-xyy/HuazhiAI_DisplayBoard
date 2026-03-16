@@ -256,91 +256,96 @@ defineExpose({ skillNodeRefs })
 </script>
 
 <template>
-  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': effectiveSubmenuOpen }" @click="onPlatformClick">
+  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': effectiveSubmenuOpen }">
+    <!-- 事件捕获层：比视觉容器窄，避免与侧边公司列表重叠 -->
+    <div class="skill-platform__hit-area" @click="onPlatformClick" />
     <!-- 底层网格大平台 -->
     <img :src="bottomLayer" alt="" class="skill-platform__bottom" :class="{ 'skill-platform__bottom--dimmed': isOverlayActive }" />
 
-    <!-- 连接装饰线 (左右各一条) -->
-    <img :src="connectLeft" alt="" class="skill-platform__connector skill-platform__connector--left" :class="{ 'skill-platform__connector--dimmed': isOverlayActive }" />
-    <img :src="connectRight" alt="" class="skill-platform__connector skill-platform__connector--right" :class="{ 'skill-platform__connector--dimmed': isOverlayActive }" />
+    <!-- 内容偏移层：除大平台底图外的所有内容整体下移 -->
+    <div class="skill-platform__content-offset">
+      <!-- 连接装饰线 (左右各一条) -->
+      <img :src="connectLeft" alt="" class="skill-platform__connector skill-platform__connector--left" :class="{ 'skill-platform__connector--dimmed': isOverlayActive }" />
+      <img :src="connectRight" alt="" class="skill-platform__connector skill-platform__connector--right" :class="{ 'skill-platform__connector--dimmed': isOverlayActive }" />
 
-    <!-- 遍历三个分类，渲染中层底座 + 上层平台 + 技能节点 -->
-    <template v-for="category in categories" :key="category.id">
-      <!-- 中层底座 (不含文字标签，hover/高亮时切换 dark→light) -->
-      <div
-        class="skill-platform__mid"
-        :class="{ 'skill-platform__mid--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }"
-        :style="{
-          top: categoryPositions[category.id]?.midTop,
-          left: categoryPositions[category.id]?.midLeft,
-        }"
-      >
-        <!-- dark 底图（始终渲染，激活时淡出） -->
-        <img
-          :src="midDark"
-          alt=""
-          class="skill-platform__mid-img"
-          :class="{ 'skill-platform__mid-img--hidden': activeCategoryIds.has(category.id) }"
-        />
-        <!-- light 切图（叠在 dark 之上，激活时淡入） -->
-        <img
-          :src="midLight"
-          alt=""
-          class="skill-platform__mid-img skill-platform__mid-img--light"
-          :class="{ 'skill-platform__mid-img--visible': activeCategoryIds.has(category.id) }"
-        />
-      </div>
-
-      <!-- 上层技能承载平台 + 技能图标 -->
-      <div
-        class="skill-platform__upper"
-        :class="{ 'skill-platform__upper--elevated': categoriesWithSubmenu.has(category.id) }"
-        :style="{
-          top: categoryPositions[category.id]?.upperTop,
-          left: categoryPositions[category.id]?.upperLeft,
-        }"
-      >
-        <img :src="upperImages[category.upperLayerImage]" alt="" class="skill-platform__upper-img" :class="{ 'skill-platform__upper-img--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }" />
-
-        <!-- 技能图标节点 (不含文字) -->
-        <SkillNode
-          v-for="skill in getCategorySkills(category)"
-          :key="skill.id"
-          :skill="skill"
-          :is-highlighted="highlightedSkillIds.includes(skill.id)"
-          :highlighted-sub-skill-ids="highlightedSubSkillIds"
-          :category-color="categoryColorMap[category.id] || '#3B82F6'"
-          :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
-          :submenu-direction="skillSubmenuDirection[skill.id] || 'up'"
-          :is-dimmed-by-overlay="isOverlayActive && !highlightedSkillIds.includes(skill.id)"
-          :active-hovered-id="localHoveredSkillId"
+      <!-- 遍历三个分类，渲染中层底座 + 上层平台 + 技能节点 -->
+      <template v-for="category in categories" :key="category.id">
+        <!-- 中层底座 (不含文字标签，hover/高亮时切换 dark→light) -->
+        <div
+          class="skill-platform__mid"
+          :class="{ 'skill-platform__mid--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }"
           :style="{
-            position: 'absolute',
-            top: skillPositions[skill.id]?.top || '50%',
-            left: skillPositions[skill.id]?.left || '50%',
-            '--node-scale': skillPositions[skill.id]?.scale ?? 1,
+            top: categoryPositions[category.id]?.midTop,
+            left: categoryPositions[category.id]?.midLeft,
           }"
-          @hover="onSkillHover"
-        />
+        >
+          <!-- dark 底图（始终渲染，激活时淡出） -->
+          <img
+            :src="midDark"
+            alt=""
+            class="skill-platform__mid-img"
+            :class="{ 'skill-platform__mid-img--hidden': activeCategoryIds.has(category.id) }"
+          />
+          <!-- light 切图（叠在 dark 之上，激活时淡入） -->
+          <img
+            :src="midLight"
+            alt=""
+            class="skill-platform__mid-img skill-platform__mid-img--light"
+            :class="{ 'skill-platform__mid-img--visible': activeCategoryIds.has(category.id) }"
+          />
+        </div>
+
+        <!-- 上层技能承载平台 + 技能图标 -->
+        <div
+          class="skill-platform__upper"
+          :class="{ 'skill-platform__upper--elevated': categoriesWithSubmenu.has(category.id) }"
+          :style="{
+            top: categoryPositions[category.id]?.upperTop,
+            left: categoryPositions[category.id]?.upperLeft,
+          }"
+        >
+          <img :src="upperImages[category.upperLayerImage]" alt="" class="skill-platform__upper-img" :class="{ 'skill-platform__upper-img--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }" />
+
+          <!-- 技能图标节点 (不含文字) -->
+          <SkillNode
+            v-for="skill in getCategorySkills(category)"
+            :key="skill.id"
+            :skill="skill"
+            :is-highlighted="highlightedSkillIds.includes(skill.id)"
+            :highlighted-sub-skill-ids="highlightedSubSkillIds"
+            :category-color="categoryColorMap[category.id] || '#3B82F6'"
+            :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
+            :submenu-direction="skillSubmenuDirection[skill.id] || 'up'"
+            :is-dimmed-by-overlay="isOverlayActive && !highlightedSkillIds.includes(skill.id)"
+            :active-hovered-id="localHoveredSkillId"
+            :style="{
+              position: 'absolute',
+              top: skillPositions[skill.id]?.top || '50%',
+              left: skillPositions[skill.id]?.left || '50%',
+              '--node-scale': skillPositions[skill.id]?.scale ?? 1,
+            }"
+            @hover="onSkillHover"
+          />
+        </div>
+      </template>
+
+      <!-- ========== 独立文字标签层 ========== -->
+
+      <!-- 父级分类标签（大号胶囊 · 毛玻璃 + 光效） -->
+      <div
+        v-for="category in categories"
+        :key="`label-${category.id}`"
+        class="category-label"
+        :class="{ 'category-label--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }"
+        :style="{
+          top: categoryLabelPositions[category.id]?.top,
+          left: categoryLabelPositions[category.id]?.left,
+          transform: `rotate(${categoryLabelPositions[category.id]?.rotate || '0deg'}) skewX(${categoryLabelPositions[category.id]?.skewX || '0deg'}) skewY(${categoryLabelPositions[category.id]?.skewY || '0deg'})`,
+          '--label-color': category.color,
+        }"
+      >
+        {{ t(category.nameKey) }}
       </div>
-    </template>
-
-    <!-- ========== 独立文字标签层 ========== -->
-
-    <!-- 父级分类标签（大号胶囊 · 毛玻璃 + 光效） -->
-    <div
-      v-for="category in categories"
-      :key="`label-${category.id}`"
-      class="category-label"
-      :class="{ 'category-label--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }"
-      :style="{
-        top: categoryLabelPositions[category.id]?.top,
-        left: categoryLabelPositions[category.id]?.left,
-        transform: `rotate(${categoryLabelPositions[category.id]?.rotate || '0deg'}) skewX(${categoryLabelPositions[category.id]?.skewX || '0deg'}) skewY(${categoryLabelPositions[category.id]?.skewY || '0deg'})`,
-        '--label-color': category.color,
-      }"
-    >
-      {{ t(category.nameKey) }}
     </div>
 
   </div>
@@ -356,6 +361,29 @@ defineExpose({ skillNodeRefs })
   height: 700px;
   z-index: var(--z-platform-base);
   transition: z-index 0s;
+  pointer-events: none; // 外层容器不捕获鼠标事件，避免与侧边公司列表重叠冲突
+
+  // 内容偏移层：除大平台底图外的所有内容整体下移
+  &__content-offset {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  // 事件捕获层：居中且比容器窄，仅此区域响应点击来取消 hover
+  &__hit-area {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 720px;
+    height: 100%;
+    pointer-events: auto;
+    z-index: 0;
+  }
 
   // 子菜单展开时，临时提升整个平台的层级，突破层叠上下文限制
   &--submenu-active {
