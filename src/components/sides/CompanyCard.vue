@@ -112,15 +112,16 @@ onUnmounted(() => {
   }
 
   &__name {
-    font-size: 14px;
-    color: var(--color-text-secondary);
+    font-size: 16px;
+    font-weight: 500;
+    color: #b8c5d6;
     text-align: center;
     max-width: 86px;
     word-break: break-all;
     white-space: normal;
-    line-height: 1.4;
+    line-height: 1.3;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }

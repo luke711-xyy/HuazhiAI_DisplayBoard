@@ -134,7 +134,7 @@ defineEmits<{
     flex: 1;
     font-size: 16px;
     font-weight: 500;
-    color: var(--color-text-secondary);
+    color: #b8c5d6;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

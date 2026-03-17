@@ -75,11 +75,11 @@ function onBeforeLeave(el: Element) {
   align-content: center;
 
   &--left {
-    left: 20px;
+    left: 40px;
   }
 
   &--right {
-    right: 20px;
+    right: 40px;
   }
 }
 

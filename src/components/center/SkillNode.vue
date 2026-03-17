@@ -160,28 +160,32 @@ onMounted(() => {
   transition: all var(--duration-normal) var(--ease-smooth);
   position: relative;
   pointer-events: auto;
-  z-index: var(--z-skill-nodes);
+  z-index: calc(var(--z-skill-nodes) + var(--node-z-offset, 0));
   transform: scale(var(--node-scale, 1));
 
   &--submenu-open {
-    z-index: calc(var(--z-skill-nodes) + 20);
+    z-index: calc(var(--z-skill-nodes) + var(--node-z-offset, 0) + 20);
   }
 
   &--hovered,
   &--highlighted {
     transform: scale(calc(var(--node-scale, 1) * 1.10));
-    z-index: calc(var(--z-skill-nodes) + 10);
+    z-index: calc(var(--z-skill-nodes) + var(--node-z-offset, 0) + 10);
 
     // filter 只作用于图标，避免光栅化文字导致模糊
     .skill-node__icon {
       filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    }
+
+    // hover/高亮时标签提到最上层，避免被其他节点遮挡
+    .skill-node__label {
+      z-index: 100;
     }
   }
 
   // 公司 hover 遮罩降暗：非关联节点（含图标和标签）整体变暗
   &--overlay-dimmed {
     opacity: 0.8;
-    pointer-events: none;
     transition: opacity 0.3s ease, filter 0.3s ease;
 
     .skill-node__icon {

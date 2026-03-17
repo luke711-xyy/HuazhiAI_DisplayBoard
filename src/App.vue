@@ -273,7 +273,7 @@ const { lines: connectionLines } = useConnectionLines(
       :indicators="kpiIndicatorsWithCount"
       :active-kpi-ids="activeKpiIds"
       :hide-count="hideBottomPanels"
-      :dimmed="!!hoveredSkillId || !!hoveredCompanyId"
+      :dimmed="!!hoveredSkillId || !!hoveredCompanyId || !!selectedCompanyId"
       @select-kpi="onSelectKpi"
     />
 
@@ -324,6 +324,7 @@ const { lines: connectionLines } = useConnectionLines(
       :kpi-indicators="kpiIndicatorsWithCount"
       :companies="config.companies"
       :active-kpi-ids="activeKpiIds"
+      :dimmed="!!hoveredSkillId || !!hoveredCompanyId || !!selectedCompanyId"
       @click-company="onClickCompany"
     />
 

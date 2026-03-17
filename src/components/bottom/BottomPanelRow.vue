@@ -11,6 +11,7 @@ const props = defineProps<{
   kpiIndicators: KpiIndicator[]
   companies: Company[]
   activeKpiIds: Set<string>
+  dimmed?: boolean
 }>()
 
 defineEmits<{
@@ -24,7 +25,7 @@ function getCompaniesForStatus(statusFilter: string): Company[] {
 </script>
 
 <template>
-  <div class="bottom-panel-row">
+  <div class="bottom-panel-row" :class="{ 'bottom-panel-row--dimmed': dimmed }">
     <Transition v-for="kpi in kpiIndicators" :key="kpi.id" name="panel-drawer">
       <BottomPanel
         v-if="activeKpiIds.has(kpi.id)"
@@ -45,6 +46,12 @@ function getCompaniesForStatus(statusFilter: string): Company[] {
   display: flex;
   gap: 16px;
   z-index: var(--z-bottom-panels);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+
+  &--dimmed {
+    opacity: 0.3;
+    filter: blur(3px);
+  }
 }
 
 // 每个面板独立的抽屉动画

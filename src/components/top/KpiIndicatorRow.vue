@@ -46,6 +46,7 @@ defineEmits<{
 
   &--dimmed {
     opacity: 0.3;
+    filter: blur(3px);
   }
 }
 </style>

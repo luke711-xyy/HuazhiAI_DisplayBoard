@@ -47,19 +47,19 @@
 
   // --- z-index 分层体系 ---
   --z-background: 1;
-  --z-platform-base: 10;
-  --z-platform-mid: 20;
-  --z-platform-connector: 25;
-  --z-platform-upper: 30;
-  --z-skill-nodes: 31;
-  --z-skill-tooltip: 40;
+  --z-hover-overlay: 50;
+  --z-header: 40;
+  --z-kpi-row: 90;
+  --z-bottom-panels: 90;
+  --z-platform-base: 60;
+  --z-platform-mid: 61;
+  --z-platform-connector: 62;
+  --z-platform-upper: 63;
+  --z-skill-nodes: 64;
+  --z-skill-tooltip: 65;
   --z-company-cards: 90;
-  --z-bottom-panels: 75;
-  --z-header: 70;
-  --z-hover-overlay: 80;
-  --z-kpi-row: 50;
-  --z-svg-overlay: 120;
-  --z-skill-submenu: 105;
+  --z-svg-overlay: 95;
+  --z-skill-submenu: 80;
   --z-modal: 200;
   --z-settings: 210;
 }

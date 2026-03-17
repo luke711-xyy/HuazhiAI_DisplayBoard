@@ -75,7 +75,7 @@ const categoryPositions: Record<string, { midTop: string; midLeft: string; upper
 const categoryLabelPositionsMap: Record<string, Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string }>> = {
   zh: {
     assembly:    { top: '350px', left: '130px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-    inspection:  { top: '350px', left: '952px', rotate: '-30deg', skewX: '30deg',  skewY: '0deg' },
+    inspection:  { top: '344px', left: '938px', rotate: '-30deg', skewX: '30deg',  skewY: '0deg' },
     palletizing: { top: '506px', left: '400px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   },
   en: {
@@ -92,7 +92,7 @@ const categoryLabelPositions = computed(() => categoryLabelPositionsMap[locale.v
 const skillPositions: Record<string, { top: string; left: string; scale?: number }> = {
   // 柔性装配 (upper_l - 4 个圆位)
   shangxiawuliao: { top: '11%', left: '11.5%' },
-  dingweiduiqi: { top: '2%', left: '38%', scale: 0.95 },
+  dingweiduiqi: { top: '2%', left: '38%', scale: 0.95, zIndex: 5 },
   lianjieguding: { top: '16%', left: '66%', scale: 0.95 },
   liuzhuanfuwei: { top: '26%', left: '38%', scale: 0.93 },
   // 柔性质检 (upper_r - 4 个位)
@@ -101,7 +101,7 @@ const skillPositions: Record<string, { top: string; left: string; scale?: number
   wusunjiance: { top: '13%', left: '64%' },
   xingneng: { top: '15%', left: '12%' },
   // 柔性码垛 (upper_m - 5 个圆位)
-  zhinengmaduo: { top: '31%', left: '37.5%', scale: 0.93 },
+  zhinengmaduo: { top: '31%', left: '37.5%', scale: 0.93, zIndex: 2 },
   cankuduijie: { top: '17%', left: '64%' },
   chengpingbaoz: { top: '16%', left: '15%' },
   lujinguihua: { top: '2%', left: '37.5%' },
@@ -218,24 +218,51 @@ const emit = defineEmits<{
 /** 本地记录当前 hover 的技能 ID，同时向父组件冒泡 */
 const localHoveredSkillId = ref<string | null>(null)
 
+/** 是否有上层平台被 hover（鼠标在平台区域内，节点间流转时保持遮罩） */
+const isUpperHovered = ref(false)
+
+/** 记录鼠标离开 upper 前最后一个 hover 的技能 ID，用于保持遮罩 */
+const lastHoveredSkillId = ref<string | null>(null)
+
+function onUpperEnter() {
+  isUpperHovered.value = true
+}
+
+function onUpperLeave() {
+  isUpperHovered.value = false
+  // 离开平台时，如果没有具体节点被 hover，清除遮罩
+  if (!localHoveredSkillId.value) {
+    lastHoveredSkillId.value = null
+    emit('hoverSkill', null)
+  }
+}
+
 // 父组件（App.vue）通过遮罩点击清除 hoveredSkillId 时，级联重置本地状态
 watch(() => props.hoveredSkillId, (newId) => {
   if (newId === null) {
     localHoveredSkillId.value = null
+    lastHoveredSkillId.value = null
     isSubmenuOpen.value = false
   }
 })
 
 function onSkillHover(skillId: string | null) {
   localHoveredSkillId.value = skillId
-  emit('hoverSkill', skillId)
 
-  // 判断当前 hover 的技能是否拥有子技能
   if (skillId) {
+    lastHoveredSkillId.value = skillId
+    emit('hoverSkill', skillId)
     const skill = props.skills.find(s => s.id === skillId)
     isSubmenuOpen.value = !!(skill?.subSkills && skill.subSkills.length > 0)
   } else {
     isSubmenuOpen.value = false
+    // 鼠标仍在上层平台内 → 保持最后一个技能的遮罩效果
+    if (isUpperHovered.value && lastHoveredSkillId.value) {
+      // 不 emit null，遮罩保持
+    } else {
+      lastHoveredSkillId.value = null
+      emit('hoverSkill', null)
+    }
   }
 }
 
@@ -303,6 +330,8 @@ defineExpose({ skillNodeRefs })
             top: categoryPositions[category.id]?.upperTop,
             left: categoryPositions[category.id]?.upperLeft,
           }"
+          @mouseenter="onUpperEnter"
+          @mouseleave="onUpperLeave"
         >
           <img :src="upperImages[category.upperLayerImage]" alt="" class="skill-platform__upper-img" :class="{ 'skill-platform__upper-img--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }" />
 
@@ -323,6 +352,7 @@ defineExpose({ skillNodeRefs })
               top: skillPositions[skill.id]?.top || '50%',
               left: skillPositions[skill.id]?.left || '50%',
               '--node-scale': skillPositions[skill.id]?.scale ?? 1,
+              '--node-z-offset': skillPositions[skill.id]?.zIndex ?? 0,
             }"
             @hover="onSkillHover"
           />
@@ -475,6 +505,7 @@ defineExpose({ skillNodeRefs })
     width: 450px;
     height: 450px;
     z-index: var(--z-platform-upper);
+    pointer-events: auto;
 
     // 有子菜单展开时提升 z-index，防止被其他平台遮挡
     &--elevated {
