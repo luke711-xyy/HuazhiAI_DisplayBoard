@@ -554,13 +554,14 @@ defineExpose({ skillNodeRefs })
   pointer-events: none;
 
   // 发光边框
-  border: 1px solid color-mix(in srgb, var(--label-color) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--label-color) 70%, transparent);
 
   // 科技感外发光
   box-shadow:
-    0 0 10px color-mix(in srgb, var(--label-color) 45%, transparent),
-    0 0 24px color-mix(in srgb, var(--label-color) 22%, transparent),
-    0 0 44px color-mix(in srgb, var(--label-color) 10%, transparent),
+    0 0 12px color-mix(in srgb, var(--label-color) 55%, transparent),
+    0 0 28px color-mix(in srgb, var(--label-color) 30%, transparent),
+    0 0 50px color-mix(in srgb, var(--label-color) 14%, transparent),
+    0 0 6px rgba(255, 255, 255, 0.08),
     0 2px 12px rgba(0, 0, 0, 0.4);
 
   // 毛玻璃层（与文字分离，避免模糊）
@@ -586,8 +587,8 @@ defineExpose({ skillNodeRefs })
   }
 
   &--en {
-    font-size: 18px;
-    font-weight: 550;
+    font-size: 16px;
+    font-weight: 530;
     letter-spacing: 2px;
   }
 
@@ -602,7 +603,7 @@ defineExpose({ skillNodeRefs })
     background: linear-gradient(
       90deg,
       transparent,
-      color-mix(in srgb, var(--label-color) 60%, white) 50%,
+      color-mix(in srgb, var(--label-color) 40%, white) 50%,
       transparent
     );
     border-radius: 1px;

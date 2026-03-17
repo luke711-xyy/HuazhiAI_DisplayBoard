@@ -138,14 +138,15 @@ function getHoveredSubSkill(): SubSkill | undefined {
     justify-content: center;
     gap: 6px;
 
-    // 发光边框
-    border: 1px solid color-mix(in srgb, var(--pill-color) 50%, transparent);
+    // 发光边框（白→彩色过渡）
+    border: 1px solid color-mix(in srgb, var(--pill-color) 55%, rgba(255, 255, 255, 0.45));
 
-    // 外发光
+    // 外发光（内层白色高光 → 外层彩色扩散）
     box-shadow:
-      0 0 8px color-mix(in srgb, var(--pill-color) 35%, transparent),
-      0 0 18px color-mix(in srgb, var(--pill-color) 16%, transparent),
-      0 0 36px color-mix(in srgb, var(--pill-color) 8%, transparent),
+      0 0 5px rgba(255, 255, 255, 0.2),
+      0 0 12px color-mix(in srgb, var(--pill-color) 45%, transparent),
+      0 0 26px color-mix(in srgb, var(--pill-color) 24%, transparent),
+      0 0 48px color-mix(in srgb, var(--pill-color) 12%, transparent),
       0 2px 8px rgba(0, 0, 0, 0.3);
 
     // 入场动画
@@ -174,11 +175,12 @@ function getHoveredSubSkill(): SubSkill | undefined {
     // hover / active 增强发光
     &:hover,
     &--active {
-      border-color: color-mix(in srgb, var(--pill-color) 65%, transparent);
+      border-color: color-mix(in srgb, var(--pill-color) 65%, rgba(255, 255, 255, 0.55));
       box-shadow:
-        0 0 12px color-mix(in srgb, var(--pill-color) 50%, transparent),
-        0 0 28px color-mix(in srgb, var(--pill-color) 25%, transparent),
-        0 0 48px color-mix(in srgb, var(--pill-color) 12%, transparent),
+        0 0 7px rgba(255, 255, 255, 0.3),
+        0 0 16px color-mix(in srgb, var(--pill-color) 55%, transparent),
+        0 0 36px color-mix(in srgb, var(--pill-color) 30%, transparent),
+        0 0 60px color-mix(in srgb, var(--pill-color) 16%, transparent),
         0 2px 12px rgba(0, 0, 0, 0.35);
     }
 
@@ -207,13 +209,13 @@ function getHoveredSubSkill(): SubSkill | undefined {
       content: '';
       position: absolute;
       top: 0;
-      left: 15%;
-      right: 15%;
+      left: 10%;
+      right: 10%;
       height: 1px;
       background: linear-gradient(
         90deg,
         transparent,
-        color-mix(in srgb, var(--pill-color) 50%, white) 50%,
+        color-mix(in srgb, var(--pill-color) 35%, white) 50%,
         transparent
       );
       border-radius: 1px;
@@ -254,13 +256,13 @@ function getHoveredSubSkill(): SubSkill | undefined {
     }
 
     .skill-submenu--en & {
-      font-size: 11px;
-      font-weight: 450;
+      font-size: 10px;
+      font-weight: 430;
     }
 
     .skill-submenu--en .skill-submenu__pill--active &,
     .skill-submenu--en .skill-submenu__pill:hover & {
-      font-weight: 600;
+      font-weight: 580;
     }
   }
 
@@ -275,11 +277,12 @@ function getHoveredSubSkill(): SubSkill | undefined {
     padding: 12px 14px;
     border-radius: 10px;
 
-    border: 1px solid color-mix(in srgb, var(--pill-color) 45%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pill-color) 60%, transparent);
     box-shadow:
-      0 0 14px color-mix(in srgb, var(--pill-color) 30%, transparent),
-      0 0 30px color-mix(in srgb, var(--pill-color) 15%, transparent),
-      0 0 50px color-mix(in srgb, var(--pill-color) 8%, transparent),
+      0 0 16px color-mix(in srgb, var(--pill-color) 40%, transparent),
+      0 0 34px color-mix(in srgb, var(--pill-color) 22%, transparent),
+      0 0 56px color-mix(in srgb, var(--pill-color) 10%, transparent),
+      0 0 6px rgba(255, 255, 255, 0.06),
       0 8px 32px rgba(0, 0, 0, 0.5);
 
     // 毛玻璃层（与文字分离，避免模糊）
@@ -304,13 +307,13 @@ function getHoveredSubSkill(): SubSkill | undefined {
       content: '';
       position: absolute;
       left: 0;
-      top: 15%;
-      bottom: 15%;
+      top: 10%;
+      bottom: 10%;
       width: 1px;
       background: linear-gradient(
         180deg,
         transparent,
-        color-mix(in srgb, var(--pill-color) 50%, white) 50%,
+        color-mix(in srgb, var(--pill-color) 35%, white) 50%,
         transparent
       );
       border-radius: 1px;
@@ -327,8 +330,8 @@ function getHoveredSubSkill(): SubSkill | undefined {
       border-bottom: 1px solid color-mix(in srgb, var(--pill-color) 20%, transparent);
 
       .skill-submenu--en & {
-        font-size: 12px;
-        font-weight: 450;
+        font-size: 11px;
+        font-weight: 430;
       }
     }
 
@@ -340,7 +343,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
       color: rgba(255, 255, 255, 0.7);
 
       .skill-submenu--en & {
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 400;
       }
     }

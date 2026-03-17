@@ -333,7 +333,7 @@ function getSkillIconUrl(iconName: string): string {
 
   &__meta {
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 550;
     color: #b8c5d6;
     display: flex;
     align-items: center;
@@ -374,7 +374,7 @@ function getSkillIconUrl(iconName: string): string {
 
   &__brief-text {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 550;
     line-height: 1.8;
     color: #b8c5d6;
     margin: 0;
@@ -437,7 +437,7 @@ function getSkillIconUrl(iconName: string): string {
 
   &__progress-note {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 550;
     line-height: 1.7;
     color: #8a9bb5;
     margin: 0;
@@ -480,6 +480,11 @@ function getSkillIconUrl(iconName: string): string {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    border: 1px solid color-mix(in srgb, var(--accent-from) 80%, rgba(255, 255, 255, 0.4));
+    box-shadow:
+      0 0 6px rgba(255, 255, 255, 0.25),
+      0 0 14px color-mix(in srgb, var(--accent-from) 35%, transparent),
+      0 0 28px color-mix(in srgb, var(--accent-from) 15%, transparent);
 
     img {
       width: 40px;
@@ -490,7 +495,7 @@ function getSkillIconUrl(iconName: string): string {
 
   &__label {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 550;
     color: #b8c5d6;
     white-space: nowrap;
   }
@@ -536,28 +541,39 @@ function getSkillIconUrl(iconName: string): string {
   padding: 10px 18px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid color-mix(in srgb, var(--badge-color) 30%, transparent);
-  box-shadow: 0 0 8px color-mix(in srgb, var(--badge-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--badge-color) 50%, rgba(255, 255, 255, 0.4));
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.2),
+    0 0 14px color-mix(in srgb, var(--badge-color) 30%, transparent),
+    0 0 28px color-mix(in srgb, var(--badge-color) 12%, transparent);
   cursor: pointer;
   transition: all 0.25s ease;
 
   &:hover {
-    border-color: color-mix(in srgb, var(--badge-color) 55%, transparent);
+    border-color: color-mix(in srgb, var(--badge-color) 65%, rgba(255, 255, 255, 0.5));
     box-shadow:
-      0 0 10px color-mix(in srgb, var(--badge-color) 20%, transparent),
-      0 0 24px color-mix(in srgb, var(--badge-color) 10%, transparent);
-    background: color-mix(in srgb, var(--badge-color) 8%, transparent);
+      0 0 8px rgba(255, 255, 255, 0.3),
+      0 0 18px color-mix(in srgb, var(--badge-color) 40%, transparent),
+      0 0 32px color-mix(in srgb, var(--badge-color) 18%, transparent);
+    background: color-mix(in srgb, var(--badge-color) 12%, transparent);
   }
 
   &__icon {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     object-fit: contain;
+    padding: 4px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid color-mix(in srgb, var(--badge-color) 35%, transparent);
+    box-shadow:
+      0 0 10px color-mix(in srgb, var(--badge-color) 25%, transparent),
+      0 0 24px color-mix(in srgb, var(--badge-color) 12%, transparent);
   }
 
   &__name {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 550;
     color: #b8c5d6;
   }
 
@@ -613,6 +629,7 @@ function getSkillIconUrl(iconName: string): string {
 
   &__desc {
     font-size: 14px;
+    font-weight: 500;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.7);
     margin: 0;

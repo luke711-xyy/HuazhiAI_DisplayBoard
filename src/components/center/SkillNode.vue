@@ -237,14 +237,15 @@ onMounted(() => {
     white-space: nowrap;
     pointer-events: none;
 
-    // 发光边框
-    border: 1px solid color-mix(in srgb, var(--label-color) 50%, transparent);
+    // 发光边框（白→彩色过渡）
+    border: 1px solid color-mix(in srgb, var(--label-color) 65%, rgba(255, 255, 255, 0.45));
 
-    // 外发光
+    // 外发光（内层白色高光 → 外层彩色扩散）
     box-shadow:
-      0 0 8px color-mix(in srgb, var(--label-color) 40%, transparent),
-      0 0 18px color-mix(in srgb, var(--label-color) 20%, transparent),
-      0 0 36px color-mix(in srgb, var(--label-color) 10%, transparent),
+      0 0 2px rgba(255, 255, 255, 0.9),
+      0 0 15px color-mix(in srgb, var(--label-color) 60%, transparent),
+      0 0 32px color-mix(in srgb, var(--label-color) 36%, transparent),
+      0 0 48px color-mix(in srgb, var(--label-color) 20%, transparent),
       0 1px 6px rgba(0, 0, 0, 0.35);
 
     // 毛玻璃层（与文字分离，避免模糊）
@@ -269,21 +270,21 @@ onMounted(() => {
       content: '';
       position: absolute;
       top: 0;
-      left: 15%;
-      right: 15%;
+      left: 10%;
+      right: 10%;
       height: 1px;
       background: linear-gradient(
         90deg,
         transparent,
-        color-mix(in srgb, var(--label-color) 50%, white) 50%,
+        color-mix(in srgb, var(--label-color) 35%, white) 50%,
         transparent
       );
       border-radius: 1px;
     }
 
     .skill-node--en & {
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 13px;
+      font-weight: 480;
     }
   }
 }
