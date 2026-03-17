@@ -130,7 +130,7 @@ for (const row of companySheet) {
     warn(`公司 "${id}" 侧边 "${side}" 不合法，应为 left/right`)
   }
 
-  companies.push({
+  const companyObj = {
     id,
     nameKey: `company.${id}.name`,
     industryKey: `company.${id}.industry`,
@@ -140,7 +140,12 @@ for (const row of companySheet) {
     side,
     slotIndex: Number(row['位置索引']) || 0,
     progress: Number(row['进度(0-100)']) || 0,
-  })
+  }
+
+  const logo = String(row['Logo文件名'] || '').trim()
+  if (logo) companyObj.logo = logo
+
+  companies.push(companyObj)
 
   // 场景流程
   const scenarioFlow = []

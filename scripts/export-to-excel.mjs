@@ -48,6 +48,7 @@ const companyRows = data.companies.map(c => {
     '进展说明(中)': zhDesc.progressNote || '',
     'Progress Note(EN)': enDesc.progressNote || '',
     '核心技能IDs(逗号分隔)': (detail.coreSkills || []).join(','),
+    'Logo文件名': c.logo || '',
   }
 
   // 场景流程扁平化（最多5步）

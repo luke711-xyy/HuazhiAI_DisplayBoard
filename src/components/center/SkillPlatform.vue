@@ -182,10 +182,6 @@ const activeCategoryIds = computed(() => {
 /** 是否有子菜单正在展开（用于临时提升平台 z-index） */
 const isSubmenuOpen = ref(false)
 
-/** 外部高亮导致子菜单展开时也要提升 z-index */
-const hasExternalSubmenu = computed(() => props.highlightedSubSkillIds.length > 0)
-const effectiveSubmenuOpen = computed(() => isSubmenuOpen.value || hasExternalSubmenu.value)
-
 /** 当前有子菜单展开的分类 ID 集合（用于提升对应 __upper 的 z-index，防止被其他平台遮挡） */
 const categoriesWithSubmenu = computed(() => {
   const ids = new Set<string>()
@@ -284,11 +280,14 @@ defineExpose({ skillNodeRefs })
 </script>
 
 <template>
-  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': effectiveSubmenuOpen }">
+  <!-- 底层网格大平台（独立容器，z-index 始终低于公司列表，不受子菜单提升影响） -->
+  <div class="skill-platform-bottom-wrap">
+    <img :src="bottomLayer" alt="" class="skill-platform-bottom" :class="{ 'skill-platform-bottom--dimmed': isOverlayActive }" />
+  </div>
+
+  <div class="skill-platform" :class="{ 'skill-platform--submenu-active': isSubmenuOpen }">
     <!-- 事件捕获层：比视觉容器窄，避免与侧边公司列表重叠 -->
     <div class="skill-platform__hit-area" @click="onPlatformClick" />
-    <!-- 底层网格大平台 -->
-    <img :src="bottomLayer" alt="" class="skill-platform__bottom" :class="{ 'skill-platform__bottom--dimmed': isOverlayActive }" />
 
     <!-- 内容偏移层：除大平台底图外的所有内容整体下移 -->
     <div class="skill-platform__content-offset">
@@ -383,6 +382,35 @@ defineExpose({ skillNodeRefs })
 </template>
 
 <style scoped lang="scss">
+// 底层大平台包裹层（独立层叠上下文，z-index 始终低于公司列表）
+// 与 .skill-platform 完全相同的定位和尺寸，但 z-index 永远不提升
+.skill-platform-bottom-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%) scale(var(--center-scale, 1)) translateY(15px);
+  width: 1200px;
+  height: 700px;
+  z-index: var(--z-platform-base);
+  pointer-events: none;
+}
+
+.skill-platform-bottom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.1);
+  margin-top: 25px;
+  width: 1200px;
+  height: auto;
+  pointer-events: none;
+
+  &--dimmed {
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+  }
+}
+
 .skill-platform {
   position: absolute;
   top: 50%;
@@ -391,8 +419,12 @@ defineExpose({ skillNodeRefs })
   width: 1200px;
   height: 700px;
   z-index: var(--z-platform-base);
-  transition: z-index 0s;
   pointer-events: none; // 外层容器不捕获鼠标事件，避免与侧边公司列表重叠冲突
+
+  // 子菜单展开时，提升平台层级（底部大平台已分离，不会被一起提升）
+  &--submenu-active {
+    z-index: var(--z-skill-submenu);
+  }
 
   // 内容偏移层：除大平台底图外的所有内容整体下移
   &__content-offset {
@@ -414,29 +446,6 @@ defineExpose({ skillNodeRefs })
     height: 100%;
     pointer-events: auto;
     z-index: 0;
-  }
-
-  // 子菜单展开时，临时提升整个平台的层级，突破层叠上下文限制
-  &--submenu-active {
-    z-index: var(--z-skill-submenu);
-  }
-
-  // 底层大平台
-  &__bottom--dimmed {
-    opacity: 0.2;
-    transition: opacity 0.3s ease;
-  }
-
-  &__bottom {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.1);
-    margin-top: 25px;
-    width: 1200px;
-    height: auto;
-    z-index: var(--z-platform-base);
-    pointer-events: none;
   }
 
   &__connector--dimmed {

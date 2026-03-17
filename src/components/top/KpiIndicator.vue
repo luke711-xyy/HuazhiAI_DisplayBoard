@@ -92,7 +92,12 @@ function getIconUrl(icon: string): string {
 
   &:hover {
     transform: scale(1.08);
-    filter: brightness(1.15);
+    border-color: color-mix(in srgb, var(--kpi-color) 70%, transparent);
+    box-shadow:
+      0 0 22px color-mix(in srgb, var(--kpi-color) 45%, transparent),
+      0 0 48px color-mix(in srgb, var(--kpi-color) 25%, transparent),
+      0 0 80px color-mix(in srgb, var(--kpi-color) 12%, transparent),
+      0 2px 12px rgba(0, 0, 0, 0.25);
   }
 
   &--active {

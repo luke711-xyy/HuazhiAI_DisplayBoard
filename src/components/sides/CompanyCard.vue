@@ -27,6 +27,17 @@ const props = defineProps<{
   isHovered: boolean
 }>()
 
+/** 动态加载公司 logo 图片 */
+const companyLogos = import.meta.glob('@/assets/company-logos/*.png', { eager: true, import: 'default' }) as Record<string, string>
+
+const logoUrl = computed(() => {
+  if (!props.company.logo) return ''
+  for (const [path, url] of Object.entries(companyLogos)) {
+    if (path.endsWith(`/${props.company.logo}`)) return url
+  }
+  return ''
+})
+
 const emit = defineEmits<{
   (e: 'hover', companyId: string | null): void
   (e: 'click', companyId: string): void
@@ -84,6 +95,11 @@ onUnmounted(() => {
     @mouseleave="deviceMode === 'pc' ? $emit('hover', null) : undefined"
     @click="deviceMode === 'pc' ? $emit('click', company.id) : handleMobileClick()"
   >
+    <!-- 公司 Logo（底座上方） -->
+    <div class="company-card__logo" :class="{ 'company-card__logo--empty': !logoUrl }">
+      <img v-if="logoUrl" :src="logoUrl" alt="" class="company-card__logo-img" />
+    </div>
+
     <!-- 方块立体图 -->
     <img :src="cubeUrl" alt="" class="company-card__cube" />
 
@@ -100,6 +116,27 @@ onUnmounted(() => {
   gap: 2px;
   cursor: pointer;
   width: 90px;
+
+  &__logo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--empty {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &__logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+  }
 
   &__cube {
     width: 80px;

@@ -27,6 +27,8 @@ export interface Company {
   slotIndex: number
   /** 合作推进进度 (0-100) */
   progress: number
+  /** 公司 logo 图片文件名（不含路径，如 "xiandaozhineng_logo.png"），为空则不显示 */
+  logo?: string
 }
 
 /**

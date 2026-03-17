@@ -412,7 +412,8 @@
       ],
       "side": "left",
       "slotIndex": 0,
-      "progress": 92
+      "progress": 92,
+      "logo": "xiandaozhinengzhuangbeigufen_logo.png"
     },
     {
       "id": "aotewei",
@@ -427,7 +428,8 @@
       ],
       "side": "left",
       "slotIndex": 1,
-      "progress": 88
+      "progress": 88,
+      "logo": "aoteweikejigufen_logo.png"
     },
     {
       "id": "xinjie",
@@ -442,7 +444,8 @@
       ],
       "side": "left",
       "slotIndex": 2,
-      "progress": 75
+      "progress": 75,
+      "logo": "xinjiedianqigufen_logo.png"
     },
     {
       "id": "shuangliang",
@@ -457,7 +460,8 @@
       ],
       "side": "left",
       "slotIndex": 3,
-      "progress": 86
+      "progress": 86,
+      "logo": "shuangliangjienenxitonggufen_logo.png"
     },
     {
       "id": "rilian",
@@ -472,7 +476,8 @@
       ],
       "side": "left",
       "slotIndex": 4,
-      "progress": 82
+      "progress": 82,
+      "logo": "riliankejigufen_logo.png"
     },
     {
       "id": "tianqi",
@@ -487,7 +492,8 @@
       ],
       "side": "left",
       "slotIndex": 5,
-      "progress": 78
+      "progress": 78,
+      "logo": "tianqizidonghuagongchenggufen_logo.png"
     },
     {
       "id": "xihua",
@@ -502,7 +508,8 @@
       ],
       "side": "left",
       "slotIndex": 6,
-      "progress": 70
+      "progress": 70,
+      "logo": "xihuaxinnengyuankejigufen_logo.png"
     },
     {
       "id": "paike",
@@ -517,7 +524,8 @@
       ],
       "side": "right",
       "slotIndex": 8,
-      "progress": 85
+      "progress": 85,
+      "logo": "paikexincailiaokejigufen_logo.png"
     },
     {
       "id": "delijia",
@@ -532,7 +540,8 @@
       ],
       "side": "right",
       "slotIndex": 0,
-      "progress": 72
+      "progress": 72,
+      "logo": "delijiachuandongkeji_logo.png"
     },
     {
       "id": "hangya",
@@ -547,7 +556,8 @@
       ],
       "side": "right",
       "slotIndex": 1,
-      "progress": 80
+      "progress": 80,
+      "logo": "hangyakejigufen_logo.png"
     },
     {
       "id": "longda",
@@ -562,7 +572,8 @@
       ],
       "side": "right",
       "slotIndex": 2,
-      "progress": 76
+      "progress": 76,
+      "logo": "longdachaohejingufen_logo.png"
     },
     {
       "id": "weidao",
@@ -577,7 +588,8 @@
       ],
       "side": "right",
       "slotIndex": 3,
-      "progress": 74
+      "progress": 74,
+      "logo": "weidaonamikejigufen_logo.png"
     },
     {
       "id": "huadong",
@@ -592,7 +604,8 @@
       ],
       "side": "right",
       "slotIndex": 4,
-      "progress": 35
+      "progress": 35,
+      "logo": "huadongzhongxingjixiegufen_logo.png"
     },
     {
       "id": "beisite",
@@ -607,7 +620,8 @@
       ],
       "side": "right",
       "slotIndex": 5,
-      "progress": 68
+      "progress": 68,
+      "logo": "beisitejingmijixiegufen_logo.png"
     },
     {
       "id": "xiangsheng",
@@ -622,7 +636,8 @@
       ],
       "side": "right",
       "slotIndex": 6,
-      "progress": 45
+      "progress": 45,
+      "logo": "xiangshengyiliaokejigufen_logo.png"
     }
   ],
   "companyDetails": [
