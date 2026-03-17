@@ -189,9 +189,10 @@ const effectiveSubmenuOpen = computed(() => isSubmenuOpen.value || hasExternalSu
 /** 当前有子菜单展开的分类 ID 集合（用于提升对应 __upper 的 z-index，防止被其他平台遮挡） */
 const categoriesWithSubmenu = computed(() => {
   const ids = new Set<string>()
-  // 直接 hover 触发
-  if (localHoveredSkillId.value) {
-    const skill = props.skills.find(s => s.id === localHoveredSkillId.value)
+  // 直接 hover 或遮罩保持期间
+  const activeSkillId = localHoveredSkillId.value || (isUpperHovered.value ? lastHoveredSkillId.value : null)
+  if (activeSkillId) {
+    const skill = props.skills.find(s => s.id === activeSkillId)
     if (skill?.subSkills?.length) ids.add(skill.categoryId)
   }
   // 外部企业 hover 触发
@@ -255,11 +256,11 @@ function onSkillHover(skillId: string | null) {
     const skill = props.skills.find(s => s.id === skillId)
     isSubmenuOpen.value = !!(skill?.subSkills && skill.subSkills.length > 0)
   } else {
-    isSubmenuOpen.value = false
     // 鼠标仍在上层平台内 → 保持最后一个技能的遮罩效果
     if (isUpperHovered.value && lastHoveredSkillId.value) {
-      // 不 emit null，遮罩保持
+      // 不 emit null，遮罩保持；submenu 状态也保持不变
     } else {
+      isSubmenuOpen.value = false
       lastHoveredSkillId.value = null
       emit('hoverSkill', null)
     }

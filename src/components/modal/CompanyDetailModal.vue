@@ -17,7 +17,7 @@ import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
 import btnCloseUrl from '@/assets/buttons/btn_close.png'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { deviceMode } = useSettings()
 
 const props = defineProps<{
@@ -142,6 +142,7 @@ function getSkillIconUrl(iconName: string): string {
     <div class="modal-overlay" @click="$emit('close')" @touchend.prevent.self="$emit('close')">
       <div
         class="modal-content"
+        :class="{ 'modal-content--en': locale === 'en' }"
         :style="{
           '--accent-from': accentColors.from,
           '--accent-to': accentColors.to,
@@ -264,10 +265,10 @@ function getSkillIconUrl(iconName: string): string {
 }
 
 .modal-content {
-  width: 750px;
-  max-height: 820px;
+  width: 820px;
+  max-height: 880px;
   border-radius: 20px;
-  padding: 40px;
+  padding: 44px;
   position: relative;
   overflow-y: auto;
   isolation: isolate;
@@ -324,14 +325,14 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__name {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 700;
     color: var(--color-text-primary);
     margin-bottom: 8px;
   }
 
   &__meta {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 500;
     color: #b8c5d6;
     display: flex;
@@ -353,7 +354,7 @@ function getSkillIconUrl(iconName: string): string {
 
   // 小节标题左侧竖条使用主题色
   &__section-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: var(--color-text-primary);
     margin-bottom: 20px;
@@ -372,7 +373,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__brief-text {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.8;
     color: #b8c5d6;
@@ -426,7 +427,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__progress-value {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     color: var(--accent-from);
     flex-shrink: 0;
@@ -435,7 +436,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__progress-note {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     line-height: 1.7;
     color: #8a9bb5;
@@ -446,6 +447,21 @@ function getSkillIconUrl(iconName: string): string {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+  }
+
+  // 英文版：弹窗更大，字号稍小
+  &--en {
+    width: 880px;
+    max-height: 900px;
+
+    .modal-content__name { font-size: 26px; }
+    .modal-content__meta { font-size: 14px; }
+    .modal-content__section-title { font-size: 17px; }
+    .modal-content__brief-text { font-size: 14px; }
+    .modal-content__progress-value { font-size: 15px; }
+    .modal-content__progress-note { font-size: 13px; }
+    .scenario-step__label { font-size: 13px; }
+    .skill-badge__name { font-size: 13px; }
   }
 }
 
@@ -473,7 +489,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__label {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     color: #b8c5d6;
     white-space: nowrap;
@@ -540,7 +556,7 @@ function getSkillIconUrl(iconName: string): string {
   }
 
   &__name {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     color: #b8c5d6;
   }

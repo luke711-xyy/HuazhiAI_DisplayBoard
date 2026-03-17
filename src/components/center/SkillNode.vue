@@ -86,10 +86,10 @@ const matchingSubSkillIds = computed(() => {
   return props.highlightedSubSkillIds.filter(id => mySubIds.has(id))
 })
 
-/** 是否展示二级子菜单（本地 hover 或有外部匹配的子技能） */
+/** 是否展示二级子菜单（本地 hover、外部高亮、或遮罩保持期间该节点仍被高亮） */
 const showSubMenu = computed(() => {
   if (!props.skill.subSkills || props.skill.subSkills.length === 0) return false
-  return isHovered.value || matchingSubSkillIds.value.length > 0
+  return isHovered.value || props.isHighlighted || matchingSubSkillIds.value.length > 0
 })
 
 /** 暴露根元素供连线坐标计算 */
