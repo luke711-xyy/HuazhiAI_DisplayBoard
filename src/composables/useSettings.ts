@@ -20,6 +20,9 @@ const deviceMode = ref<'pc' | 'mobile'>('mobile')
 /** 常闭底部列表：开启后底部三个滚动列表永远不显示，KPI 数字也隐藏 */
 const hideBottomPanels = ref(false)
 
+/** 待机演示模式：开启后鼠标闲置 5 秒自动循环展示公司 hover 效果 */
+const idleDemoEnabled = ref(false)
+
 export function useSettings() {
   /** 切换设置面板显隐 */
   function toggleSettings() {
@@ -36,6 +39,7 @@ export function useSettings() {
     soundVolume,
     deviceMode,
     hideBottomPanels,
+    idleDemoEnabled,
     toggleSettings,
     closeSettings,
   }

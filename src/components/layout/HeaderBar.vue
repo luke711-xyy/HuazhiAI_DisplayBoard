@@ -9,7 +9,7 @@ import logoUrl from '@/assets/logo/huazhi_logo.png'
 import settingUrl from '@/assets/icons/ic-setting.png'
 import { useI18n } from '@/composables/useI18n'
 
-const { locale } = useI18n()
+const { t, locale } = useI18n()
 
 defineEmits<{
   (e: 'toggleSettings'): void
@@ -26,7 +26,7 @@ defineProps<{
     <div class="header-bar__logo">
       <img :src="logoUrl" alt="HUAZHI AI" class="header-bar__logo-img" />
       <span class="header-bar__logo-divider" />
-      <span class="header-bar__logo-text">无锡（华为云）人工智能创新中心</span>
+      <span class="header-bar__logo-text" :class="{ 'header-bar__logo-text--en': locale === 'en' }">{{ t('app.logoText') }}</span>
     </div>
 
     <!-- 中间标题 -->
@@ -79,21 +79,30 @@ defineProps<{
 
   &__logo-text {
     font-size: 20px;
-    font-weight: 350;
+    font-weight: 500;
     color: #fff;
     white-space: nowrap;
     letter-spacing: 2px;
     padding-bottom: 10px;
     padding-left: 10px;
+
+    &--en {
+      white-space: pre-line;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      line-height: 1.4;
+    }
   }
 
   &__title {
     position: absolute;
-    top: 20px;
+    top: 30px;
     left: 50%;
     transform: translateX(calc(-50% + 6px));
-    font-size: 38px;
-    font-weight: 520;
+    font-size: 40px;
+    font-weight: 600;
     letter-spacing: 14px;
     color: var(--color-text-primary);
     white-space: nowrap;
@@ -101,6 +110,7 @@ defineProps<{
     &--en {
       letter-spacing: 4px;
       font-size: 28px;
+      font-weight: 650;
     }
   }
 

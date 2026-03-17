@@ -11,7 +11,7 @@ import { ref } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { deviceMode } = useSettings()
 
 const props = defineProps<{
@@ -48,7 +48,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
 </script>
 
 <template>
-  <div class="skill-submenu" :class="{ 'skill-submenu--down': direction === 'down' }" @mouseenter.stop @mouseleave.stop @click.stop>
+  <div class="skill-submenu" :class="{ 'skill-submenu--down': direction === 'down', 'skill-submenu--en': locale === 'en' }" @mouseenter.stop @mouseleave.stop @click.stop>
     <!-- 垂直连接线 -->
     <div class="skill-submenu__stem" :style="{ '--stem-color': categoryColor }" />
 
@@ -97,7 +97,8 @@ function getHoveredSubSkill(): SubSkill | undefined {
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(var(--submenu-scale, 1));
+  transform-origin: bottom center;
   z-index: var(--z-skill-submenu);
   display: flex;
   flex-direction: column;
@@ -138,12 +139,13 @@ function getHoveredSubSkill(): SubSkill | undefined {
     gap: 6px;
 
     // 发光边框
-    border: 1px solid color-mix(in srgb, var(--pill-color) 30%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pill-color) 50%, transparent);
 
     // 外发光
     box-shadow:
-      0 0 6px color-mix(in srgb, var(--pill-color) 20%, transparent),
-      0 0 14px color-mix(in srgb, var(--pill-color) 8%, transparent),
+      0 0 8px color-mix(in srgb, var(--pill-color) 35%, transparent),
+      0 0 18px color-mix(in srgb, var(--pill-color) 16%, transparent),
+      0 0 36px color-mix(in srgb, var(--pill-color) 8%, transparent),
       0 2px 8px rgba(0, 0, 0, 0.3);
 
     // 入场动画
@@ -161,8 +163,8 @@ function getHoveredSubSkill(): SubSkill | undefined {
       pointer-events: none;
       background: linear-gradient(
         135deg,
-        rgba(0, 0, 0, 0.5) 0%,
-        color-mix(in srgb, var(--pill-color) 20%, transparent) 80%
+        rgba(0, 0, 0, 0.7) 0%,
+        color-mix(in srgb, var(--pill-color) 28%, transparent) 80%
       );
       backdrop-filter: blur(12px) saturate(1.3);
       -webkit-backdrop-filter: blur(12px) saturate(1.3);
@@ -172,10 +174,11 @@ function getHoveredSubSkill(): SubSkill | undefined {
     // hover / active 增强发光
     &:hover,
     &--active {
-      border-color: color-mix(in srgb, var(--pill-color) 55%, transparent);
+      border-color: color-mix(in srgb, var(--pill-color) 65%, transparent);
       box-shadow:
-        0 0 10px color-mix(in srgb, var(--pill-color) 40%, transparent),
-        0 0 24px color-mix(in srgb, var(--pill-color) 18%, transparent),
+        0 0 12px color-mix(in srgb, var(--pill-color) 50%, transparent),
+        0 0 28px color-mix(in srgb, var(--pill-color) 25%, transparent),
+        0 0 48px color-mix(in srgb, var(--pill-color) 12%, transparent),
         0 2px 12px rgba(0, 0, 0, 0.35);
     }
 
@@ -183,8 +186,8 @@ function getHoveredSubSkill(): SubSkill | undefined {
     &--active::after {
       background: linear-gradient(
         135deg,
-        rgba(0, 0, 0, 0.35) 0%,
-        color-mix(in srgb, var(--pill-color) 35%, transparent) 100%
+        rgba(0, 0, 0, 0.55) 0%,
+        color-mix(in srgb, var(--pill-color) 40%, transparent) 100%
       );
     }
 
@@ -249,6 +252,16 @@ function getHoveredSubSkill(): SubSkill | undefined {
       font-weight: 650;
       color: #fff;
     }
+
+    .skill-submenu--en & {
+      font-size: 11px;
+      font-weight: 450;
+    }
+
+    .skill-submenu--en .skill-submenu__pill--active &,
+    .skill-submenu--en .skill-submenu__pill:hover & {
+      font-weight: 600;
+    }
   }
 
   // 详情描述浮窗
@@ -262,10 +275,11 @@ function getHoveredSubSkill(): SubSkill | undefined {
     padding: 12px 14px;
     border-radius: 10px;
 
-    border: 1px solid color-mix(in srgb, var(--pill-color) 25%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pill-color) 45%, transparent);
     box-shadow:
-      0 0 10px color-mix(in srgb, var(--pill-color) 18%, transparent),
-      0 0 24px color-mix(in srgb, var(--pill-color) 8%, transparent),
+      0 0 14px color-mix(in srgb, var(--pill-color) 30%, transparent),
+      0 0 30px color-mix(in srgb, var(--pill-color) 15%, transparent),
+      0 0 50px color-mix(in srgb, var(--pill-color) 8%, transparent),
       0 8px 32px rgba(0, 0, 0, 0.5);
 
     // 毛玻璃层（与文字分离，避免模糊）
@@ -311,6 +325,11 @@ function getHoveredSubSkill(): SubSkill | undefined {
       margin-bottom: 6px;
       padding-bottom: 5px;
       border-bottom: 1px solid color-mix(in srgb, var(--pill-color) 20%, transparent);
+
+      .skill-submenu--en & {
+        font-size: 12px;
+        font-weight: 450;
+      }
     }
 
     &-desc {
@@ -319,6 +338,11 @@ function getHoveredSubSkill(): SubSkill | undefined {
       font-size: 12px;
       line-height: 1.7;
       color: rgba(255, 255, 255, 0.7);
+
+      .skill-submenu--en & {
+        font-size: 11px;
+        font-weight: 400;
+      }
     }
   }
 }
@@ -329,6 +353,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
   top: 100%;
   padding-bottom: 0;
   padding-top: 6px;
+  transform-origin: top center;
 
   .skill-submenu__stem {
     background: linear-gradient(

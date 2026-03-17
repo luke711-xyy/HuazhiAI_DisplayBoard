@@ -14,7 +14,7 @@ import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
 import SkillSubMenu from './SkillSubMenu.vue'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { deviceMode } = useSettings()
 
 const props = defineProps<{
@@ -24,7 +24,7 @@ const props = defineProps<{
   highlightedSubSkillIds: string[]
   categoryColor: string
   /** 标签相对于节点左上角的偏移及变形 */
-  labelOffset: { top: string; left: string; rotate?: string; skewX?: string; skewY?: string }
+  labelOffset: { top: string; left: string; rotate?: string; skewX?: string; skewY?: string; scale?: number }
   /** 子菜单展开方向 */
   submenuDirection?: 'up' | 'down'
   /** 公司 hover 时，非关联节点降暗 */
@@ -74,13 +74,10 @@ function findIcon(name: string): string {
   return ''
 }
 
-const iconUrl = computed(() => {
-  if (isHovered.value || props.isHighlighted) {
-    // 优先使用 select 图标，缺失时回退到默认图标
-    return findIcon(props.skill.iconSelect) || findIcon(props.skill.icon)
-  }
-  return findIcon(props.skill.icon)
-})
+/** 默认态图标 URL */
+const iconDefault = computed(() => findIcon(props.skill.icon))
+/** 选中态图标 URL（缺失时回退到默认） */
+const iconSelect = computed(() => findIcon(props.skill.iconSelect) || findIcon(props.skill.icon))
 
 /** 该技能下被外部高亮的子技能 ID 列表 */
 const matchingSubSkillIds = computed(() => {
@@ -113,13 +110,16 @@ onMounted(() => {
   <div
     ref="nodeRef"
     class="skill-node"
-    :class="{ 'skill-node--highlighted': isHighlighted, 'skill-node--hovered': isHovered, 'skill-node--overlay-dimmed': isDimmedByOverlay, 'skill-node--submenu-open': showSubMenu }"
+    :class="{ 'skill-node--highlighted': isHighlighted, 'skill-node--hovered': isHovered, 'skill-node--overlay-dimmed': isDimmedByOverlay, 'skill-node--submenu-open': showSubMenu, 'skill-node--en': locale === 'en' }"
     :data-skill-id="skill.id"
     @mouseenter="deviceMode === 'pc' ? (isHovered = true, $emit('hover', skill.id)) : undefined"
     @mouseleave="deviceMode === 'pc' ? (isHovered = false, $emit('hover', null)) : undefined"
     @click.stop="deviceMode === 'mobile' ? handleMobileClick() : undefined"
   >
-    <img :src="iconUrl" :alt="skill.nameKey" class="skill-node__icon" />
+    <div class="skill-node__icon-wrap">
+      <img :src="iconDefault" :alt="skill.nameKey" class="skill-node__icon skill-node__icon--default" />
+      <img :src="iconSelect" :alt="skill.nameKey" class="skill-node__icon skill-node__icon--select" />
+    </div>
 
     <!-- 毛玻璃文字标签（位置通过 labelOffset 单独控制） -->
     <span
@@ -128,7 +128,7 @@ onMounted(() => {
         '--label-color': categoryColor,
         top: labelOffset.top,
         left: labelOffset.left,
-        transform: `translateX(-50%) rotate(${labelOffset.rotate || '0deg'}) skewX(${labelOffset.skewX || '0deg'}) skewY(${labelOffset.skewY || '0deg'})`,
+        transform: `translateX(-50%) rotate(${labelOffset.rotate || '0deg'}) skewX(${labelOffset.skewX || '0deg'}) skewY(${labelOffset.skewY || '0deg'}) scale(${labelOffset.scale ?? 1})`,
       }"
     >
       {{ t(skill.nameKey) }}
@@ -142,6 +142,7 @@ onMounted(() => {
       :category-color="categoryColor"
       :external-active-ids="matchingSubSkillIds"
       :direction="submenuDirection || 'up'"
+      :style="labelOffset.scale ? { '--submenu-scale': labelOffset.scale } : undefined"
     />
 
     <!-- 默认 slot (tooltip 等) -->
@@ -173,9 +174,12 @@ onMounted(() => {
     z-index: calc(var(--z-skill-nodes) + var(--node-z-offset, 0) + 10);
 
     // filter 只作用于图标，避免光栅化文字导致模糊
-    .skill-node__icon {
-      filter: brightness(1.4) saturate(1.6) drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    .skill-node__icon-wrap {
+      filter: brightness(1.5) saturate(1.8) drop-shadow(0 0 12px rgba(59, 130, 246, 0.7)) drop-shadow(0 0 24px rgba(59, 130, 246, 0.3));
     }
+
+    .skill-node__icon--default { opacity: 0; }
+    .skill-node__icon--select { opacity: 1; }
 
     // hover/高亮时标签提到最上层，避免被其他节点遮挡
     .skill-node__label {
@@ -188,7 +192,7 @@ onMounted(() => {
     opacity: 0.8;
     transition: opacity 0.3s ease, filter 0.3s ease;
 
-    .skill-node__icon {
+    .skill-node__icon-wrap {
       filter: brightness(0.5);
     }
 
@@ -198,11 +202,26 @@ onMounted(() => {
     }
   }
 
-  &__icon {
+  &__icon-wrap {
+    position: relative;
     width: 106px;
     height: 106px;
-    object-fit: contain;
+    flex-shrink: 0;
     transition: filter var(--duration-normal) var(--ease-smooth);
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+
+    &--select {
+      opacity: 0;
+    }
   }
 
   // 子级技能标签 — 小号胶囊 · 毛玻璃 + 光效
@@ -212,19 +231,20 @@ onMounted(() => {
     // transform 由内联 style 控制（含 translateX(-50%) + rotate + skew）
     padding: 3px 10px;
     border-radius: 12px;
-    font-size: 18px;
-    font-weight: 550;
+    font-size: 16px;
+    font-weight: 500;
     color: #fff;
     white-space: nowrap;
     pointer-events: none;
 
     // 发光边框
-    border: 1px solid color-mix(in srgb, var(--label-color) 30%, transparent);
+    border: 1px solid color-mix(in srgb, var(--label-color) 50%, transparent);
 
     // 外发光
     box-shadow:
-      0 0 6px color-mix(in srgb, var(--label-color) 25%, transparent),
-      0 0 14px color-mix(in srgb, var(--label-color) 10%, transparent),
+      0 0 8px color-mix(in srgb, var(--label-color) 40%, transparent),
+      0 0 18px color-mix(in srgb, var(--label-color) 20%, transparent),
+      0 0 36px color-mix(in srgb, var(--label-color) 10%, transparent),
       0 1px 6px rgba(0, 0, 0, 0.35);
 
     // 毛玻璃层（与文字分离，避免模糊）
@@ -259,6 +279,11 @@ onMounted(() => {
         transparent
       );
       border-radius: 1px;
+    }
+
+    .skill-node--en & {
+      font-size: 15px;
+      font-weight: 500;
     }
   }
 }

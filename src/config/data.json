@@ -445,6 +445,21 @@
       "progress": 75
     },
     {
+      "id": "shuangliang",
+      "nameKey": "company.shuangliang.name",
+      "industryKey": "company.shuangliang.industry",
+      "type": "Private",
+      "status": "promotion",
+      "relatedSkillIds": [
+        "lianjieguding",
+        "xingneng",
+        "quexianjiance"
+      ],
+      "side": "left",
+      "slotIndex": 3,
+      "progress": 86
+    },
+    {
       "id": "rilian",
       "nameKey": "company.rilian.name",
       "industryKey": "company.rilian.industry",
@@ -456,7 +471,7 @@
         "xingneng"
       ],
       "side": "left",
-      "slotIndex": 3,
+      "slotIndex": 4,
       "progress": 82
     },
     {
@@ -471,7 +486,7 @@
         "rouxingshineng"
       ],
       "side": "left",
-      "slotIndex": 4,
+      "slotIndex": 5,
       "progress": 78
     },
     {
@@ -486,7 +501,7 @@
         "xingneng"
       ],
       "side": "left",
-      "slotIndex": 5,
+      "slotIndex": 6,
       "progress": 70
     },
     {
@@ -500,8 +515,8 @@
         "lianjieguding",
         "wusunjiance"
       ],
-      "side": "left",
-      "slotIndex": 6,
+      "side": "right",
+      "slotIndex": 8,
       "progress": 85
     },
     {
@@ -565,21 +580,6 @@
       "progress": 74
     },
     {
-      "id": "shuangliang",
-      "nameKey": "company.shuangliang.name",
-      "industryKey": "company.shuangliang.industry",
-      "type": "Private",
-      "status": "promotion",
-      "relatedSkillIds": [
-        "lianjieguding",
-        "xingneng",
-        "quexianjiance"
-      ],
-      "side": "right",
-      "slotIndex": 4,
-      "progress": 86
-    },
-    {
       "id": "huadong",
       "nameKey": "company.huadong.name",
       "industryKey": "company.huadong.industry",
@@ -591,7 +591,7 @@
         "zhinengmaduo"
       ],
       "side": "right",
-      "slotIndex": 5,
+      "slotIndex": 4,
       "progress": 35
     },
     {
@@ -606,7 +606,7 @@
         "quexianjiance"
       ],
       "side": "right",
-      "slotIndex": 6,
+      "slotIndex": 5,
       "progress": 68
     },
     {
@@ -621,7 +621,7 @@
         "xingneng"
       ],
       "side": "right",
-      "slotIndex": 7,
+      "slotIndex": 6,
       "progress": 45
     }
   ],
@@ -732,6 +732,39 @@
         "dianqiceshi"
       ],
       "progressNoteKey": "companyDesc.xinjie.progressNote"
+    },
+    {
+      "companyId": "shuangliang",
+      "briefInfoKeys": {
+        "name": "company.shuangliang.name",
+        "industry": "company.shuangliang.industry",
+        "type": "company.shuangliang.type"
+      },
+      "briefDescKey": "companyDesc.shuangliang.brief",
+      "scenarioFlow": [
+        {
+          "labelKey": "scenario.connecting",
+          "icon": "lianjieguding",
+          "progress": 100
+        },
+        {
+          "labelKey": "scenario.performance",
+          "icon": "xingneng",
+          "progress": 95
+        },
+        {
+          "labelKey": "scenario.inspection",
+          "icon": "quexianjiance",
+          "progress": 90
+        }
+      ],
+      "coreSkills": [
+        "luoshuaningsuo",
+        "kakouguding",
+        "dianqiceshi",
+        "biaomianhuahen"
+      ],
+      "progressNoteKey": "companyDesc.shuangliang.progressNote"
     },
     {
       "companyId": "rilian",
@@ -995,39 +1028,6 @@
         "dianqiceshi"
       ],
       "progressNoteKey": "companyDesc.weidao.progressNote"
-    },
-    {
-      "companyId": "shuangliang",
-      "briefInfoKeys": {
-        "name": "company.shuangliang.name",
-        "industry": "company.shuangliang.industry",
-        "type": "company.shuangliang.type"
-      },
-      "briefDescKey": "companyDesc.shuangliang.brief",
-      "scenarioFlow": [
-        {
-          "labelKey": "scenario.connecting",
-          "icon": "lianjieguding",
-          "progress": 100
-        },
-        {
-          "labelKey": "scenario.performance",
-          "icon": "xingneng",
-          "progress": 95
-        },
-        {
-          "labelKey": "scenario.inspection",
-          "icon": "quexianjiance",
-          "progress": 90
-        }
-      ],
-      "coreSkills": [
-        "luoshuaningsuo",
-        "kakouguding",
-        "dianqiceshi",
-        "biaomianhuahen"
-      ],
-      "progressNoteKey": "companyDesc.shuangliang.progressNote"
     },
     {
       "companyId": "huadong",

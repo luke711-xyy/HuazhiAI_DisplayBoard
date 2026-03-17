@@ -19,8 +19,7 @@ const { deviceMode } = useSettings()
 // 预加载所有 cube 图片
 import cubeChubei from '@/assets/cubes/cube_company_chubei_hover.png'
 import cubeShishi from '@/assets/cubes/cube_company_shishi.png'
-import cubeTuiguang from '@/assets/cubes/cube_company_tuiguang.png'
-import cubeTuiguangHover from '@/assets/cubes/cube_company_tuiguang_hover.png'
+import cubeTuiguang from '@/assets/cubes/cube_company_tuiguang_hover.png'
 
 const props = defineProps<{
   company: Company
@@ -50,9 +49,7 @@ const cubeUrl = computed(() => {
   const status = props.company.status
   if (status === 'reserve') return cubeChubei
   if (status === 'implementation') return cubeShishi
-  if (status === 'promotion') {
-    return props.isHovered ? cubeTuiguangHover : cubeTuiguang
-  }
+  if (status === 'promotion') return cubeTuiguang
   return cubeShishi
 })
 

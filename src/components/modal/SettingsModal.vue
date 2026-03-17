@@ -11,10 +11,11 @@ import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
 
 const { t, locale, setLocale } = useI18n()
-const { soundVolume, deviceMode, hideBottomPanels } = useSettings()
+const { soundVolume, deviceMode, hideBottomPanels, idleDemoEnabled } = useSettings()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'close'): void
+  (e: 'toggleIdleDemo'): void
 }>()
 </script>
 
@@ -72,6 +73,18 @@ defineEmits<{
         class="settings-modal__toggle"
         :class="{ 'settings-modal__toggle--light': hideBottomPanels }"
         @click="hideBottomPanels = !hideBottomPanels"
+      >
+        <span class="settings-modal__toggle-knob" />
+      </button>
+    </div>
+
+    <!-- 待机演示 -->
+    <div class="settings-modal__item">
+      <span class="settings-modal__label">{{ t('settings.idleDemo') }}</span>
+      <button
+        class="settings-modal__toggle"
+        :class="{ 'settings-modal__toggle--light': idleDemoEnabled }"
+        @click="emit('toggleIdleDemo')"
       >
         <span class="settings-modal__toggle-knob" />
       </button>

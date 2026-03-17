@@ -74,9 +74,9 @@ const categoryPositions: Record<string, { midTop: string; midLeft: string; upper
  */
 const categoryLabelPositionsMap: Record<string, Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string }>> = {
   zh: {
-    assembly:    { top: '350px', left: '130px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-    inspection:  { top: '344px', left: '938px', rotate: '-30deg', skewX: '30deg',  skewY: '0deg' },
-    palletizing: { top: '506px', left: '400px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+    assembly:    { top: '330px', left: '130px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+    inspection:  { top: '326px', left: '932px', rotate: '-30deg', skewX: '30deg',  skewY: '0deg' },
+    palletizing: { top: '488px', left: '395px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   },
   en: {
     assembly:    { top: '350px', left: '90px', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
@@ -89,22 +89,22 @@ const categoryLabelPositions = computed(() => categoryLabelPositionsMap[locale.v
 /**
  * 每个技能在其上层平台中的相对位置 (百分比)
  */
-const skillPositions: Record<string, { top: string; left: string; scale?: number }> = {
+const skillPositions: Record<string, { top: string; left: string; scale?: number; zIndex?: number }> = {
   // 柔性装配 (upper_l - 4 个圆位)
   shangxiawuliao: { top: '11%', left: '11.5%' },
   dingweiduiqi: { top: '2%', left: '38%', scale: 0.95, zIndex: 5 },
   lianjieguding: { top: '16%', left: '66%', scale: 0.95 },
   liuzhuanfuwei: { top: '26%', left: '38%', scale: 0.93 },
   // 柔性质检 (upper_r - 4 个位)
-  quexianjiance: { top: '2%', left: '38%' },
+  quexianjiance: { top: '1%', left: '38%' },
   rouxingshineng: { top: '28%', left: '37%' },
   wusunjiance: { top: '13%', left: '64%' },
   xingneng: { top: '15%', left: '12%' },
   // 柔性码垛 (upper_m - 5 个圆位)
-  zhinengmaduo: { top: '31%', left: '37.5%', scale: 0.93, zIndex: 2 },
-  cankuduijie: { top: '17%', left: '64%' },
-  chengpingbaoz: { top: '16%', left: '15%' },
-  lujinguihua: { top: '2%', left: '37.5%' },
+  zhinengmaduo: { top: '31%', left: '37.5%', scale: 0.8, zIndex: 2 },
+  cankuduijie: { top: '15%', left: '66%' },
+  chengpingbaoz: { top: '15%', left: '14%' },
+  lujinguihua: { top: '-1.5%', left: '37.5%' },
   fenjianpeisong: { top: '14.5%', left: '40%', scale: 0.88 },
 }
 
@@ -128,23 +128,23 @@ const skillSubmenuDirection: Record<string, 'up' | 'down'> = {
  * 标签水平方向默认以 translateX(-50%) 居中，left 基于节点宽度百分比
  * 可对每个技能单独微调
  */
-const skillLabelOffsets: Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string }> = {
+const skillLabelOffsets: Record<string, { top: string; left: string; rotate: string; skewX: string; skewY: string; scale?: number }> = {
   // 柔性装配
   shangxiawuliao: { top: '78px', left: '20%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  dingweiduiqi:   { top: '60px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  lianjieguding:  { top: '73px', left: '15%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  liuzhuanfuwei:  { top: '78px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  dingweiduiqi:   { top: '60px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.05 },
+  lianjieguding:  { top: '73px', left: '15%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.05 },
+  liuzhuanfuwei:  { top: '78px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.08 },
   // 柔性质检
   quexianjiance:  { top: '68px', left: '70%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   rouxingshineng: { top: '72px', left: '92%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   wusunjiance:    { top: '78px', left: '80%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   xingneng:       { top: '70px', left: '80%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
   // 柔性码垛
-  zhinengmaduo:   { top: '75px', left: '23%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  zhinengmaduo:   { top: '75px', left: '23%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.25 },
   cankuduijie:    { top: '70px', left: '22%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   chengpingbaoz:  { top: '70px', left: '8%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   lujinguihua:    { top: '65px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
-  fenjianpeisong: { top: '70px', left: '5%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
+  fenjianpeisong: { top: '70px', left: '5%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.14 },
 }
 
 /**
@@ -366,7 +366,7 @@ defineExpose({ skillNodeRefs })
         v-for="category in categories"
         :key="`label-${category.id}`"
         class="category-label"
-        :class="{ 'category-label--dimmed': isOverlayActive && !activeCategoryIds.has(category.id) }"
+        :class="{ 'category-label--dimmed': isOverlayActive && !activeCategoryIds.has(category.id), 'category-label--en': locale === 'en' }"
         :style="{
           top: categoryLabelPositions[category.id]?.top,
           left: categoryLabelPositions[category.id]?.left,
@@ -386,7 +386,7 @@ defineExpose({ skillNodeRefs })
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -48%) scale(var(--center-scale, 1));
+  transform: translate(-50%, -48%) scale(var(--center-scale, 1)) translateY(15px);
   width: 1200px;
   height: 700px;
   z-index: var(--z-platform-base);
@@ -430,7 +430,8 @@ defineExpose({ skillNodeRefs })
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1.1);
+    margin-top: 25px;
     width: 1200px;
     height: auto;
     z-index: var(--z-platform-base);
@@ -543,12 +544,13 @@ defineExpose({ skillNodeRefs })
   pointer-events: none;
 
   // 发光边框
-  border: 1px solid color-mix(in srgb, var(--label-color) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--label-color) 55%, transparent);
 
   // 科技感外发光
   box-shadow:
-    0 0 8px color-mix(in srgb, var(--label-color) 35%, transparent),
-    0 0 20px color-mix(in srgb, var(--label-color) 15%, transparent),
+    0 0 10px color-mix(in srgb, var(--label-color) 45%, transparent),
+    0 0 24px color-mix(in srgb, var(--label-color) 22%, transparent),
+    0 0 44px color-mix(in srgb, var(--label-color) 10%, transparent),
     0 2px 12px rgba(0, 0, 0, 0.4);
 
   // 毛玻璃层（与文字分离，避免模糊）
@@ -571,6 +573,12 @@ defineExpose({ skillNodeRefs })
   &--dimmed {
     opacity: 0.2;
     transition: opacity 0.3s ease;
+  }
+
+  &--en {
+    font-size: 18px;
+    font-weight: 550;
+    letter-spacing: 2px;
   }
 
   // 顶部高光线

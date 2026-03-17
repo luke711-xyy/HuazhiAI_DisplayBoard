@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "Co-Creation · Co-Expansion · Co-Operation",
-    "subtitle": "HUAZHI AI Industrial Intelligence Platform"
+    "subtitle": "HUAZHI AI Industrial Intelligence Platform",
+    "logoText": "Wuxi (Huawei Cloud)\nAI Innovation Center"
   },
   "modal": {
     "companyInfo": "Company Info",
@@ -20,7 +21,12 @@
     "theme": "Mobile Mode",
     "chinese": "中文",
     "english": "English",
-    "hideBottomPanels": "Always Hide Panels"
+    "hideBottomPanels": "Always Hide Panels",
+    "idleDemo": "Idle Demo"
+  },
+  "idleDemo": {
+    "enter": "Idle demo activated",
+    "exit": "Idle demo deactivated"
   },
   "bottomPanel": {
     "title": "Company List",
@@ -279,6 +285,11 @@
       "industry": "Industrial Automation",
       "type": "Private"
     },
+    "shuangliang": {
+      "name": "Shuangliang Energy Saving System Co.",
+      "industry": "Energy Saving Equipment",
+      "type": "Private"
+    },
     "rilian": {
       "name": "Wuxi Unicomp Technology Co.",
       "industry": "Intelligent Inspection Equipment",
@@ -319,11 +330,6 @@
       "industry": "Semiconductor Equipment",
       "type": "Private"
     },
-    "shuangliang": {
-      "name": "Shuangliang Energy Saving System Co.",
-      "industry": "Energy Saving Equipment",
-      "type": "Private"
-    },
     "huadong": {
       "name": "Wuxi Huadong Heavy Machinery Co.",
       "industry": "Port Equipment",
@@ -352,6 +358,10 @@
     "xinjie": {
       "brief": "Founded in 2008, Xinje Electric focuses on R&D, production and sales of industrial automation control products, a leading domestic enterprise in industrial automation, with main products including PLC, servo systems, HMI, and machine vision, ranking first among domestic brands in small PLC market share.",
       "progressNote": "Medium PLC has achieved sales revenue, large PLC R&D continues to advance, cooperating with Huawei Cloud to build embodied intelligence benchmark projects."
+    },
+    "shuangliang": {
+      "brief": "Shuangliang is a leading enterprise in energy-saving and environmental protection equipment, mainly engaged in lithium bromide chillers, heat exchangers, air coolers and other energy-saving equipment, as well as polysilicon reduction furnaces, PV modules and other new energy equipment, with deep technical accumulation in energy saving and water conservation.",
+      "progressNote": "Polysilicon reduction furnace market share leads, PV module business rapidly scales up, energy-saving equipment continues technological iteration."
     },
     "rilian": {
       "brief": "Founded in 2009, Unicomp is a leading enterprise in China's industrial X-ray intelligent inspection field, focusing on R&D, production and sales of industrial X-ray inspection equipment and core components X-ray sources, widely used in IC, new energy batteries, castings and weldings inspection.",
@@ -384,10 +394,6 @@
     "weidao": {
       "brief": "Micro导 Nano focuses on R&D, production and sales of thin film deposition equipment for semiconductor and PV fields, core products include ALD, CVD equipment, with leading technical advantages in advanced semiconductor processes and PV cell manufacturing.",
       "progressNote": "Semiconductor ALD equipment enters mainstream wafer fab verification, PV equipment continues to upgrade, convertible bond fundraising increases investment in semiconductor equipment field."
-    },
-    "shuangliang": {
-      "brief": "Shuangliang is a leading enterprise in energy-saving and environmental protection equipment, mainly engaged in lithium bromide chillers, heat exchangers, air coolers and other energy-saving equipment, as well as polysilicon reduction furnaces, PV modules and other new energy equipment, with deep technical accumulation in energy saving and water conservation.",
-      "progressNote": "Polysilicon reduction furnace market share leads, PV module business rapidly scales up, energy-saving equipment continues technological iteration."
     },
     "huadong": {
       "brief": "Huadong originally focused on container handling equipment and intelligent CNC machine tools, and has actively expanded into PV cell business in recent years, investing in high-efficiency solar cell production bases in Xuzhou and Bozhou.",
