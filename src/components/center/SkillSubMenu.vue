@@ -150,7 +150,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
       0 2px 8px rgba(0, 0, 0, 0.3);
 
     // 入场动画
-    animation: pill-rise 0.3s var(--ease-smooth) both;
+    animation: pill-rise 0.3s var(--ease-smooth) backwards;
 
     transition: all 0.2s var(--ease-smooth);
 
@@ -172,9 +172,10 @@ function getHoveredSubSkill(): SubSkill | undefined {
       transition: background 0.2s var(--ease-smooth);
     }
 
-    // hover / active 增强发光
+    // hover / active 增强发光 + 中心放大
     &:hover,
     &--active {
+      transform: scale(1.12);
       border-color: color-mix(in srgb, var(--pill-color) 65%, rgba(255, 255, 255, 0.55));
       box-shadow:
         0 0 7px rgba(255, 255, 255, 0.3),
@@ -195,7 +196,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
 
     // 外部高亮时，非关联技能变暗
     &--dimmed {
-      opacity: 0.3;
+      opacity: 0.55;
       box-shadow: none;
 
       // hover 时恢复正常亮度
