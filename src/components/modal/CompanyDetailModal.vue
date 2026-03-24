@@ -148,7 +148,7 @@ function getSkillIconUrl(iconName: string): string {
           '--accent-to': accentColors.to,
         }"
         @click.stop="hoveredBadgeId = null"
-        @touchend="hoveredBadgeId = null"
+        @touchend.self="hoveredBadgeId = null"
       >
         <!-- 关闭按钮 -->
         <button class="modal-content__close" @click="$emit('close')" @touchend.prevent.stop="$emit('close')">
