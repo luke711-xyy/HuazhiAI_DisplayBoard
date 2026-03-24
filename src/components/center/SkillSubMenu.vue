@@ -7,12 +7,16 @@
  * 每个胶囊被悬停时，在右侧弹出详细描述浮窗。
  */
 import type { SubSkill } from '@/types'
-import { ref, watch } from 'vue'
+import type { Ref } from 'vue'
+import { ref, computed, watch, inject, nextTick } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
 
 const { t, locale } = useI18n()
 const { deviceMode } = useSettings()
+
+/** 全局唯一详情弹窗 ID（由 App.vue provide） */
+const activeSubSkillDetailId = inject<Ref<string | null>>('activeSubSkillDetailId')
 
 const props = defineProps<{
   subSkills: SubSkill[]
@@ -25,17 +29,42 @@ const props = defineProps<{
   direction?: 'up' | 'down'
 }>()
 
-/** 当前悬停的子技能 ID，用于控制描述浮窗显示 */
+/** 当前悬停的子技能 ID，用于控制描述浮窗显示（PC 端本地 hover） */
 const hoveredSubSkillId = ref<string | null>(null)
+
+/** Teleport 详情弹窗的固定定位坐标 */
+const detailPos = ref<{ top: number; left: number } | null>(null)
+
+/** pill 元素引用（用于计算 Teleport 定位） */
+const pillRefs = ref<Record<string, HTMLElement>>({})
+
+function setPillRef(id: string, el: any) {
+  if (el) pillRefs.value[id] = el as HTMLElement
+}
+
+/** 当前 submenu 拥有的子技能 ID 集合 */
+const mySubIds = computed(() => new Set(props.subSkills.map(s => s.id)))
 
 // 外部高亮状态变化时（如点击不同公司），关闭已展开的详情浮窗
 watch(() => props.externalActiveIds, () => {
   hoveredSubSkillId.value = null
+  if (activeSubSkillDetailId && activeSubSkillDetailId.value && mySubIds.value.has(activeSubSkillDetailId.value)) {
+    activeSubSkillDetailId.value = null
+  }
 })
 
-/** 该子技能是否应被高亮（本地 hover 或外部指定） */
+// 全局弹窗 ID 变化时，如果不属于本 submenu，清除本地状态
+watch(() => activeSubSkillDetailId?.value, (newId) => {
+  if (newId && !mySubIds.value.has(newId)) {
+    hoveredSubSkillId.value = null
+    detailPos.value = null
+  }
+})
+
+/** 该子技能是否应被高亮（本地 hover、全局详情弹窗、或外部指定） */
 function isPillActive(subId: string): boolean {
   if (hoveredSubSkillId.value === subId) return true
+  if (activeSubSkillDetailId?.value === subId) return true
   return props.externalActiveIds?.includes(subId) ?? false
 }
 
@@ -45,10 +74,44 @@ function isDimmed(subId: string): boolean {
   return !props.externalActiveIds.includes(subId)
 }
 
-/** 本地 hover 的子技能数据（仅鼠标直接 hover 时显示详情弹窗） */
-function getHoveredSubSkill(): SubSkill | undefined {
-  if (!hoveredSubSkillId.value) return undefined
-  return props.subSkills.find(s => s.id === hoveredSubSkillId.value)
+/** 当前应显示详情的子技能 ID（PC 用本地 hover，移动端用全局状态） */
+const activeDetailId = computed(() => {
+  // PC 端：本地 hover
+  if (hoveredSubSkillId.value && deviceMode.value === 'pc') return hoveredSubSkillId.value
+  // 移动端：全局状态中属于本 submenu 的 ID
+  if (activeSubSkillDetailId?.value && mySubIds.value.has(activeSubSkillDetailId.value)) {
+    return activeSubSkillDetailId.value
+  }
+  return null
+})
+
+/** 获取当前应展示详情的子技能数据 */
+function getActiveSubSkill(): SubSkill | undefined {
+  if (!activeDetailId.value) return undefined
+  return props.subSkills.find(s => s.id === activeDetailId.value)
+}
+
+/** 移动端点击 pill：设置全局弹窗 ID + 计算定位 */
+async function onMobilePillClick(sub: SubSkill) {
+  if (activeSubSkillDetailId) {
+    if (activeSubSkillDetailId.value === sub.id) {
+      // 再次点击同一个，关闭
+      activeSubSkillDetailId.value = null
+      detailPos.value = null
+      return
+    }
+    activeSubSkillDetailId.value = sub.id
+  }
+  // 计算 pill 位置
+  await nextTick()
+  const pillEl = pillRefs.value[sub.id]
+  if (pillEl) {
+    const rect = pillEl.getBoundingClientRect()
+    detailPos.value = {
+      top: rect.top + rect.height / 2,
+      left: rect.right + 14,
+    }
+  }
 }
 </script>
 
@@ -61,6 +124,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
     <div
       v-for="(sub, index) in (direction === 'down' ? subSkills : [...subSkills].reverse())"
       :key="sub.id"
+      :ref="(el: any) => setPillRef(sub.id, el)"
       class="skill-submenu__pill"
       :class="{
         'skill-submenu__pill--active': isPillActive(sub.id),
@@ -72,28 +136,51 @@ function getHoveredSubSkill(): SubSkill | undefined {
       }"
       @mouseenter="deviceMode === 'pc' ? (hoveredSubSkillId = sub.id) : undefined"
       @mouseleave="deviceMode === 'pc' ? (hoveredSubSkillId = null) : undefined"
-      @click="deviceMode === 'mobile' ? (hoveredSubSkillId = hoveredSubSkillId === sub.id ? null : sub.id) : undefined"
+      @click="deviceMode === 'mobile' ? onMobilePillClick(sub) : undefined"
     >
       <span class="skill-submenu__pill-dot" />
       <span class="skill-submenu__pill-text">{{ t(sub.nameKey) }}</span>
     </div>
 
-    <!-- 详情描述浮窗（仅鼠标直接 hover 时展示） -->
+    <!-- PC 端详情描述浮窗（相对定位，鼠标 hover 时展示） -->
     <Transition name="desc-fade">
       <div
-        v-if="hoveredSubSkillId && getHoveredSubSkill()"
+        v-if="deviceMode === 'pc' && hoveredSubSkillId && getActiveSubSkill()"
         :key="hoveredSubSkillId"
         class="skill-submenu__detail"
         :style="{ '--pill-color': categoryColor }"
       >
         <h4 class="skill-submenu__detail-title">
-          {{ t(getHoveredSubSkill()!.nameKey) }}
+          {{ t(getActiveSubSkill()!.nameKey) }}
         </h4>
         <p class="skill-submenu__detail-desc">
-          {{ t(getHoveredSubSkill()!.descriptionKey) }}
+          {{ t(getActiveSubSkill()!.descriptionKey) }}
         </p>
       </div>
     </Transition>
+
+    <!-- 移动端详情弹窗（Teleport 到 body，脱离层叠上下文） -->
+    <Teleport to="body">
+      <Transition name="desc-fade">
+        <div
+          v-if="deviceMode === 'mobile' && activeDetailId && getActiveSubSkill() && detailPos"
+          :key="activeDetailId"
+          class="skill-submenu__detail skill-submenu__detail--teleported"
+          :style="{
+            '--pill-color': categoryColor,
+            top: `${detailPos.top}px`,
+            left: `${detailPos.left}px`,
+          }"
+        >
+          <h4 class="skill-submenu__detail-title">
+            {{ t(getActiveSubSkill()!.nameKey) }}
+          </h4>
+          <p class="skill-submenu__detail-desc">
+            {{ t(getActiveSubSkill()!.descriptionKey) }}
+          </p>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -204,9 +291,16 @@ function getHoveredSubSkill(): SubSkill | undefined {
       opacity: 0.55;
       box-shadow: none;
 
-      // hover 时恢复正常亮度
-      &:hover {
+      // hover 或点击激活时恢复正常效果
+      &:hover,
+      &.skill-submenu__pill--active {
         opacity: 1;
+        box-shadow:
+          0 0 7px rgba(255, 255, 255, 0.3),
+          0 0 16px color-mix(in srgb, var(--pill-color) 55%, transparent),
+          0 0 36px color-mix(in srgb, var(--pill-color) 30%, transparent),
+          0 0 60px color-mix(in srgb, var(--pill-color) 16%, transparent),
+          0 2px 12px rgba(0, 0, 0, 0.35);
       }
     }
 
@@ -328,29 +422,46 @@ function getHoveredSubSkill(): SubSkill | undefined {
     &-title {
       position: relative;
       z-index: 1;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 16px;
+      font-weight: 600;
       color: #fff;
-      margin-bottom: 6px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid color-mix(in srgb, var(--pill-color) 20%, transparent);
+      margin-bottom: 8px;
+      padding-bottom: 7px;
+      border-bottom: none;
+      background-image:
+        linear-gradient(
+          90deg,
+          transparent,
+          color-mix(in srgb, var(--pill-color) 75%, rgba(255, 255, 255, 0.6)) 50%,
+          transparent
+        ),
+        linear-gradient(
+          90deg,
+          transparent 10%,
+          color-mix(in srgb, var(--pill-color) 35%, transparent) 50%,
+          transparent 90%
+        );
+      background-size: 100% 1.5px, 90% 6px;
+      background-repeat: no-repeat;
+      background-position: bottom center, bottom center;
 
       .skill-submenu--en & {
-        font-size: 11px;
-        font-weight: 430;
+        font-size: 12px;
+        font-weight: 500;
       }
     }
 
     &-desc {
       position: relative;
       z-index: 1;
-      font-size: 12px;
+      font-size: 14px;
+      font-weight: 500;
       line-height: 1.7;
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.75);
 
       .skill-submenu--en & {
-        font-size: 10px;
-        font-weight: 400;
+        font-size: 11px;
+        font-weight: 430;
       }
     }
   }
@@ -381,27 +492,19 @@ function getHoveredSubSkill(): SubSkill | undefined {
   // 详情浮窗保持在右侧（无需改变）
 }
 
-// 胶囊入场动画：从上方淡入下落
+// 胶囊入场动画：仅定义 from，to 自动继承元素自身的 opacity 和 transform
+// 这样 dimmed 节点直接淡入到 0.55，active 节点直接带 scale(1.12) 展开
 @keyframes pill-drop {
   from {
     opacity: 0;
     transform: translateY(-10px);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
-// 胶囊入场动画：从下方淡入上升
 @keyframes pill-rise {
   from {
     opacity: 0;
     transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -410,6 +513,101 @@ function getHoveredSubSkill(): SubSkill | undefined {
 .desc-fade-leave-active {
   transition: opacity 0.2s var(--ease-smooth),
               transform 0.2s var(--ease-smooth);
+}
+
+.desc-fade-enter-from,
+.desc-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-50%) translateX(-6px);
+}
+</style>
+
+<!-- 非 scoped 样式：Teleport 到 body 的详情弹窗 -->
+<style lang="scss">
+.skill-submenu__detail--teleported {
+  position: fixed;
+  isolation: isolate;
+  transform: translateY(-50%);
+  z-index: 99999;
+  width: 260px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  pointer-events: auto;
+
+  border: 1px solid color-mix(in srgb, var(--pill-color) 60%, transparent);
+  box-shadow:
+    0 0 16px color-mix(in srgb, var(--pill-color) 40%, transparent),
+    0 0 34px color-mix(in srgb, var(--pill-color) 22%, transparent),
+    0 0 56px color-mix(in srgb, var(--pill-color) 10%, transparent),
+    0 0 6px rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      rgba(5, 10, 25, 0.92) 0%,
+      color-mix(in srgb, var(--pill-color) 12%, rgba(5, 10, 25, 0.92)) 100%
+    );
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      color-mix(in srgb, var(--pill-color) 35%, white) 50%,
+      transparent
+    );
+    border-radius: 1px;
+  }
+
+  .skill-submenu__detail-title {
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    padding-bottom: 7px;
+    border-bottom: none;
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--pill-color) 70%, rgba(255, 255, 255, 0.5)) 50%,
+      transparent
+    );
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+
+  .skill-submenu__detail-desc {
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+// Teleport 详情弹窗的过渡动画
+.desc-fade-enter-active,
+.desc-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .desc-fade-enter-from,

@@ -112,9 +112,9 @@ const emit = defineEmits<{
   animation: fade-in-scale var(--duration-normal) var(--ease-smooth) both;
 
   &__title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-text-primary);
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -132,8 +132,9 @@ const emit = defineEmits<{
   }
 
   &__label {
-    font-size: 13px;
-    color: var(--color-text-secondary);
+    font-size: 15px;
+    font-weight: 550;
+    color: rgba(255, 255, 255, 0.85);
   }
 
   &__lang-btns {
@@ -143,8 +144,9 @@ const emit = defineEmits<{
     button {
       padding: 4px 12px;
       border-radius: 6px;
-      font-size: 12px;
-      color: var(--color-text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.55);
       background: rgba(255, 255, 255, 0.05);
       transition: all var(--duration-fast) var(--ease-smooth);
 

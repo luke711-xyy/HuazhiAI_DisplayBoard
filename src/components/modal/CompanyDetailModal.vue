@@ -15,7 +15,7 @@ import type { CompanyDetail, CompanyStatus, Skill } from '@/types'
 import { computed, ref, reactive } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
-import btnCloseUrl from '@/assets/buttons/btn_close.png'
+
 
 const { t, locale } = useI18n()
 const { deviceMode } = useSettings()
@@ -151,9 +151,7 @@ function getSkillIconUrl(iconName: string): string {
         @touchend.self="hoveredBadgeId = null"
       >
         <!-- 关闭按钮 -->
-        <button class="modal-content__close" @click="$emit('close')" @touchend.prevent.stop="$emit('close')">
-          <img :src="btnCloseUrl" alt="close" />
-        </button>
+        <button class="modal-content__close" @click="$emit('close')" @touchend.prevent.stop="$emit('close')">✕</button>
 
         <!-- 1. 公司简要信息 -->
         <div class="modal-content__header">
@@ -231,9 +229,10 @@ function getSkillIconUrl(iconName: string): string {
 
   <!-- 技能详情浮层 — Teleport 到 body，独立于弹窗层级 -->
   <Teleport to="body">
-    <Transition name="badge-tip">
+    <Transition name="badge-tip" mode="out-in">
       <div
         v-if="hoveredSubSkill"
+        :key="hoveredBadgeId"
         class="skill-badge-floating-tip"
         :style="{
           top: tooltipPos.top + 'px',
@@ -297,23 +296,47 @@ function getSkillIconUrl(iconName: string): string {
 
   &__close {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 40px;
-    height: 40px;
+    top: 14px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 8px color-mix(in srgb, var(--accent-from) 80%, rgba(255, 255, 255, 0.6));
+    isolation: isolate;
+    border: 1.5px solid color-mix(in srgb, var(--accent-from) 60%, rgba(255, 255, 255, 0.4));
+    box-shadow:
+      0 0 6px rgba(255, 255, 255, 0.25),
+      0 0 14px color-mix(in srgb, var(--accent-from) 40%, transparent),
+      0 0 28px color-mix(in srgb, var(--accent-from) 18%, transparent);
+    background: none;
+    cursor: pointer;
     transition: all var(--duration-fast) var(--ease-smooth);
 
-    img {
-      width: 34px;
-      height: 34px;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      pointer-events: none;
+      background: rgba(10, 15, 30, 0.6);
+      backdrop-filter: blur(12px) saturate(1.3);
+      -webkit-backdrop-filter: blur(12px) saturate(1.3);
     }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
+      border-color: color-mix(in srgb, var(--accent-from) 75%, rgba(255, 255, 255, 0.55));
+      text-shadow: 0 0 12px color-mix(in srgb, var(--accent-from) 90%, rgba(255, 255, 255, 0.8));
+      box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.35),
+        0 0 20px color-mix(in srgb, var(--accent-from) 50%, transparent),
+        0 0 36px color-mix(in srgb, var(--accent-from) 25%, transparent);
       transform: scale(1.1);
     }
   }
@@ -597,12 +620,32 @@ function getSkillIconUrl(iconName: string): string {
     );
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--badge-color) 60%, rgba(255, 255, 255, 0.4));
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 12px color-mix(in srgb, var(--badge-color) 15%, transparent);
+    0 0 6px rgba(255, 255, 255, 0.2),
+    0 0 16px color-mix(in srgb, var(--badge-color) 40%, transparent),
+    0 0 34px color-mix(in srgb, var(--badge-color) 22%, transparent),
+    0 0 56px color-mix(in srgb, var(--badge-color) 10%, transparent),
+    0 8px 32px rgba(0, 0, 0, 0.5);
   z-index: 99999;
   pointer-events: none;
+
+  // 左侧高光线
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      color-mix(in srgb, var(--badge-color) 35%, white) 50%,
+      transparent
+    );
+    border-radius: 1px;
+  }
 
   // 顶部小三角
   &::before {
@@ -614,8 +657,8 @@ function getSkillIconUrl(iconName: string): string {
     width: 10px;
     height: 10px;
     background: rgba(5, 10, 25, 0.92);
-    border-top: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
-    border-left: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--badge-color) 60%, rgba(255, 255, 255, 0.4));
+    border-left: 1px solid color-mix(in srgb, var(--badge-color) 60%, rgba(255, 255, 255, 0.4));
   }
 
   &__title {
@@ -624,7 +667,23 @@ function getSkillIconUrl(iconName: string): string {
     color: #fff;
     margin-bottom: 8px;
     padding-bottom: 6px;
-    border-bottom: 1px solid color-mix(in srgb, var(--badge-color) 20%, transparent);
+    border-bottom: none;
+    background-image:
+      linear-gradient(
+        90deg,
+        transparent,
+        color-mix(in srgb, var(--badge-color) 75%, rgba(255, 255, 255, 0.6)) 50%,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
+        transparent 10%,
+        color-mix(in srgb, var(--badge-color) 35%, transparent) 50%,
+        transparent 90%
+      );
+    background-size: 100% 1.5px, 90% 6px;
+    background-repeat: no-repeat;
+    background-position: bottom center, bottom center;
   }
 
   &__desc {

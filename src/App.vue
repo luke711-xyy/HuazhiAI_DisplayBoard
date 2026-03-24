@@ -66,6 +66,10 @@ const selectedCompanyId = ref<string | null>(null)
 /** 当前悬停的技能 ID (显示 tooltip) */
 const hoveredSkillId = ref<string | null>(null)
 
+/** 全局唯一的子技能详情弹窗 ID（确保同时只有一个详情弹窗） */
+const activeSubSkillDetailId = ref<string | null>(null)
+provide('activeSubSkillDetailId', activeSubSkillDetailId)
+
 // ==================== 派生数据 ====================
 
 /** KPI 指标列表，count 由实际公司数量动态计算 */
@@ -216,6 +220,18 @@ function onClearHover() {
   hoveredCompanyId.value = null
   hoveredSkillId.value = null
 }
+
+/** 移动端关闭按钮：清除所有高亮/弹窗状态 */
+function onClearAllHighlight() {
+  hoveredCompanyId.value = null
+  hoveredSkillId.value = null
+  activeSubSkillDetailId.value = null
+}
+
+// 当公司或技能 hover 状态变化时，关闭子技能详情弹窗
+watch([hoveredCompanyId, hoveredSkillId], () => {
+  activeSubSkillDetailId.value = null
+})
 
 // ==================== 连线系统 ====================
 
@@ -414,6 +430,17 @@ onUnmounted(() => {
       @clear-hover="onClearHover"
     />
 
+    <!-- 移动端：技能高亮关闭按钮 -->
+    <Transition name="overlay-fade">
+      <button
+        v-if="deviceMode === 'mobile' && !isIdleDemoActive && (hoveredCompanyId || hoveredSkillId)"
+        class="skill-clear-btn"
+        @click="onClearAllHighlight"
+      >
+        ✕
+      </button>
+    </Transition>
+
     <!-- 底部信息面板（各面板由对应 KPI 独立控制，抽屉式滑入/滑出） -->
     <BottomPanelRow
       v-if="!hideBottomPanels"
@@ -478,6 +505,59 @@ onUnmounted(() => {
 .overlay-fade-enter-from,
 .overlay-fade-leave-to {
   opacity: 0;
+}
+
+/* 移动端技能高亮关闭按钮 */
+.skill-clear-btn {
+  position: absolute;
+  top: 120px;
+  right: 330px;
+  z-index: 96;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  pointer-events: auto;
+  isolation: isolate;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.35),
+    0 0 14px rgba(59, 130, 246, 0.4),
+    0 0 28px rgba(59, 130, 246, 0.2),
+    0 4px 16px rgba(0, 0, 0, 0.5);
+  background: none;
+  transition: all 0.2s ease;
+}
+
+.skill-clear-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: rgba(10, 15, 30, 0.65);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+}
+
+.skill-clear-btn:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.45),
+    0 0 20px rgba(59, 130, 246, 0.5),
+    0 0 36px rgba(59, 130, 246, 0.25),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
 }
 
 /* 待机演示 Toast */
