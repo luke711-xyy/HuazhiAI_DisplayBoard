@@ -27,6 +27,8 @@ const props = defineProps<{
   labelOffset: { top: string; left: string; rotate?: string; skewX?: string; skewY?: string; scale?: number }
   /** 子菜单展开方向 */
   submenuDirection?: 'up' | 'down'
+  /** 子菜单额外顶部偏移 (px)，用于避免与标签重叠 */
+  submenuTopOffset?: number
   /** 公司 hover 时，非关联节点降暗 */
   isDimmedByOverlay?: boolean
   /** 父组件当前激活的 hover 技能 ID（用于移动端外部复位） */
@@ -142,7 +144,10 @@ onMounted(() => {
       :category-color="categoryColor"
       :external-active-ids="matchingSubSkillIds"
       :direction="submenuDirection || 'up'"
-      :style="labelOffset.scale ? { '--submenu-scale': labelOffset.scale } : undefined"
+      :style="{
+        '--submenu-scale': labelOffset.scale ?? 1,
+        '--submenu-top-offset': `${submenuTopOffset ?? 0}px`,
+      }"
     />
 
     <!-- 默认 slot (tooltip 等) -->

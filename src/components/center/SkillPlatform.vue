@@ -123,6 +123,18 @@ const skillSubmenuDirection: Record<string, 'up' | 'down'> = {
 }
 
 /**
+ * 部分向下展开的子菜单需要额外下移，避免与技能文字标签重叠
+ * 值为额外偏移量 (px)
+ */
+const skillSubmenuTopOffset: Record<string, number> = {
+  liuzhuanfuwei: 16,
+  zhinengmaduo: 16,
+  rouxingshineng: 6,
+  cankuduijie: 4,
+  xingneng: 4,
+}
+
+/**
  * 子级技能标签相对于各自 SkillNode 的偏移量
  * top / left 是相对于节点左上角的 CSS 值
  * 标签水平方向默认以 translateX(-50%) 居中，left 基于节点宽度百分比
@@ -132,7 +144,7 @@ const skillLabelOffsets: Record<string, { top: string; left: string; rotate: str
   // 柔性装配
   shangxiawuliao: { top: '78px', left: '20%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg' },
   dingweiduiqi:   { top: '60px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.05 },
-  lianjieguding:  { top: '73px', left: '15%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.05 },
+  lianjieguding:  { top: '66px', left: '7%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.05 },
   liuzhuanfuwei:  { top: '78px', left: '10%', rotate: '30deg',  skewX: '-30deg', skewY: '0deg', scale: 1.08 },
   // 柔性质检
   quexianjiance:  { top: '68px', left: '70%', rotate: '-30deg',  skewX: '30deg', skewY: '0deg' },
@@ -252,8 +264,14 @@ function onSkillHover(skillId: string | null) {
     const skill = props.skills.find(s => s.id === skillId)
     isSubmenuOpen.value = !!(skill?.subSkills && skill.subSkills.length > 0)
   } else {
-    // 鼠标仍在上层平台内 → 保持最后一个技能的遮罩效果
-    if (isUpperHovered.value && lastHoveredSkillId.value) {
+    // 移动端：直接清除所有状态（不需要 linger 保持逻辑）
+    if (deviceMode.value === 'mobile') {
+      isSubmenuOpen.value = false
+      lastHoveredSkillId.value = null
+      emit('hoverSkill', null)
+    }
+    // PC 端：鼠标仍在上层平台内 → 保持最后一个技能的遮罩效果
+    else if (isUpperHovered.value && lastHoveredSkillId.value) {
       // 不 emit null，遮罩保持；submenu 状态也保持不变
     } else {
       isSubmenuOpen.value = false
@@ -345,6 +363,7 @@ defineExpose({ skillNodeRefs })
             :category-color="categoryColorMap[category.id] || '#3B82F6'"
             :label-offset="skillLabelOffsets[skill.id] || { top: '108px', left: '50%' }"
             :submenu-direction="skillSubmenuDirection[skill.id] || 'up'"
+            :submenu-top-offset="skillSubmenuTopOffset[skill.id] || 0"
             :is-dimmed-by-overlay="isOverlayActive && !highlightedSkillIds.includes(skill.id)"
             :active-hovered-id="localHoveredSkillId"
             :style="{

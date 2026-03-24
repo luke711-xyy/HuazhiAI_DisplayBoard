@@ -353,7 +353,7 @@ function getHoveredSubSkill(): SubSkill | undefined {
 // 向下展开变体
 .skill-submenu--down {
   bottom: auto;
-  top: 100%;
+  top: calc(100% + var(--submenu-top-offset, 0px));
   padding-bottom: 0;
   padding-top: 6px;
   transform-origin: top center;

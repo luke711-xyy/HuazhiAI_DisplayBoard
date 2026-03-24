@@ -203,7 +203,7 @@ function getSkillIconUrl(iconName: string): string {
               @mouseenter="deviceMode === 'pc' ? onBadgeEnter(sub, $event) : undefined"
               @mouseleave="deviceMode === 'pc' ? (hoveredBadgeId = null) : undefined"
               @touchend.prevent.stop="onBadgeTouch(sub, $event)"
-              @click.stop
+              @click.stop="deviceMode === 'mobile' ? onBadgeTouch(sub, $event) : undefined"
             >
               <img :src="getSkillIconUrl(sub.parentIcon)" alt="" class="skill-badge__icon" />
               <span class="skill-badge__name">{{ t(sub.nameKey) }}</span>
