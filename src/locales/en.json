@@ -2,7 +2,11 @@
   "app": {
     "title": "Co-Creation · Co-Expansion · Co-Operation",
     "subtitle": "HUAZHI AI Industrial Intelligence Platform",
-    "logoText": "Wuxi (Huawei Cloud)\nAI Innovation Center"
+    "logoText": "HUAZHI AI Industrial Intelligence Platform"
+  },
+  "idleDemo": {
+    "enter": "Entering idle demo mode",
+    "exit": "Exiting idle demo mode"
   },
   "modal": {
     "companyInfo": "Company Info",
@@ -23,10 +27,6 @@
     "english": "English",
     "hideBottomPanels": "Always Hide Panels",
     "idleDemo": "Idle Demo"
-  },
-  "idleDemo": {
-    "enter": "Idle demo activated",
-    "exit": "Idle demo deactivated"
   },
   "bottomPanel": {
     "title": "Company List",
@@ -99,111 +99,99 @@
   "subSkill": {
     "wuliaoshaicha": {
       "name": "Material Screening",
-      "desc": "Uses vision, sensors, and other methods to identify and verify incoming material dimensions, surface quality, pose state, and identification information, ensuring materials meet assembly requirements and match production order data."
+      "desc": "Uses vision, sensors to identify and verify incoming material dimensions, surface quality, pose state."
     },
     "wuxulailiao": {
       "name": "Unordered Picking",
-      "desc": "For randomly stacked parts, uses 3D vision recognition and grasp planning to achieve occlusion-resistant picking, placing parts into temporary sorting buffers or feeders for subsequent orderly feeding."
+      "desc": "For randomly stacked parts, uses 3D vision recognition and grasp planning for occlusion-resistant picking."
     },
     "youxugongliao": {
       "name": "Ordered Feeding",
-      "desc": "From sorted or oriented feeding devices (vibratory bowls, sorting trays, conveyors), uses high-precision vision guidance to control robotic arms for precise pose picking, accurately placing parts into assembly station fixtures or positioning mechanisms."
+      "desc": "From sorted feeding devices, uses high-precision vision guidance for robotic arms to precisely pick parts."
     },
     "duowuliaoxietong": {
       "name": "Multi-Material Sync",
-      "desc": "When assembly requires multiple parts in specific sequence or simultaneously, coordinates multiple devices or robotic arms to complete synchronized feeding per assembly process sequence and cycle time requirements."
+      "desc": "Coordinates multiple devices or robotic arms for synchronized feeding per assembly process sequence."
     },
     "xialiaofendao": {
       "name": "Sortation & Diversion",
-      "desc": "Removes completed products or semi-finished goods from assembly stations, sorting them into different transfer containers, trays, or conveyor lines based on inline inspection results (pass/fail) or downstream process routes."
+      "desc": "Removes completed products from stations, sorting into different transfer containers based on inspection results."
     },
     "shijuedingwei": {
       "name": "Pose Sensing & Servo",
-      "desc": "Comprehensively uses vision, force, proximity and other sensors to track workpiece pose in real-time during assembly, with adaptive adjustment forming closed-loop control."
+      "desc": "Uses vision, force sensors to track workpiece pose in real-time with adaptive adjustment."
     },
     "jiguangduizhun": {
       "name": "Adaptive Mating Alignment",
-      "desc": "For contact, friction, and tolerance-based mating actions (surface fitting, shaft-hole insertion, snap-fit), uses force control strategies to adaptively adjust execution, preventing jamming or damage."
+      "desc": "For contact-based mating actions, uses force control strategies for adaptive adjustment."
     },
     "jixiedingwei": {
       "name": "Multi-Body Coordinated Positioning",
-      "desc": "Coordinates multiple execution units (dual robotic arms, human-robot, multi-robot) to jointly complete gripping, pose adjustment, and assembly of multi-component, heavy, or complex structures."
+      "desc": "Coordinates multiple execution units for gripping, pose adjustment and assembly of complex structures."
     },
     "luoshuaningsuo": {
       "name": "Adaptive Connection Control",
-      "desc": "Dynamically adjusts connection process parameters (torque, current, temperature, speed, pressure, etc.) based on real-time sensing of workpiece state (material, gap, alignment) to adapt to workpiece variations and environmental changes."
+      "desc": "Dynamically adjusts connection process parameters based on real-time workpiece state sensing."
     },
     "maojieliangjie": {
       "name": "Connection Path Planning",
-      "desc": "Generates or corrects tool (welding gun, glue gun, screwdriver) motion trajectories and poses in real-time based on actual workpiece features (weld grooves, glue surface shapes, screw hole positions), ensuring correct coverage and optimal orientation."
+      "desc": "Generates or corrects tool motion trajectories based on actual workpiece features."
     },
     "jiaozhanyajie": {
       "name": "End-Effector Smart Switching",
-      "desc": "For complex assembly tasks requiring multiple connection processes, automatically completes rapid changeover, calibration, and coordinated sequential operation of different end-effectors (electric gun, welding gun, glue gun, etc.)."
+      "desc": "Automatically completes rapid changeover and calibration of different end-effectors."
     },
     "kakouguding": {
       "name": "Quality Sensing & Warning",
-      "desc": "During connection processes, monitors connection state in real-time through multi-sensor fusion (force, vision, acoustic, thermal imaging), including weld pool morphology, adhesive bead continuity, and screw seating, with online quality judgment and early warning."
+      "desc": "Monitors connection state in real-time with online quality judgment and early warning."
     },
     "zhinenghuanxian": {
       "name": "Smart Changeover",
-      "desc": "Records complete process parameters and quality data for each connection, forming traceable 'digital process packages' that can be quickly recalled and adjusted by product model or order for small-batch rapid changeover."
-    },
-    "zhuangpeiyanzheng": {
-      "name": "Assembly Online Verification",
-      "desc": "Before the assembly is removed, quickly verifies assembly completeness, critical dimensions, or function through vision, force sensing, or functional testing, ensuring defective products don't flow to downstream processes."
-    },
-    "chengpinfenjian": {
-      "name": "Product Sorting & Unloading",
-      "desc": "Based on verification results, picks and places good and defective products separately to designated areas (transfer trays, rework line), while ensuring placement pose meets downstream requirements."
-    },
-    "gongweifuwei": {
-      "name": "Station Reset & Cleanup",
-      "desc": "After unloading, inspects fixtures and positioning mechanisms, clears residual materials, and resets the station to prepare for the next assembly cycle, ensuring process consistency."
+      "desc": "Records complete process parameters and quality data for traceable digital process packages."
     },
     "biaomianhuahen": {
       "name": "Appearance & Surface Quality",
-      "desc": "Surface defects (scratches, cracks, burrs, dents, oxidation, oil stains, coating delamination, weld spatter); color and gloss (color difference, glossiness, coating thickness, missed coating, texture); cleanliness (foreign objects, dust, oil stains)."
+      "desc": "Detects surface defects, color and gloss, cleanliness and other appearance quality issues."
     },
     "liewen": {
       "name": "Structural Dimension & Label",
-      "desc": "Comprehensive inspection of product geometric dimensions, assembly completeness, and identification information, ensuring physical characteristics and traceability data comply with design specifications."
+      "desc": "Comprehensive inspection of geometric dimensions, assembly completeness and identification."
     },
     "bianse": {
       "name": "Product & Packaging Quality",
-      "desc": "Packaging appearance (box damage, sealing, banding); packaging accessories (manuals, accessories, cushioning); palletizing and pallets (stability, labels, stretch wrap)."
+      "desc": "Inspects packaging appearance, accessories, palletizing and pallet quality."
     },
     "likongshiying": {
       "name": "Inspection Standardized Modeling",
-      "desc": "Converts product drawings and acceptance standards into digital inspection templates (defect examples, tolerances, rules)."
+      "desc": "Converts product drawings and acceptance standards into digital inspection templates."
     },
     "qumiandamoqi": {
       "name": "Adaptive Inspection Execution",
-      "desc": "Automatically generates equipment execution programs (robot paths, camera parameters, algorithm configurations) based on templates."
+      "desc": "Automatically generates equipment execution programs based on templates."
     },
     "rousunkongzhi": {
       "name": "Resource Dynamic Scheduling",
-      "desc": "Intelligently allocates inspection stations and resources based on production line cycle time and equipment status."
+      "desc": "Intelligently allocates inspection stations based on production line cycle time."
     },
     "chaoshengbojiance": {
       "name": "Internal NDT",
-      "desc": "Without destroying the product, uses non-destructive testing techniques to inspect internal structures, detecting defects that affect performance and reliability."
+      "desc": "Uses non-destructive testing to inspect internal structures without destroying the product."
     },
     "dianqiceshi": {
       "name": "Functional Performance Testing",
-      "desc": "Electrical (continuity, insulation, withstand voltage, LCR, logic); mechanical (insertion force, torque, tensile, hardness, fatigue); sealing (air-tight, water-tight, helium); optical/acoustic (transmittance, color coordinates, noise); environmental (temperature, salt spray, aging)."
+      "desc": "Comprehensive testing covering electrical, mechanical, sealing, optical/acoustic, environmental dimensions."
     },
     "hunhemaduo": {
       "name": "Adaptive Position Adjustment",
-      "desc": "Compensates for pallet position errors or lower box displacement through vision-based secondary positioning before placement."
+      "desc": "Compensates for pallet position errors through vision-based secondary positioning."
     },
     "gaosumaduo": {
       "name": "Adaptive Force-Controlled Placement",
-      "desc": "For deformable products (e.g., cartons), uses force control mode for contact placement, avoiding toppling of already-stacked boxes."
+      "desc": "Uses force control mode for contact placement of deformable products."
     },
     "chaizhuomaduo": {
       "name": "Online Pattern Dynamic Correction",
-      "desc": "After stacking several layers, 3D scans the actual stack pattern, compares with the planned model, and re-plans subsequent stacking if deviations are found."
+      "desc": "3D scans actual stack pattern and re-plans subsequent stacking after several layers."
     },
     "agvdiaodu": {
       "name": "Inbound Shelving",
@@ -211,47 +199,47 @@
     },
     "liticangku": {
       "name": "AS/RS Docking",
-      "desc": "Coordinates with stacker cranes via smart equipment for high-bay rack storage and retrieval operations."
+      "desc": "Coordinates with stacker cranes for high-bay rack storage and retrieval."
     },
     "jingquejizhong": {
       "name": "Incoming Recognition & Matching",
-      "desc": "In multi-variety mixed production, product specs, dimensions, poses, and incoming sequences constantly change. RGB-D cameras perform inline measurement, barcode recognition, and WMS order verification to handle product changeover diversity."
+      "desc": "RGB-D cameras perform inline measurement, barcode recognition, and WMS verification."
     },
     "zidongfengxiang": {
       "name": "Pick Sequence Decision",
-      "desc": "Pick point detection algorithms with sequence optimization based on current pallet pattern and incoming order, ensuring each pick best supports pallet stability."
+      "desc": "Sequence optimization based on current pallet pattern and incoming order."
     },
     "tiebiaodabao": {
       "name": "Pick Method Adjustment",
-      "desc": "Different products (cartons, plastic bags, wooden boxes, irregular items) require different pick methods (suction, gripping, embracing). The system auto-selects appropriate methods and dynamically adjusts parameters based on real-time sensing of material properties, dimensions, weight, and surface characteristics."
+      "desc": "Auto-selects appropriate pick methods based on real-time material property sensing."
     },
     "bizhangguihua": {
       "name": "Pallet Pattern Tracking",
-      "desc": "Uses 3D vision to identify incoming dimensions, materials, and remaining pallet space, auto-calculating optimal stacking patterns (flat, interlocked, rotated nesting) and generating pick/place sequences with dynamic adjustment during stacking."
+      "desc": "Uses 3D vision to identify dimensions and auto-calculate optimal stacking patterns."
     },
     "zuijianlujing": {
       "name": "Palletizing Path Optimization",
-      "desc": "During placement, plans smooth collision-free trajectories based on environment sensing (pallet boundaries, stacked materials, surrounding equipment), dynamically correcting via vision or force feedback to handle pallet drift and material sliding."
+      "desc": "Plans smooth collision-free trajectories based on environment sensing."
     },
     "duojixietong": {
       "name": "Multi-Robot Stacking Control",
-      "desc": "For large-format or high-throughput palletizing, employs dual robotic arms or multi-device coordination through master-slave control, path synchronization, and collision prediction for collaborative stacking operations."
+      "desc": "Employs dual robotic arms or multi-device coordination for collaborative stacking."
     },
     "zhinengfenjian": {
       "name": "Unit Reinforcement",
-      "desc": "Based on material properties (cartons, soft packs, irregular items), stack height, and transport requirements, auto-selects reinforcement methods (stretch wrap, banding, corner protectors) to ensure pallet unit stability during downstream transfer."
+      "desc": "Auto-selects reinforcement methods based on material properties."
     },
     "lujingpeisong": {
       "name": "Label Binding",
-      "desc": "Auto-generates labels containing product specs, quantities, batches, and destinations based on pallet order information, precisely applying them to designated positions for reliable physical-information binding."
+      "desc": "Auto-generates labels based on pallet order information and precisely applies them."
     },
     "duodanxietong": {
       "name": "Logistics Coordination",
-      "desc": "After palletizing, automatically notifies and dispatches downstream logistics equipment (AGV, conveyors) for docking, or triggers warehouse entry with status handshake and information synchronization."
+      "desc": "Automatically notifies and dispatches downstream logistics equipment."
     },
     "tuopanyizai": {
       "name": "Pallet Transfer",
-      "desc": "Transfers fully processed pallets from palletizing stations to docking points (AGV carrier plates, conveyor entrances) via transfer machines or robots, ensuring pose compliance with downstream equipment interfaces."
+      "desc": "Transfers fully processed pallets to docking points."
     }
   },
   "scenario": {
@@ -283,11 +271,6 @@
     "xinjie": {
       "name": "Wuxi Xinje Electric Co.",
       "industry": "Industrial Automation",
-      "type": "Private"
-    },
-    "shuangliang": {
-      "name": "Shuangliang Energy Saving System Co.",
-      "industry": "Energy Saving Equipment",
       "type": "Private"
     },
     "rilian": {
@@ -326,8 +309,13 @@
       "type": "Private"
     },
     "weidao": {
-      "name": "Wuxi Micro导 Nano Technology Co.",
+      "name": "Wuxi Micro Nano Technology Co.",
       "industry": "Semiconductor Equipment",
+      "type": "Private"
+    },
+    "shuangliang": {
+      "name": "Shuangliang Energy Saving System Co.",
+      "industry": "Energy Saving Equipment",
       "type": "Private"
     },
     "huadong": {
@@ -335,7 +323,7 @@
       "industry": "Port Equipment",
       "type": "Private"
     },
-    "beisite": {
+    "best": {
       "name": "Wuxi Best Precision Machinery Co.",
       "industry": "Precision Components",
       "type": "Private"
@@ -343,6 +331,16 @@
     "xiangsheng": {
       "name": "Wuxi Xiangsheng Medical Technology Co.",
       "industry": "Medical Equipment",
+      "type": "Private"
+    },
+    "Dade": {
+      "name": "Jiangsu Dade Heavy Industry Co., Ltd.",
+      "industry": "Intelligent Equipment",
+      "type": "Private"
+    },
+    "yueke": {
+      "name": "Yueke Intelligent Manufacturing (Wuxi) Co., Ltd.",
+      "industry": "High-end Equipment Components",
       "type": "Private"
     }
   },
@@ -358,10 +356,6 @@
     "xinjie": {
       "brief": "Founded in 2008, Xinje Electric focuses on R&D, production and sales of industrial automation control products, a leading domestic enterprise in industrial automation, with main products including PLC, servo systems, HMI, and machine vision, ranking first among domestic brands in small PLC market share.",
       "progressNote": "Medium PLC has achieved sales revenue, large PLC R&D continues to advance, cooperating with Huawei Cloud to build embodied intelligence benchmark projects."
-    },
-    "shuangliang": {
-      "brief": "Shuangliang is a leading enterprise in energy-saving and environmental protection equipment, mainly engaged in lithium bromide chillers, heat exchangers, air coolers and other energy-saving equipment, as well as polysilicon reduction furnaces, PV modules and other new energy equipment, with deep technical accumulation in energy saving and water conservation.",
-      "progressNote": "Polysilicon reduction furnace market share leads, PV module business rapidly scales up, energy-saving equipment continues technological iteration."
     },
     "rilian": {
       "brief": "Founded in 2009, Unicomp is a leading enterprise in China's industrial X-ray intelligent inspection field, focusing on R&D, production and sales of industrial X-ray inspection equipment and core components X-ray sources, widely used in IC, new energy batteries, castings and weldings inspection.",
@@ -395,17 +389,29 @@
       "brief": "Micro导 Nano focuses on R&D, production and sales of thin film deposition equipment for semiconductor and PV fields, core products include ALD, CVD equipment, with leading technical advantages in advanced semiconductor processes and PV cell manufacturing.",
       "progressNote": "Semiconductor ALD equipment enters mainstream wafer fab verification, PV equipment continues to upgrade, convertible bond fundraising increases investment in semiconductor equipment field."
     },
+    "shuangliang": {
+      "brief": "Shuangliang is a leading enterprise in energy-saving and environmental protection equipment, mainly engaged in lithium bromide chillers, heat exchangers, air coolers and other energy-saving equipment, as well as polysilicon reduction furnaces, PV modules and other new energy equipment, with deep technical accumulation in energy saving and water conservation.",
+      "progressNote": "Polysilicon reduction furnace market share leads, PV module business rapidly scales up, energy-saving equipment continues technological iteration."
+    },
     "huadong": {
       "brief": "Huadong originally focused on container handling equipment and intelligent CNC machine tools, and has actively expanded into PV cell business in recent years, investing in high-efficiency solar cell production bases in Xuzhou and Bozhou.",
       "progressNote": "PV cell business is in capacity ramp-up phase, high-end equipment manufacturing business develops steadily, strategic transformation continues to advance."
     },
-    "beisite": {
+    "best": {
       "brief": "Best focuses on R&D, production and sales of various precision components and tooling fixtures, mainly used in automotive, aviation, refrigeration compressors and other fields, with strong technical strength and customer resources in precision machining.",
       "progressNote": "Automotive parts business grows steadily, aviation parts business continues to expand, precision machining capabilities continue to improve."
     },
     "xiangsheng": {
       "brief": "Xiangsheng is a high-tech enterprise specializing in R&D, manufacturing and sales of ultrasound medical imaging equipment, known as the first ultrasound stock on STAR Market, products cover portable ultrasound, desktop ultrasound, intelligent ultrasound, exported to over 100 countries and regions.",
       "progressNote": "Intelligent ultrasound products continue to iterate, overseas market channels continue to expand, continuous breakthroughs in key core technologies of ultrasound imaging."
+    },
+    "Dade": {
+      "brief": "",
+      "progressNote": ""
+    },
+    "yueke": {
+      "brief": "",
+      "progressNote": ""
     }
   }
 }

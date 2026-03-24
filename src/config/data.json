@@ -4,7 +4,7 @@
       "id": "reserve",
       "labelKey": "kpi.reserve",
       "icon": "ic_storage",
-      "count": 6,
+      "count": 2,
       "color": "#3B82F6",
       "statusFilter": "reserve"
     },
@@ -12,7 +12,7 @@
       "id": "implementation",
       "labelKey": "kpi.implementation",
       "icon": "ic_shishizhong",
-      "count": 14,
+      "count": 10,
       "color": "#F59E0B",
       "statusFilter": "implementation"
     },
@@ -20,7 +20,7 @@
       "id": "promotion",
       "labelKey": "kpi.promotion",
       "icon": "ic_megaphone",
-      "count": 10,
+      "count": 3,
       "color": "#EF4444",
       "statusFilter": "promotion"
     }
@@ -173,23 +173,7 @@
       "icon": "ic_skill_liuzhuanfuwei",
       "iconSelect": "ic_skill_liuzhuanfuwei_select",
       "categoryId": "assembly",
-      "subSkills": [
-        {
-          "id": "zhuangpeiyanzheng",
-          "nameKey": "subSkill.zhuangpeiyanzheng.name",
-          "descriptionKey": "subSkill.zhuangpeiyanzheng.desc"
-        },
-        {
-          "id": "chengpinfenjian",
-          "nameKey": "subSkill.chengpinfenjian.name",
-          "descriptionKey": "subSkill.chengpinfenjian.desc"
-        },
-        {
-          "id": "gongweifuwei",
-          "nameKey": "subSkill.gongweifuwei.name",
-          "descriptionKey": "subSkill.gongweifuwei.desc"
-        }
-      ]
+      "subSkills": []
     },
     {
       "id": "quexianjiance",
@@ -371,7 +355,7 @@
       "nameKey": "skill.fenjianpeisong.name",
       "descriptionKey": "skill.fenjianpeisong.desc",
       "icon": "ic_skill_fenjianpeisong",
-      "iconSelect": "ic_skill_fenjianpeisong-select",
+      "iconSelect": "ic_skill_fenjianpeisong_select",
       "categoryId": "palletizing",
       "subSkills": [
         {
@@ -402,8 +386,8 @@
       "id": "xiandao",
       "nameKey": "company.xiandao.name",
       "industryKey": "company.xiandao.industry",
-      "type": "Private",
-      "status": "promotion",
+      "type": "新能源",
+      "status": "reserve",
       "relatedSkillIds": [
         "shangxiawuliao",
         "dingweiduiqi",
@@ -412,15 +396,14 @@
       ],
       "side": "left",
       "slotIndex": 0,
-      "progress": 92,
-      "logo": "xiandaozhinengzhuangbeigufen_logo.png"
+      "progress": 10
     },
     {
       "id": "aotewei",
       "nameKey": "company.aotewei.name",
       "industryKey": "company.aotewei.industry",
-      "type": "Private",
-      "status": "promotion",
+      "type": "新能源",
+      "status": "implementation",
       "relatedSkillIds": [
         "dingweiduiqi",
         "quexianjiance",
@@ -428,15 +411,14 @@
       ],
       "side": "left",
       "slotIndex": 1,
-      "progress": 88,
-      "logo": "aoteweikejigufen_logo.png"
+      "progress": 50
     },
     {
       "id": "xinjie",
       "nameKey": "company.xinjie.name",
       "industryKey": "company.xinjie.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "自动化",
+      "status": "reserve",
       "relatedSkillIds": [
         "dingweiduiqi",
         "lianjieguding",
@@ -444,95 +426,74 @@
       ],
       "side": "left",
       "slotIndex": 2,
-      "progress": 75,
-      "logo": "xinjiedianqigufen_logo.png"
-    },
-    {
-      "id": "shuangliang",
-      "nameKey": "company.shuangliang.name",
-      "industryKey": "company.shuangliang.industry",
-      "type": "Private",
-      "status": "promotion",
-      "relatedSkillIds": [
-        "lianjieguding",
-        "xingneng",
-        "quexianjiance"
-      ],
-      "side": "left",
-      "slotIndex": 3,
-      "progress": 86,
-      "logo": "shuangliangjienenxitonggufen_logo.png"
+      "progress": 10
     },
     {
       "id": "rilian",
       "nameKey": "company.rilian.name",
       "industryKey": "company.rilian.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "检测装备",
+      "status": "reserve",
       "relatedSkillIds": [
         "quexianjiance",
         "wusunjiance",
         "xingneng"
       ],
       "side": "left",
-      "slotIndex": 4,
-      "progress": 82,
-      "logo": "riliankejigufen_logo.png"
+      "slotIndex": 3,
+      "progress": 10
     },
     {
       "id": "tianqi",
       "nameKey": "company.tianqi.name",
       "industryKey": "company.tianqi.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "智能装备",
+      "status": "reserve",
       "relatedSkillIds": [
         "shangxiawuliao",
         "lianjieguding",
         "rouxingshineng"
       ],
       "side": "left",
-      "slotIndex": 5,
-      "progress": 78,
-      "logo": "tianqizidonghuagongchenggufen_logo.png"
+      "slotIndex": 4,
+      "progress": 10
     },
     {
       "id": "xihua",
       "nameKey": "company.xihua.name",
       "industryKey": "company.xihua.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "高端装备",
+      "status": "reserve",
       "relatedSkillIds": [
         "dingweiduiqi",
         "quexianjiance",
         "xingneng"
       ],
       "side": "left",
-      "slotIndex": 6,
-      "progress": 70,
-      "logo": "xihuaxinnengyuankejigufen_logo.png"
+      "slotIndex": 5,
+      "progress": 10
     },
     {
       "id": "paike",
       "nameKey": "company.paike.name",
       "industryKey": "company.paike.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "航空航天",
+      "status": "reserve",
       "relatedSkillIds": [
         "dingweiduiqi",
         "lianjieguding",
         "wusunjiance"
       ],
-      "side": "right",
-      "slotIndex": 8,
-      "progress": 85,
-      "logo": "paikexincailiaokejigufen_logo.png"
+      "side": "left",
+      "slotIndex": 6,
+      "progress": 10
     },
     {
       "id": "delijia",
       "nameKey": "company.delijia.name",
       "industryKey": "company.delijia.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "高端装备",
+      "status": "reserve",
       "relatedSkillIds": [
         "dingweiduiqi",
         "xingneng",
@@ -540,15 +501,14 @@
       ],
       "side": "right",
       "slotIndex": 0,
-      "progress": 72,
-      "logo": "delijiachuandongkeji_logo.png"
+      "progress": 10
     },
     {
       "id": "hangya",
       "nameKey": "company.hangya.name",
       "industryKey": "company.hangya.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "航空航天",
+      "status": "reserve",
       "relatedSkillIds": [
         "dingweiduiqi",
         "quexianjiance",
@@ -556,15 +516,14 @@
       ],
       "side": "right",
       "slotIndex": 1,
-      "progress": 80,
-      "logo": "hangyakejigufen_logo.png"
+      "progress": 10
     },
     {
       "id": "longda",
       "nameKey": "company.longda.name",
       "industryKey": "company.longda.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "合金材料",
+      "status": "reserve",
       "relatedSkillIds": [
         "dingweiduiqi",
         "lianjieguding",
@@ -572,15 +531,14 @@
       ],
       "side": "right",
       "slotIndex": 2,
-      "progress": 76,
-      "logo": "longdachaohejingufen_logo.png"
+      "progress": 10
     },
     {
       "id": "weidao",
       "nameKey": "company.weidao.name",
       "industryKey": "company.weidao.industry",
-      "type": "Private",
-      "status": "implementation",
+      "type": "半导体",
+      "status": "reserve",
       "relatedSkillIds": [
         "dingweiduiqi",
         "quexianjiance",
@@ -588,14 +546,28 @@
       ],
       "side": "right",
       "slotIndex": 3,
-      "progress": 74,
-      "logo": "weidaonamikejigufen_logo.png"
+      "progress": 10
+    },
+    {
+      "id": "shuangliang",
+      "nameKey": "company.shuangliang.name",
+      "industryKey": "company.shuangliang.industry",
+      "type": "节能装备",
+      "status": "reserve",
+      "relatedSkillIds": [
+        "lianjieguding",
+        "xingneng",
+        "quexianjiance"
+      ],
+      "side": "right",
+      "slotIndex": 4,
+      "progress": 10
     },
     {
       "id": "huadong",
       "nameKey": "company.huadong.name",
       "industryKey": "company.huadong.industry",
-      "type": "Private",
+      "type": "港口装备",
       "status": "reserve",
       "relatedSkillIds": [
         "shangxiawuliao",
@@ -603,15 +575,14 @@
         "zhinengmaduo"
       ],
       "side": "right",
-      "slotIndex": 4,
-      "progress": 35,
-      "logo": "huadongzhongxingjixiegufen_logo.png"
+      "slotIndex": 5,
+      "progress": 10
     },
     {
-      "id": "beisite",
-      "nameKey": "company.beisite.name",
-      "industryKey": "company.beisite.industry",
-      "type": "Private",
+      "id": "best",
+      "nameKey": "company.best.name",
+      "industryKey": "company.best.industry",
+      "type": "精密零部件",
       "status": "implementation",
       "relatedSkillIds": [
         "dingweiduiqi",
@@ -619,15 +590,14 @@
         "quexianjiance"
       ],
       "side": "right",
-      "slotIndex": 5,
-      "progress": 68,
-      "logo": "beisitejingmijixiegufen_logo.png"
+      "slotIndex": 6,
+      "progress": 20
     },
     {
       "id": "xiangsheng",
       "nameKey": "company.xiangsheng.name",
       "industryKey": "company.xiangsheng.industry",
-      "type": "Private",
+      "type": "医疗装备",
       "status": "reserve",
       "relatedSkillIds": [
         "dingweiduiqi",
@@ -635,9 +605,38 @@
         "xingneng"
       ],
       "side": "right",
-      "slotIndex": 6,
-      "progress": 45,
-      "logo": "xiangshengyiliaokejigufen_logo.png"
+      "slotIndex": 7,
+      "progress": 10
+    },
+    {
+      "id": "Dade",
+      "nameKey": "company.Dade.name",
+      "industryKey": "company.Dade.industry",
+      "type": "智能装备",
+      "status": "implementation",
+      "relatedSkillIds": [
+        "dingweiduiqi",
+        "quexianjiance",
+        "xingneng"
+      ],
+      "side": "left",
+      "slotIndex": 7,
+      "progress": 60
+    },
+    {
+      "id": "yueke",
+      "nameKey": "company.yueke.name",
+      "industryKey": "company.yueke.industry",
+      "type": "高端设备",
+      "status": "implementation",
+      "relatedSkillIds": [
+        "dingweiduiqi",
+        "quexianjiance",
+        "xingneng"
+      ],
+      "side": "left",
+      "slotIndex": 8,
+      "progress": 70
     }
   ],
   "companyDetails": [
@@ -747,39 +746,6 @@
         "dianqiceshi"
       ],
       "progressNoteKey": "companyDesc.xinjie.progressNote"
-    },
-    {
-      "companyId": "shuangliang",
-      "briefInfoKeys": {
-        "name": "company.shuangliang.name",
-        "industry": "company.shuangliang.industry",
-        "type": "company.shuangliang.type"
-      },
-      "briefDescKey": "companyDesc.shuangliang.brief",
-      "scenarioFlow": [
-        {
-          "labelKey": "scenario.connecting",
-          "icon": "lianjieguding",
-          "progress": 100
-        },
-        {
-          "labelKey": "scenario.performance",
-          "icon": "xingneng",
-          "progress": 95
-        },
-        {
-          "labelKey": "scenario.inspection",
-          "icon": "quexianjiance",
-          "progress": 90
-        }
-      ],
-      "coreSkills": [
-        "luoshuaningsuo",
-        "kakouguding",
-        "dianqiceshi",
-        "biaomianhuahen"
-      ],
-      "progressNoteKey": "companyDesc.shuangliang.progressNote"
     },
     {
       "companyId": "rilian",
@@ -1045,6 +1011,39 @@
       "progressNoteKey": "companyDesc.weidao.progressNote"
     },
     {
+      "companyId": "shuangliang",
+      "briefInfoKeys": {
+        "name": "company.shuangliang.name",
+        "industry": "company.shuangliang.industry",
+        "type": "company.shuangliang.type"
+      },
+      "briefDescKey": "companyDesc.shuangliang.brief",
+      "scenarioFlow": [
+        {
+          "labelKey": "scenario.connecting",
+          "icon": "lianjieguding",
+          "progress": 100
+        },
+        {
+          "labelKey": "scenario.performance",
+          "icon": "xingneng",
+          "progress": 95
+        },
+        {
+          "labelKey": "scenario.inspection",
+          "icon": "quexianjiance",
+          "progress": 90
+        }
+      ],
+      "coreSkills": [
+        "luoshuaningsuo",
+        "kakouguding",
+        "dianqiceshi",
+        "biaomianhuahen"
+      ],
+      "progressNoteKey": "companyDesc.shuangliang.progressNote"
+    },
+    {
       "companyId": "huadong",
       "briefInfoKeys": {
         "name": "company.huadong.name",
@@ -1078,13 +1077,13 @@
       "progressNoteKey": "companyDesc.huadong.progressNote"
     },
     {
-      "companyId": "beisite",
+      "companyId": "best",
       "briefInfoKeys": {
-        "name": "company.beisite.name",
-        "industry": "company.beisite.industry",
-        "type": "company.beisite.type"
+        "name": "company.best.name",
+        "industry": "company.best.industry",
+        "type": "company.best.type"
       },
-      "briefDescKey": "companyDesc.beisite.brief",
+      "briefDescKey": "companyDesc.best.brief",
       "scenarioFlow": [
         {
           "labelKey": "scenario.positioning",
@@ -1107,7 +1106,7 @@
         "luoshuaningsuo",
         "biaomianhuahen"
       ],
-      "progressNoteKey": "companyDesc.beisite.progressNote"
+      "progressNoteKey": "companyDesc.best.progressNote"
     },
     {
       "companyId": "xiangsheng",
@@ -1140,6 +1139,70 @@
         "dianqiceshi"
       ],
       "progressNoteKey": "companyDesc.xiangsheng.progressNote"
+    },
+    {
+      "companyId": "Dade",
+      "briefInfoKeys": {
+        "name": "company.Dade.name",
+        "industry": "company.Dade.industry",
+        "type": "company.Dade.type"
+      },
+      "briefDescKey": "companyDesc.Dade.brief",
+      "scenarioFlow": [
+        {
+          "labelKey": "scenario.positioning",
+          "icon": "dingweiduiqi",
+          "progress": 100
+        },
+        {
+          "labelKey": "scenario.inspection",
+          "icon": "quexianjiance",
+          "progress": 80
+        },
+        {
+          "labelKey": "scenario.performance",
+          "icon": "xingneng",
+          "progress": 75
+        }
+      ],
+      "coreSkills": [
+        "shijuedingwei",
+        "biaomianhuahen",
+        "dianqiceshi"
+      ],
+      "progressNoteKey": "companyDesc.Dade.progressNote"
+    },
+    {
+      "companyId": "yueke",
+      "briefInfoKeys": {
+        "name": "company.yueke.name",
+        "industry": "company.yueke.industry",
+        "type": "company.yueke.type"
+      },
+      "briefDescKey": "companyDesc.yueke.brief",
+      "scenarioFlow": [
+        {
+          "labelKey": "scenario.positioning",
+          "icon": "dingweiduiqi",
+          "progress": 100
+        },
+        {
+          "labelKey": "scenario.inspection",
+          "icon": "quexianjiance",
+          "progress": 90
+        },
+        {
+          "labelKey": "scenario.performance",
+          "icon": "xingneng",
+          "progress": 85
+        }
+      ],
+      "coreSkills": [
+        "shijuedingwei",
+        "biaomianhuahen",
+        "dianqiceshi"
+      ],
+      "progressNoteKey": "companyDesc.yueke.progressNote"
     }
   ]
 }

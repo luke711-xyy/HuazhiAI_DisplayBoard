@@ -55,7 +55,7 @@ defineEmits<{
 
 <style scoped lang="scss">
 .bottom-panel {
-  width: 400px;
+  width: 440px;
   height: 160px;
   display: flex;
   flex-direction: column;
@@ -95,7 +95,7 @@ defineEmits<{
 
   &__count {
     font-size: 15px;
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.6);
     flex-shrink: 0;
   }
 
@@ -141,7 +141,7 @@ defineEmits<{
   }
 
   &__progress {
-    width: 56px;
+    width: 44px;
     height: 5px;
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.08);
@@ -159,9 +159,9 @@ defineEmits<{
   }
 
   &__company-type {
-    width: 50px;
+    width: 72px;
     font-size: 13px;
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.6);
     flex-shrink: 0;
     text-align: right;
   }
