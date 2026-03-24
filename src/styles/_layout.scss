@@ -22,8 +22,7 @@
   height: 100%;
   z-index: var(--z-background);
   pointer-events: none;
-  transform: scale(var(--center-scale, 1));
-  transform-origin: center center;
+  // 不跟随 center-scale 缩放，保持刚好填满画面
 
   img {
     width: 100%;
