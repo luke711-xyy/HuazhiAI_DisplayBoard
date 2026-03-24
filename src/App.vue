@@ -175,6 +175,8 @@ function onHoverCompany(companyId: string | null) {
     hoverCompanyTimer = null
   }
   if (companyId) {
+    // 清除此前的技能 hover 状态（submenu、z-index 等恢复默认）
+    hoveredSkillId.value = null
     hoveredCompanyId.value = companyId
   } else {
     hoverCompanyTimer = setTimeout(() => {

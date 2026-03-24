@@ -7,7 +7,7 @@
  * 每个胶囊被悬停时，在右侧弹出详细描述浮窗。
  */
 import type { SubSkill } from '@/types'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import { useSettings } from '@/composables/useSettings'
 
@@ -27,6 +27,11 @@ const props = defineProps<{
 
 /** 当前悬停的子技能 ID，用于控制描述浮窗显示 */
 const hoveredSubSkillId = ref<string | null>(null)
+
+// 外部高亮状态变化时（如点击不同公司），关闭已展开的详情浮窗
+watch(() => props.externalActiveIds, () => {
+  hoveredSubSkillId.value = null
+})
 
 /** 该子技能是否应被高亮（本地 hover 或外部指定） */
 function isPillActive(subId: string): boolean {

@@ -88,10 +88,14 @@ const matchingSubSkillIds = computed(() => {
   return props.highlightedSubSkillIds.filter(id => mySubIds.has(id))
 })
 
-/** 是否展示二级子菜单（本地 hover、外部高亮、或遮罩保持期间该节点仍被高亮） */
+/** 是否展示二级子菜单（本地 hover、外部高亮且有匹配子技能、或遮罩保持期间该节点仍被高亮） */
 const showSubMenu = computed(() => {
   if (!props.skill.subSkills || props.skill.subSkills.length === 0) return false
-  return isHovered.value || props.isHighlighted || matchingSubSkillIds.value.length > 0
+  // 直接 hover 或遮罩保持期间的高亮
+  if (isHovered.value || props.isHighlighted) return true
+  // 企业 hover 时，仅当父级技能也被关联时才因 subskill 匹配展开
+  // 避免未关联的父级技能因子技能匹配而意外亮起
+  return false
 })
 
 /** 暴露根元素供连线坐标计算 */
@@ -116,7 +120,7 @@ onMounted(() => {
     :data-skill-id="skill.id"
     @mouseenter="deviceMode === 'pc' ? (isHovered = true, $emit('hover', skill.id)) : undefined"
     @mouseleave="deviceMode === 'pc' ? (isHovered = false, $emit('hover', null)) : undefined"
-    @click.stop="deviceMode === 'mobile' ? handleMobileClick() : undefined"
+    @click.stop="deviceMode === 'mobile' && !(isDimmedByOverlay && highlightedSubSkillIds.length > 0) ? handleMobileClick() : undefined"
   >
     <div class="skill-node__icon-wrap">
       <img :src="iconDefault" :alt="skill.nameKey" class="skill-node__icon skill-node__icon--default" />
